@@ -1,9 +1,13 @@
 # Projeto WikiMusic
 
-## Funcionalidades:
+## Requitos
 
-- Exibe info de albuns;
-- Exibe info de artistas;
-- Exibe info.
+- Backend
+- Frontend
+- Banco de dados
 
+## Funcionalidades
 
+- Eixibi infos. de albuns musicais
+- Exibi infos. dos artista
+- Exibi a música mais tocada do artista
