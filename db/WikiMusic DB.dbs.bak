@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="WikiMusi" id="Project-2ad" database="MySql" >
+	<schema name="wikimusi" >
+		<table name="album" prior="tbl" >
+			<column name="id" type="INT" jt="4" mandatory="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="nome" type="VARCHAR" length="50" jt="12" />
+			<column name="ano_lancamento" type="DATE" length="50" jt="91" />
+			<column name="quantidade_musicas" type="SMALLINT" jt="5" />
+			<index name="pk_album" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="grupo_banda" prior="artistas" spec="" >
+			<column name="albuns" type="VARCHAR" length="50" jt="12" />
+			<column name="id" type="INT" jt="4" mandatory="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="ano_formacao" type="INT" jt="4" />
+			<column name="em_atividade" prior="esta_em_atividade" type="BOOLEAN" jt="16" />
+			<column name="nome" type="VARCHAR" length="50" jt="12" />
+			<column name="estilo_musical" type="VARCHAR" length="50" jt="12" />
+			<column name="nacionalidade" type="VARCHAR" length="50" jt="12" />
+			<index name="pk_artistas" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="integrantes" prior="tbl" spec="" >
+			<column name="id" type="INT" jt="4" mandatory="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="nome" type="VARCHAR" length="50" jt="12" />
+			<column name="instrumento" type="VARCHAR" length="50" jt="12" />
+			<column name="nacionalidade" type="VARCHAR" length="50" jt="12" />
+			<column name="em_atividade" type="BOOLEAN" jt="16" />
+			<index name="pk_integrantes" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="intrumentos" prior="tbl" >
+			<column name="id" type="INT" jt="4" mandatory="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="nome" type="VARCHAR" length="50" jt="12" />
+			<column name="tipo" type="VARCHAR" length="20" jt="12" />
+			<index name="pk_intrumentos" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="musicas" prior="tbl" >
+			<column name="id" type="INT" jt="4" mandatory="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="nome" type="VARCHAR" length="50" jt="12" />
+			<column name="lancamento" type="DATE" jt="91" />
+			<index name="pk_musicas" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="single" prior="tbl" >
+			<column name="id" type="INT" length="50" jt="4" mandatory="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="nome" type="VARCHAR" length="50" jt="12" />
+			<index name="pk_single" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+	</schema>
+	<layout name="Default Layout" id="Layout-10e4" show_relation="columns" >
+		<comment><![CDATA[Default Layout]]></comment>
+		<entity schema="wikimusi" name="album" color="DAC1EE" x="400" y="48" />
+		<entity schema="wikimusi" name="grupo_banda" color="C1D8EE" x="48" y="48" />
+		<entity schema="wikimusi" name="integrantes" color="C1EEE9" x="224" y="48" />
+		<entity schema="wikimusi" name="musicas" color="EED3C1" x="624" y="48" />
+		<entity schema="wikimusi" name="single" color="E9EEC1" x="800" y="48" />
+	</layout>
+</project>
