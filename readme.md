@@ -1,19 +1,33 @@
 # Projeto WikiMusic
 
-## Requitos
+### Requitos
 
 - Backend
 - Frontend
 - Banco de dados
 
-## Funcionalidades
+### Funcionalidades
 
-- Eixibi infos. de albuns musicais
-- Exibi infos. dos artista
-- Exibi a música mais tocada do artista
-- Albuns relacionados
-- Album mais tocado no ano
-- Musica com mais stream
-- Musicas premiadas
+- Exibe infos. de albuns musicais;
+- Exibe infos. dos artistas;
+- Exibe a música mais tocada do artista;
+- Álbuns relacionados;
+- Álbum mais tocado no ano;
+- Música com mais stream;
+- Músicas premiadas;
 
+## Protótipo:
+
+#### Tela de login
+![Tela de login](/prototipo/login.png)
+
+#### Página Inicial
 ![Página inicial](/prototipo/index.png)
+
+#### Tela de Exibição das Músicas
+![Tela de exibição de músicas](/prototipo/musicas.png)
+
+## Banco de Dados
+
+#### Modelo Entidade Relacionamento (MER)
+![Modelo Entidade Relacionamento](/Docs/MER/MER.PNG)
