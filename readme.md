@@ -19,7 +19,7 @@
 ## Protótipo:
 
 #### Tela de login
-![Tela de login](/prototipo/login.PNG)
+![Tela de login](/prototipo/tela_login.png)
 
 #### Página Inicial
 ![Página inicial](/prototipo/index.png)
