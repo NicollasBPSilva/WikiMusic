@@ -25,7 +25,7 @@ public class CreateLoginServlet extends HttpServlet {
         login.setPassword(loginPassword);
 
         LoginDao loginDao = new LoginDao();
-        loginDao.createUser(login);
+
         loginDao.loginUser(login);
 
 
