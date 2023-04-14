@@ -112,3 +112,7 @@
 127.0.0.1 - - [14/Apr/2023:20:01:41 -0300] "GET /avatar.png HTTP/1.1" 404 971 http-bio-8080-exec-2 2
 127.0.0.1 - - [14/Apr/2023:20:03:16 -0300] "POST /login HTTP/1.1" 200 2729 http-bio-8080-exec-1 95
 127.0.0.1 - - [14/Apr/2023:20:03:16 -0300] "GET /avatar.png HTTP/1.1" 404 971 http-bio-8080-exec-2 0
+127.0.0.1 - - [14/Apr/2023:20:04:33 -0300] "POST /login HTTP/1.1" 200 2729 http-bio-8080-exec-1 70
+127.0.0.1 - - [14/Apr/2023:20:04:33 -0300] "GET /avatar.png HTTP/1.1" 404 971 http-bio-8080-exec-2 4
+127.0.0.1 - - [14/Apr/2023:20:34:11 -0300] "POST /login HTTP/1.1" 200 2729 http-bio-8080-exec-4 125
+127.0.0.1 - - [14/Apr/2023:20:34:11 -0300] "GET /avatar.png HTTP/1.1" 404 971 http-bio-8080-exec-5 15
