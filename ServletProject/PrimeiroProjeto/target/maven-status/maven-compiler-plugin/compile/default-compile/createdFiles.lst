@@ -1,3 +1,8 @@
-br\com\carsoft\dao\LoginDao.class
+br\com\carsoft\servlet\ListAlbumServlet.class
+br\com\carsoft\servlet\CreateAlbumServlet.class
 br\com\carsoft\servlet\CreateLoginServlet.class
 br\com\carsoft\model\Login.class
+br\com\carsoft\model\Musica.class
+br\com\carsoft\dao\MusicaDao.class
+br\com\carsoft\servlet\ListAlbumServlet$ListCarServlet.class
+br\com\carsoft\dao\LoginDao.class
