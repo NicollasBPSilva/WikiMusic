@@ -1,7 +1,6 @@
 package br.com.carsoft.dao;
 
-import br.com.carsoft.model.Login;
-import br.com.carsoft.model.Musica;
+import br.com.carsoft.model.Album;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,7 +12,7 @@ import java.util.List;
 
 public class MusicaDao {
 
-    public static void albumAdicionar(Musica musica){
+    public static void albumAdicionar(Album album){
         String SQL = "INSERT INTO ALBUM (TITULO,ARTISTA,ALBUM) VALUES ((?), (?), (?))";
 
         try {
@@ -21,9 +20,9 @@ public class MusicaDao {
 
             PreparedStatement preparedStatement = connection.prepareStatement(SQL);
 
-            preparedStatement.setString(1, musica.getTitulo());
-            preparedStatement.setString(2, musica.getArtista());
-            preparedStatement.setString(3, musica.getAlbum());
+            preparedStatement.setString(1, album.getTitulo());
+            preparedStatement.setString(2, album.getArtista());
+            preparedStatement.setString(3, album.getAlbum());
             preparedStatement.execute();
 
             connection.close();
@@ -38,7 +37,7 @@ public class MusicaDao {
         }
     }
 
-    public List<Musica> encontrarAlbum(){
+    public List<Album> encontrarAlbum(){
     String SQL = "SELECT * FROM ALBUM";
         try {
 
@@ -50,25 +49,26 @@ public class MusicaDao {
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            List<Musica> musicaList = new ArrayList<>();
+            List<Album> albumList = new ArrayList<>();
 
             while (resultSet.next()) {
 
-                String albumName = resultSet.getString("albumName");
-                String tituloName= resultSet.getString("tituloName");
-                String artistaName = resultSet.getString("artistaName");
+                String album = resultSet.getString("titulo");
+                String titulo= resultSet.getString("artista");
+                String artista = resultSet.getString("album");
 
-                Musica musica = new Musica(albumName, tituloName, artistaName);
+                Album musica = new Album(album, titulo, artista);
 
-                musicaList.add(musica);
+                albumList.add(musica);
+
 
             }
 
-            System.out.println("success in select * car");
+            System.out.println("success in select * from album");
 
             connection.close();
 
-            return musicaList;
+            return albumList;
 
         } catch (Exception e) {
 

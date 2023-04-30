@@ -2,9 +2,7 @@ package br.com.carsoft.servlet;
 
 import br.com.carsoft.dao.LoginDao;
 
-import br.com.carsoft.dao.MusicaDao;
 import br.com.carsoft.model.Login;
-import br.com.carsoft.model.Musica;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

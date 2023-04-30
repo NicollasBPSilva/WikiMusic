@@ -178,3 +178,15 @@
 0:0:0:0:0:0:0:1 - - [28/Apr/2023:22:34:10 -0300] "GET /avatar.png HTTP/1.1" 404 971 http-bio-8080-exec-3 4
 0:0:0:0:0:0:0:1 - - [28/Apr/2023:22:34:16 -0300] "POST /adicionarAlbum HTTP/1.1" 302 - http-bio-8080-exec-4 25
 0:0:0:0:0:0:0:1 - - [28/Apr/2023:22:34:16 -0300] "GET /encontrarAlbuns HTTP/1.1" 404 949 http-bio-8080-exec-5 0
+0:0:0:0:0:0:0:1 - - [28/Apr/2023:22:35:36 -0300] "POST /adicionarAlbum HTTP/1.1" 302 - http-bio-8080-exec-1 54
+0:0:0:0:0:0:0:1 - - [28/Apr/2023:22:35:36 -0300] "GET /encontrarAlbuns HTTP/1.1" 500 4340 http-bio-8080-exec-2 15
+0:0:0:0:0:0:0:1 - - [28/Apr/2023:22:40:35 -0300] "POST /adicionarAlbum HTTP/1.1" 302 - http-bio-8080-exec-3 3
+0:0:0:0:0:0:0:1 - - [28/Apr/2023:22:40:35 -0300] "GET /encontrarAlbuns HTTP/1.1" 404 949 http-bio-8080-exec-4 1
+0:0:0:0:0:0:0:1 - - [28/Apr/2023:22:41:02 -0300] "GET /avatar.png HTTP/1.1" 404 971 http-bio-8080-exec-1 53
+0:0:0:0:0:0:0:1 - - [28/Apr/2023:22:41:07 -0300] "GET /musica.html HTTP/1.1" 304 - http-bio-8080-exec-2 8
+0:0:0:0:0:0:0:1 - - [28/Apr/2023:22:41:10 -0300] "POST /adicionarAlbum HTTP/1.1" 302 - http-bio-8080-exec-3 19
+0:0:0:0:0:0:0:1 - - [28/Apr/2023:22:41:10 -0300] "GET /encontrarAlbuns HTTP/1.1" 500 4340 http-bio-8080-exec-4 9
+0:0:0:0:0:0:0:1 - - [28/Apr/2023:22:43:45 -0300] "GET / HTTP/1.1" 304 - http-bio-8080-exec-1 95
+0:0:0:0:0:0:0:1 - - [28/Apr/2023:22:43:45 -0300] "GET /avatar.png HTTP/1.1" 404 971 http-bio-8080-exec-2 14
+0:0:0:0:0:0:0:1 - - [28/Apr/2023:22:43:50 -0300] "POST /adicionarAlbum HTTP/1.1" 302 - http-bio-8080-exec-3 20
+0:0:0:0:0:0:0:1 - - [28/Apr/2023:22:43:50 -0300] "GET /encontrarAlbuns HTTP/1.1" 500 4340 http-bio-8080-exec-4 10

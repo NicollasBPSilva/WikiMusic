@@ -1,17 +1,15 @@
 package br.com.carsoft.model;
 
-public class Musica {
+public class Album {
 
     private String titulo;
     private String artista;
-
-    public Musica(String titulo, String artista, String album) {
+    private String album;
+    public Album(String titulo, String artista, String album) {
         this.titulo = titulo;
         this.artista = artista;
         this.album = album;
     }
-
-    private String album;
 
 
 

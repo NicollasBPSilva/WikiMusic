@@ -1,10 +1,7 @@
 package br.com.carsoft.servlet;
 
-import br.com.carsoft.dao.LoginDao;
-
 import br.com.carsoft.dao.MusicaDao;
-import br.com.carsoft.model.Login;
-import br.com.carsoft.model.Musica;
+import br.com.carsoft.model.Album;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,13 +20,13 @@ public class CreateAlbumServlet extends HttpServlet {
             String artista = servletRequest.getParameter("artista");
             String album = servletRequest.getParameter("album");
 
-            Musica musicaClass = new Musica(titulo, artista, album);
+            Album albumClass = new Album(titulo, artista, album);
 
 
-            new MusicaDao().albumAdicionar(musicaClass);
+            new MusicaDao().albumAdicionar(albumClass);
 
 
-            response.sendRedirect("/encontrarAlbuns");
+            response.sendRedirect("/encontrar-Albums");
         }
 
 
