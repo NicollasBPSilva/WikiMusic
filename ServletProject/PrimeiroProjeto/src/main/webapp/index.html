@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f1f1f1;
+        }
+
+        .container {
+            padding: 16px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px #ccc;
+            max-width: 500px;
+            margin: auto;
+            margin-top: 50px;
+        }
+
+        input{
+            width: 40%;
+            padding: 5px 10px;
+            margin: 5px 230px;
+            display: inline-block;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom: 1px solid #3F1111
+        }
+
+        button {
+            background-color: #D9BFA0;
+            color: black;
+            padding: 2px 2px;
+            margin: 5px 300px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 20%;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        .visitantebtn {
+            background-color: #D9BFA0;
+            color: black;
+            padding: 2px 2px;
+            border: none;
+            border-radius: 5px;
+            width: 20%;
+        }
+
+        .imgcontainer {
+            text-align: center;
+            margin: 24px 0 12px 0;
+        }
+
+        img.avatar {
+            width: 30%;
+            border-radius: 50%;
+        }
+
+        .container label {
+            margin: 5px 320px;
+            padding: 2px 2px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .container span {
+            color: red;
+        }
+
+        .container .forgot {
+            float: right;
+            font-size: 14px;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+</head>
+    <body>
+        <form action="/login" method="post">
+                <div class="container">
+                    <div class="imgcontainer">
+                        <img src="avatar.png" alt="Avatar" class="avatar">
+                    </div>
+
+                    <label><b>Usuário</b></label>
+                    <input type="text" placeholder="Insira o nome de usuario" name="username" id="name" required>
+
+                    <label><b>Senha</b></label>
+                    <input type="password" placeholder="Insira a senha" name="password" id="password" required>
+
+                    <button type="submit">Entrar</button>
+                    <button type="button" class="visitantebtn">Sou visitante</button>
+
+
+                </div>
+
+        </form>
+        <button><a href="adicionarAlbum.html">Adicionar album</a></button>
+
+    </body>
+</html>
