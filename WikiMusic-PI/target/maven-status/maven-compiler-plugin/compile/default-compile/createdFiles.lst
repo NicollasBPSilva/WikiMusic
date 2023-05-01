@@ -1,5 +1,0 @@
-br\com\Wiki\servlet\ListWikiServlet.class
-br\com\Wiki\model\Artista.class
-br\com\Wiki\servlet\CreateWikiServlet.class
-br\com\Wiki\servlet\DeleteWikiServlet.class
-br\com\Wiki\dao\WikiDao.class
