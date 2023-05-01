@@ -1,0 +1,73 @@
+header{
+    background: #515151;
+    color:aliceblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 8%;
+    position: absolute;
+    width: 100%;
+    font-size: 20px;
+    top: 0;
+}
+
+.Menu_opcoes{
+    word-spacing: 10px;
+    padding: 0px;
+}
+
+.Login{
+    background-color: #8C3F23;
+    width: 7%;
+    height: 100%;
+}
+
+#login_pf{
+    width: 60px;
+    height: 10px;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container_box{
+    background-color: #D9BFA0;
+    height: 850px;
+    width: 350px;
+    font-size: 15px;
+}
+
+#Artista{    
+    padding: 100px 0;
+}
+
+#genero{
+    padding: 0 48px;
+}
+
+#albuns{
+    padding: 20px 48px;
+}
+
+footer{
+    background: #515151;
+    color:aliceblue;
+    display: flex;
+    align-items: center;
+    height: 8%;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    font-size: 15px;
+}
+
+#Wiki_rodape{
+    padding: 0px 0px;
+    margin-left: 10%;
+}
+
+#Sua_biblioteca{
+    padding: 0px 0px;
+    margin-left: 65%;
+}
