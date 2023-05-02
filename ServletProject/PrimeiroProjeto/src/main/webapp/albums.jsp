@@ -11,56 +11,105 @@
 <body>
 <style>
     body {
-        background-color: #F5F5F5;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f4f4;
+        font-family: Arial, sans-serif;
+        text-align: center;
     }
 
     h1 {
-        color: #404040;
-        text-align: center;
+        color: #444;
+        font-size: 36px;
         margin-top: 40px;
     }
 
-    table {
-        width: 80%;
-        margin: 50px auto;
-        border-collapse: collapse;
-        box-shadow: 0 0 20px rgba(0,0,0,0.1);
-        background-color: #FFFFFF;
+    #album-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 40px;
     }
 
-    th, td {
+    .album {
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0px 0px 5px #ccc;
+        margin: 20px;
+        padding: 20px;
         text-align: left;
-        padding: 10px;
-        border-bottom: 1px solid #E1E1E1;
+        width: 400px;
     }
 
-    th {
-        background-color: #404040;
-        color: #FFFFFF;
+    .album h2 {
+        color: #444;
+        font-size: 28px;
+        margin-top: 0;
     }
 
-    tr:nth-child(even) {
-        background-color: #F5F5F5;
+    .album p {
+        color: #666;
+        font-size: 20px;
+        margin-bottom: 10px;
+        margin-top: 0;
+    }
+
+    .album strong {
+        color: #444;
+        font-weight: bold;
     }
 </style>
 <div>
     <h1>Albums</h1>
-    <table>
-        <tr>
-            <th>Titulo</th>
-            <th>Artista</th>
-            <th>Album</th>
-        </tr>
+
+    <div id="album-list">
         <% List<Album> albums = (List<Album>) request.getAttribute("albums");
             for (Album album : albums) { %>
-        <tr>
-            <td><%= album.getTitulo() %></td>
-            <td><%= album.getArtista() %></td>
-            <td><%= album.getAlbum() %></td>
-        </tr>
+        <div class="album">
+            <h2><%= album.getId() %></h2>
+            <h2><%= album.getTitulo() %></h2>
+            <p><strong>Artista:</strong> <%= album.getArtista() %></p>
+            <p><strong>Album:</strong> <%= album.getAlbum() %></p>
+            <p><strong>Informacoes:</strong> <%= album.getInformacoes() %></p>
+            <form action="/delete-album" method="post">
+                <input type="hidden" id="id" name="id" value="  <%= album.getId() %>">
+                <button type="submit">Delete</button>
+            </form>
+
+        </div>
         <% } %>
-    </table>
+    </div>
+
+    <button id="next-album">Próximo Álbum</button>
+
+    <script>
+        // seleciona todos os elementos com a classe "album"
+        const albums = document.querySelectorAll(".album");
+
+        // mantém um registro do índice do álbum atualmente visível
+        let currentIndex = 0;
+
+        // esconde todos os álbuns, exceto o primeiro
+        for (let i = 1; i < albums.length; i++) {
+            albums[i].style.display = "none";
+        }
+
+        // adiciona um ouvinte de eventos ao botão "Próximo Álbum"
+        document.querySelector("#next-album").addEventListener("click", () => {
+            // oculta o álbum atual
+            albums[currentIndex].style.display = "none";
+
+            // atualiza o índice para o próximo álbum
+            currentIndex++;
+
+            // se chegou ao final da lista de álbuns, volta para o primeiro
+            if (currentIndex >= albums.length) {
+                currentIndex = 0;
+            }
+
+            // exibe o álbum atual
+            albums[currentIndex].style.display = "block";
+        });
+    </script>
 </div>
 </body>
 </html>

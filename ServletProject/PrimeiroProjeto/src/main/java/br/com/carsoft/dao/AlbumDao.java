@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MusicaDao {
+public class AlbumDao {
 
     public static void albumAdicionar(Album album){
-        String SQL = "INSERT INTO ALBUM (TITULO,ARTISTA,ALBUM) VALUES ((?), (?), (?))";
+        String SQL = "INSERT INTO ALBUM (TITULO,ARTISTA,ALBUM, INFORMACOES) VALUES ((?), (?), (?), (?))";
 
         try {
             Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "sa");
@@ -23,6 +23,7 @@ public class MusicaDao {
             preparedStatement.setString(1, album.getTitulo());
             preparedStatement.setString(2, album.getArtista());
             preparedStatement.setString(3, album.getAlbum());
+            preparedStatement.setString(4, album.getInformacoes());
             preparedStatement.execute();
 
             connection.close();
@@ -53,11 +54,15 @@ public class MusicaDao {
 
             while (resultSet.next()) {
 
+                String albumId = resultSet.getString("id");
+
                 String album = resultSet.getString("titulo");
                 String titulo= resultSet.getString("artista");
                 String artista = resultSet.getString("album");
+                String informacoes = resultSet.getString("informacoes");
 
-                Album musica = new Album(album, titulo, artista);
+
+                Album musica = new Album(albumId, album, titulo, artista, informacoes);
 
                 albumList.add(musica);
 
@@ -75,6 +80,30 @@ public class MusicaDao {
             System.out.println("fail in database connection");
 
             return Collections.emptyList();
+
+        }
+
+    }
+
+    public void deleteAlbumById(String albumId){
+        String SQL = "DELETE ALBUM WHERE ID = (?)";
+        try {
+
+            Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "sa");
+
+            System.out.println("success in database connection");
+
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setString(1, albumId);
+            preparedStatement.execute();
+
+            System.out.println("success on delete car with id: " + albumId);
+
+            connection.close();
+
+        } catch (Exception e) {
+
+            System.out.println("fail in database connection");
 
         }
 
