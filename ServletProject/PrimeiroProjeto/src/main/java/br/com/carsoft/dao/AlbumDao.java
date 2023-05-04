@@ -109,4 +109,35 @@ public class AlbumDao {
 
     }
 
+    public static void atualizarAlbum(Album albumUpdate){
+        String SQL = "UPDATE ALBUM SET TITULO = ?, ARTISTA = ?, ALBUM = ?, INFORMACOES = ? WHERE ID = ?";
+
+        try {
+
+            Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa","sa");
+
+            System.out.println("success in database connection");
+
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+
+            preparedStatement.setString(1, albumUpdate.getTitulo());
+            preparedStatement.setString(2, albumUpdate.getArtista());
+            preparedStatement.setString(3, albumUpdate.getAlbum());
+            preparedStatement.setString(4, albumUpdate.getInformacoes());
+            preparedStatement.setString(5, albumUpdate.getId());
+
+            preparedStatement.execute();
+
+            System.out.println("success in update album");
+
+            connection.close();
+
+        } catch (Exception e) {
+
+            System.out.println("fail in database connection");
+            System.out.println("Error: " + e.getMessage());
+
+        }
+    }
+
 }

@@ -11,52 +11,105 @@
 <body>
 <style>
     body {
-        background-color: #f4f4f4;
         font-family: Arial, sans-serif;
-        text-align: center;
+        background-color: #f2f2f2;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
     h1 {
-        color: #444;
-        font-size: 36px;
-        margin-top: 40px;
+        text-align: center;
+        margin: 50px 0 20px;
     }
 
     #album-list {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        margin-top: 40px;
     }
 
     .album {
         background-color: #fff;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        box-shadow: 0px 0px 5px #ccc;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        border-radius: 4px;
+        width: 300px;
         margin: 20px;
         padding: 20px;
-        text-align: left;
-        width: 400px;
+        text-align: center;
+        position: relative;
     }
 
     .album h2 {
-        color: #444;
-        font-size: 28px;
-        margin-top: 0;
+        margin: 0;
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
     }
 
     .album p {
+        margin: 10px 0 0;
+        font-size: 16px;
         color: #666;
-        font-size: 20px;
-        margin-bottom: 10px;
-        margin-top: 0;
     }
 
-    .album strong {
-        color: #444;
-        font-weight: bold;
+    .album form {
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
     }
+
+    .album label {
+        font-size: 16px;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .album input {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    .album button {
+        padding: 10px 20px;
+        background-color: #333;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .album button:hover {
+        background-color: #555;
+    }
+
+    .album .delete {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #ff4136;
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+        line-height: 1;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .album .delete:hover {
+        background-color: #c70000;
+    }
+
 </style>
 <div>
     <h1>Albums</h1>
@@ -75,40 +128,67 @@
                 <button type="submit">Delete</button>
             </form>
 
+            <form action="/update-album" method="post">
+                <input type="hidden" name="id" value="<%= album.getId() %>">
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" name="titulo">
+
+                <label for="artista">Artista:</label>
+                <input type="text" id="artista" name="artista">
+
+                <label for="album">Álbum:</label>
+                <input type="text" id="album" name="album">
+
+                <label for="album">Informacoes do artista:</label>
+                <input type="text" id="informacoes" name="informacoes">
+
+                <label for="album">Imagem:</label>
+                <input type="file" id="imagem" name="imagem">
+
+                <button type="submit">Update Album</button>
+
+            </form>
+
         </div>
+
         <% } %>
     </div>
 
-    <button id="next-album">Próximo Álbum</button>
+    <button id="anterior-album">Álbum anterior</button>
+    <button id="proximo-album">Próximo Álbum</button>
 
     <script>
-        // seleciona todos os elementos com a classe "album"
         const albums = document.querySelectorAll(".album");
+        let indexAtual = 0;
 
-        // mantém um registro do índice do álbum atualmente visível
-        let currentIndex = 0;
-
-        // esconde todos os álbuns, exceto o primeiro
         for (let i = 1; i < albums.length; i++) {
             albums[i].style.display = "none";
         }
 
-        // adiciona um ouvinte de eventos ao botão "Próximo Álbum"
-        document.querySelector("#next-album").addEventListener("click", () => {
-            // oculta o álbum atual
-            albums[currentIndex].style.display = "none";
+        document.querySelector("#proximo-album").addEventListener("click", () => {
+            albums[indexAtual].style.display = "none";
 
-            // atualiza o índice para o próximo álbum
-            currentIndex++;
+            indexAtual++;
 
-            // se chegou ao final da lista de álbuns, volta para o primeiro
-            if (currentIndex >= albums.length) {
-                currentIndex = 0;
+            if (indexAtual >= albums.length) {
+                indexAtual = 0;
             }
 
-            // exibe o álbum atual
-            albums[currentIndex].style.display = "block";
+            albums[indexAtual].style.display = "block";
         });
+
+        document.querySelector("#anterior-album").addEventListener("click", () => {
+            albums[indexAtual].style.display = "none";
+
+            indexAtual--;
+
+            if (indexAtual < 0) {
+                indexAtual = albums.length - 1;
+            }
+
+            albums[indexAtual].style.display = "block";
+        });
+
     </script>
 </div>
 </body>

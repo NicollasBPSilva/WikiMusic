@@ -4,5 +4,6 @@ br\com\carsoft\servlet\DeleteAlbumServlet.class
 br\com\carsoft\servlet\CreateLoginServlet.class
 br\com\carsoft\model\Login.class
 br\com\carsoft\dao\AlbumDao.class
+br\com\carsoft\servlet\UpdateAlbumServlet.class
 br\com\carsoft\dao\LoginDao.class
 br\com\carsoft\model\Album.class

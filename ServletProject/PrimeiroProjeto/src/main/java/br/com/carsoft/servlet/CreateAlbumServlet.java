@@ -15,6 +15,7 @@ public class CreateAlbumServlet extends HttpServlet {
 
         protected void doPost(HttpServletRequest servletRequest, HttpServletResponse response) throws ServletException, IOException {
 
+            String albumId = servletRequest.getParameter("id");
 
             String titulo = servletRequest.getParameter("titulo");
             String artista = servletRequest.getParameter("artista");
@@ -27,10 +28,11 @@ public class CreateAlbumServlet extends HttpServlet {
 
             new AlbumDao().albumAdicionar(albumClass);
 
-
             response.sendRedirect("/encontrar-Albums");
         }
 
 
 
 }
+
+

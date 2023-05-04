@@ -92,6 +92,7 @@
 </table>
 
 <form action="/adicionaralbum" method="post" class="formulario" id="form-adicionar">
+
     <label for="titulo">Título:</label>
     <input type="text" id="titulo" name="titulo" required>
 
@@ -105,5 +106,6 @@
     <input type="text" id="informacoes" name="informacoes" required>
     <button type="submit">Enviar</button>
 
+    <button type="submit">Save</button>
     </body>
 </html>
