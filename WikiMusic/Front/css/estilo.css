@@ -1,30 +1,40 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 header{
     background: #515151;
     color:aliceblue;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 8%;
-    position: absolute;
+    height: 8vh;
+    position: fixed;
     width: 100%;
     font-size: 20px;
     top: 0;
 }
 
 .Menu_opcoes{
-    word-spacing: 10px;
+    word-spacing: 1vh;
     padding: 0px;
+    margin: auto;
 }
 
-.Login{
+.Perfil{
     background-color: #8C3F23;
-    width: 7%;
+    width: 20vh;
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
 }
 
 #login_pf{
-    width: 60px;
-    height: 10px;
+    margin: 2%;
 }
 
 body{
@@ -33,29 +43,65 @@ body{
 
 .container_box{
     background-color: #D9BFA0;
-    height: 850px;
-    width: 350px;
-    font-size: 15px;
+    height: 100vh;
+    width: 45vh;
+    font-size: 18px;
+    display: auto;
+    position: static;
+    box-sizing: border-box;
 }
 
 #Artista{    
-    padding: 100px 0;
+    padding: 11vh 3vh;
+    display: auto;
+    position: static;
 }
 
 #genero{
-    padding: 0 48px;
+    padding: 0vh 3vh;
+    display: auto;
+    position: static;
 }
 
 #albuns{
-    padding: 20px 48px;
+    padding: 3vh 3vh;
+    display: auto;
+    position: static;
 }
 
+
+.nome_Artista{
+    padding: 0vh 65vh;
+    color: black;
+    display: auto;
+    text-align: left;
+}
+         
+.info_artista{
+    padding: 1vh 65vh;
+    color: black;
+    display: relative;
+    text-align: left;
+}
+
+.descricao{
+    padding: 4vh 65vh;
+    color: black;
+    display: relative;
+    text-align: left;
+}
+
+p{
+    text-align: left;
+}
+            
 footer{
     background: #515151;
     color:aliceblue;
     display: flex;
     align-items: center;
-    height: 8%;
+    justify-content: center;
+    height: 5vh;
     position: absolute;
     width: 100%;
     bottom: 0;
@@ -63,11 +109,11 @@ footer{
 }
 
 #Wiki_rodape{
-    padding: 0px 0px;
-    margin-left: 10%;
+    padding: 0px 5px;
+    margin-left: 8%;
 }
 
 #Sua_biblioteca{
-    padding: 0px 0px;
-    margin-left: 65%;
+    padding: 0px 5px;
+    margin-left: 55%;
 }
