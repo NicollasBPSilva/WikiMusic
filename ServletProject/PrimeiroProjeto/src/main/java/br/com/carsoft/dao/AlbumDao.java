@@ -2,6 +2,11 @@ package br.com.carsoft.dao;
 
 import br.com.carsoft.model.Album;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -9,11 +14,12 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Base64;
 
 public class AlbumDao {
 
     public static void albumAdicionar(Album album){
-        String SQL = "INSERT INTO ALBUM (TITULO,ARTISTA,ALBUM, INFORMACOES) VALUES ((?), (?), (?), (?))";
+        String SQL = "INSERT INTO ALBUM (TITULO,ARTISTA,ALBUM, INFORMACOES, IMAGEM) VALUES ((?), (?), (?), (?), (?))";
 
         try {
             Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "sa");
@@ -24,6 +30,8 @@ public class AlbumDao {
             preparedStatement.setString(2, album.getArtista());
             preparedStatement.setString(3, album.getAlbum());
             preparedStatement.setString(4, album.getInformacoes());
+            preparedStatement.setBytes(5, album.getImagem());
+
             preparedStatement.execute();
 
             connection.close();
@@ -60,10 +68,11 @@ public class AlbumDao {
                 String titulo= resultSet.getString("artista");
                 String artista = resultSet.getString("album");
                 String informacoes = resultSet.getString("informacoes");
+                byte[] imagem = resultSet.getBytes("imagem");
 
+                String base64Imagem = Base64.getEncoder().encodeToString(imagem);
 
-                Album musica = new Album(albumId, album, titulo, artista, informacoes);
-
+                Album musica = new Album(albumId, album, titulo, artista, informacoes, base64Imagem);
                 albumList.add(musica);
 
 
@@ -97,7 +106,7 @@ public class AlbumDao {
             preparedStatement.setString(1, albumId);
             preparedStatement.execute();
 
-            System.out.println("success on delete car with id: " + albumId);
+            System.out.println("success on delete album with id: " + albumId);
 
             connection.close();
 
@@ -110,7 +119,7 @@ public class AlbumDao {
     }
 
     public static void atualizarAlbum(Album albumUpdate){
-        String SQL = "UPDATE ALBUM SET TITULO = ?, ARTISTA = ?, ALBUM = ?, INFORMACOES = ? WHERE ID = ?";
+        String SQL = "UPDATE ALBUM SET TITULO = ?, ARTISTA = ?, ALBUM = ?, INFORMACOES = ?, IMAGEM = ? WHERE ID = ?";
 
         try {
 
@@ -124,7 +133,8 @@ public class AlbumDao {
             preparedStatement.setString(2, albumUpdate.getArtista());
             preparedStatement.setString(3, albumUpdate.getAlbum());
             preparedStatement.setString(4, albumUpdate.getInformacoes());
-            preparedStatement.setString(5, albumUpdate.getId());
+            preparedStatement.setBytes(5, albumUpdate.getImagem());
+            preparedStatement.setString(6, albumUpdate.getId());
 
             preparedStatement.execute();
 

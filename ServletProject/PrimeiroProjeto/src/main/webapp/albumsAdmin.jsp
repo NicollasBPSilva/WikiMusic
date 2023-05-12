@@ -1,5 +1,6 @@
 <%@ page import="br.com.carsoft.model.Album" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.Base64" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -110,6 +111,31 @@
         background-color: #c70000;
     }
 
+    .edit-form {
+        display:none;
+    }
+
+    .album {
+        margin-bottom: 20px;
+    }
+
+    .edit-button {
+        margin-top: 10px;
+    }
+
+    .container {
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .container img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
 </style>
 <div>
     <h1>Albums</h1>
@@ -123,12 +149,16 @@
             <p><strong>Artista:</strong> <%= album.getArtista() %></p>
             <p><strong>Album:</strong> <%= album.getAlbum() %></p>
             <p><strong>Informacoes:</strong> <%= album.getInformacoes() %></p>
+            <div class="container">
+                <img src="data:image/jpg;base64,<%= album.getImagemBase() %>">
+            </div>
             <form action="/delete-album" method="post">
-                <input type="hidden" id="id" name="id" value="  <%= album.getId() %>">
+                <input type="hidden" id="id" name="id" value="<%= album.getId() %>">
                 <button type="submit">Delete</button>
             </form>
+            <button class="edit-button" onclick="mostrarEdicao(<%= album.getId() %>)">Editar</button>
 
-            <form action="/update-album" method="post">
+            <form action="/update-album" method="post" class="edit-form">
                 <input type="hidden" name="id" value="<%= album.getId() %>">
                 <label for="titulo">Título:</label>
                 <input type="text" id="titulo" name="titulo">
@@ -139,25 +169,23 @@
                 <label for="album">Álbum:</label>
                 <input type="text" id="album" name="album">
 
-                <label for="album">Informacoes do artista:</label>
+                <label for="album">Artista:</label>
                 <input type="text" id="informacoes" name="informacoes">
 
                 <label for="album">Imagem:</label>
                 <input type="file" id="imagem" name="imagem">
 
                 <button type="submit">Update Album</button>
-
             </form>
 
         </div>
-
         <% } %>
     </div>
-
     <button id="anterior-album">Álbum anterior</button>
     <button id="proximo-album">Próximo Álbum</button>
 
     <script>
+
         const albums = document.querySelectorAll(".album");
         let indexAtual = 0;
 
@@ -188,6 +216,7 @@
 
             albums[indexAtual].style.display = "block";
         });
+
 
     </script>
 </div>

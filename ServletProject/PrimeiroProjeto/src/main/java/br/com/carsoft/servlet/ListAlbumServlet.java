@@ -20,7 +20,7 @@ import java.util.List;
 
             req.setAttribute("albums", albums);
 
-            req.getRequestDispatcher("albums.jsp").forward(req, resp);
+            req.getRequestDispatcher("albumsAdmin.jsp").forward(req, resp);
 
 
         }

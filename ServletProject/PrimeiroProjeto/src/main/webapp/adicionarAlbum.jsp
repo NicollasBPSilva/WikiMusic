@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <html>
 <head>
     <title>Gerenciador de Músicas</title>
@@ -91,7 +93,7 @@
     </tr>
 </table>
 
-<form action="/adicionaralbum" method="post" class="formulario" id="form-adicionar">
+<form action="/adicionaralbum" method="post" class="formulario" id="form-adicionar" enctype="multipart/form-data">
 
     <label for="titulo">Título:</label>
     <input type="text" id="titulo" name="titulo" required>
@@ -105,6 +107,9 @@
     <label for="album">Informacoes do artista:</label>
     <input type="text" id="informacoes" name="informacoes" required>
     <button type="submit">Enviar</button>
+
+    <label for="album">Imagem:</label>
+    <input type="file" id="imagem" name="imagem">
 
     <button type="submit">Save</button>
     </body>

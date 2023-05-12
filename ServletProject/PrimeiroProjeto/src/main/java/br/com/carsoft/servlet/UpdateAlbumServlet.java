@@ -21,9 +21,9 @@ public class UpdateAlbumServlet  extends HttpServlet {
         String artista = servletRequest.getParameter("artista");
         String album = servletRequest.getParameter("album");
         String informacoes = servletRequest.getParameter("informacoes");
+        byte[] imagem = servletRequest.getParameter("imagem").getBytes();
 
-
-        Album albumClass = new Album(albumId, titulo, artista, album, informacoes);
+        Album albumClass = new Album(albumId, titulo, artista, album, informacoes, imagem);
 
 
         new AlbumDao().atualizarAlbum(albumClass);
