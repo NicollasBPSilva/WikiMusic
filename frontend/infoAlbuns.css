@@ -11,34 +11,39 @@ html, body {
 .container {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    min-height: 100vh;
 }
 
 .header {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
     height: 80px;
     background-color: #515151;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
 }
 
 .footer {
     display: flex;
-    justify-content: left;
+    justify-content: center;
     align-items: center;
-    position: relative;
     height: 50px;
     background-color: #515151;
     color: #fff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 .footer p {
     display: flex;
-    justify-content: left;
+    justify-content: center;
     align-items: center;
     color: #fff;
-    
 }
 
 .header button {
@@ -72,18 +77,9 @@ html, body {
     flex-grow: 1;
     justify-content: flex-start;
     align-items: flex-start;
-    height: 100%;
+    margin-top: 80px;
+    padding-bottom: 50px;
 }
-
-.main-content {
-    max-width: 60%;
-    text-align: left;
-    padding: 20px;
-    margin-left: 5%;
-    border: 1px solid #ddd;
-    align-self: center;
-    
-}  
 
 .sidebar {
     display: flex;
@@ -91,7 +87,6 @@ html, body {
     align-items: center;
     justify-content: left;
     width: 250px;
-    height: 100%;
     background-color: #84794b;
     padding: 20px;
 }
@@ -101,5 +96,23 @@ html, body {
     height: 250px;
     border-radius: 5%;
     margin-bottom: 20px;
-    
+}
+
+.main-content {
+    max-width: 60%;
+    text-align: left;
+    padding: 20px;
+    margin-left: 5%;
+    border: 1px solid #ddd;
+    flex-grow: 1;
+}
+
+div .faixas {
+    margin-top: 6%;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
 }
