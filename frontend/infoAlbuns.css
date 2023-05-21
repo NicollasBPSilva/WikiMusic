@@ -12,51 +12,50 @@ html, body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    position: relative; 
 }
 
 .header {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80px;
+    height: 55px;
     background-color: #515151;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
+    z-index: 2; 
+}
+
+.img_login{
+    width: 36px;
+    height: 36px;
+    display: flex;
 }
 
 .footer {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     height: 50px;
     background-color: #515151;
     color: #fff;
-    position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
+    z-index: 200;
+    padding-right: 1vw; 
 }
 
-.footer p {
+.header-buttons {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #fff;
+    flex-grow: 1;
 }
 
-.header button {
-    padding: 10px;
-    margin: 10px;
-    font-size: 18px;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: transparent;
-}
-
+.header button,
 .footer button {
     padding: 10px;
     margin: 10px;
@@ -68,27 +67,47 @@ html, body {
     background-color: transparent;
 }
 
+button:hover {
+    background: rgb(65, 65, 66);
+    background: linear-gradient(0deg, #515151 0%, #909090 100%);
+    scale: 1.02;
+    transition-duration: 100ms;
+}
+
+.header .button-login{
+    display: flex; 
+    font-size: 40px;
+    padding: 0 2%;
+    margin-left: auto;
+    background-color: #8C3F23;
+    border-radius: 0;
+    color: white;
+}
+
 .header button.active {
     background-color: darkgrey;
+}
+
+.header .button-login:hover {
+    background: rgb(62, 20, 20);
+    background: linear-gradient(0deg, #652b2b 0%, #561212 100%);
 }
 
 .wrapper {
     display: flex;
     flex-grow: 1;
-    justify-content: flex-start;
-    align-items: flex-start;
-    margin-top: 80px;
-    padding-bottom: 50px;
+    margin-top: 0px;
+    padding-bottom: 0px;
 }
 
 .sidebar {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: left;
-    width: 250px;
-    background-color: #84794b;
+    align-items: flex-start;
+    width: 300px;
+    background-color: #b5b5b5;
     padding: 20px;
+    margin-bottom: 0;
 }
 
 .sidebar img {
@@ -96,15 +115,15 @@ html, body {
     height: 250px;
     border-radius: 5%;
     margin-bottom: 20px;
+    margin-top: 60px;
 }
 
 .main-content {
+    flex-grow: 1;
     max-width: 60%;
     text-align: left;
-    padding: 20px;
+    padding: 80px;
     margin-left: 5%;
-    border: 1px solid #ddd;
-    flex-grow: 1;
 }
 
 div .faixas {
@@ -115,4 +134,19 @@ div .faixas {
     align-items: center;
     justify-content: center;
     width: 50%;
+}
+
+@media (max-width: 768px) {
+    
+    .sidebar img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .container .main-content{
+        padding: 40px;
+        padding-top: 80px;
+        margin: 0;
+    }
+
 }
