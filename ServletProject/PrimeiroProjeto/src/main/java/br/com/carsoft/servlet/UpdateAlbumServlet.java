@@ -10,20 +10,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/update-album")
+@WebServlet("/editar-album")
 public class UpdateAlbumServlet  extends HttpServlet {
 
     protected void doPost(HttpServletRequest servletRequest, HttpServletResponse response) throws ServletException, IOException {
 
         String albumId = servletRequest.getParameter("id");
 
-        String titulo = servletRequest.getParameter("titulo");
-        String artista = servletRequest.getParameter("artista");
-        String album = servletRequest.getParameter("album");
-        String informacoes = servletRequest.getParameter("informacoes");
+        String gravadora  = servletRequest.getParameter("gravadora");
+        String genero  = servletRequest.getParameter("genero");
+        String pais  = servletRequest.getParameter("pais");
+        String ano  = servletRequest.getParameter("ano");
+        String descricao  = servletRequest.getParameter("descricao");
         byte[] imagem = servletRequest.getParameter("imagem").getBytes();
 
-        Album albumClass = new Album(albumId, titulo, artista, album, informacoes, imagem);
+        int converterAno =  Integer.parseInt(ano);
+
+        Album albumClass = new Album(albumId, gravadora, genero, pais, converterAno,descricao, imagem);
 
 
         new AlbumDao().atualizarAlbum(albumClass);

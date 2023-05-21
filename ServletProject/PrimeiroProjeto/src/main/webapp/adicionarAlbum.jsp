@@ -5,112 +5,119 @@
 <head>
     <title>Gerenciador de Músicas</title>
     <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
+        .card {
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 0 auto;
         }
 
-        th, td {
-            text-align: left;
-            padding: 8px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        tr:hover {
-            background-color: #f5f5f5;
-        }
-
-        .formulario {
-            margin-top: 20px;
-        }
-
-        .formulario label {
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        .formulario input[type=text] {
-            padding: 8px;
-            width: 100%;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
+        .card h1 {
+            text-align: center;
             margin-bottom: 20px;
         }
 
-        .formulario input[type=submit] {
+        .card label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .card input,
+        .card select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .card button {
             background-color: #4CAF50;
             color: white;
-            padding: 12px 20px;
+            padding: 10px 20px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
         }
 
-        .formulario input[type=submit]:hover {
+        .card button:hover {
             background-color: #45a049;
-        }
-
-        .deletar {
-            background-color: #f44336;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            font-size: 16px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .deletar:hover {
-            background-color: #da190b;
         }
     </style>
 </head>
 <body>
-<h1>Gerenciador de Músicas</h1>
-
-<table>
-    <tr>
-        <th>Título</th>
-        <th>Artista</th>
-        <th>Álbum</th>
-        <th>Ano</th>
-        <th>Ações</th>
-    </tr>
-    <tr>
-        <td>Bohemian Rhapsody</td>
-        <td>Queen</td>
-        <td>A Night at the Opera</td>
-        <td>1975</td>
-        <td><button class="deletar">Deletar</button></td>
-    </tr>
-    <tr>
-        <td>Stairway to Heaven</td>
-        <td>Led Zeppelin</td>
-        <td>Led Zeppelin IV</td>
-        <td>1971</td>
-        <td><button class="deletar">Deletar</button></td>
-    </tr>
-</table>
+<div class="card">
+<h1>Gerenciador de Musicas</h1>
 
 <form action="/adicionaralbum" method="post" class="formulario" id="form-adicionar" enctype="multipart/form-data">
 
-    <label for="titulo">Título:</label>
-    <input type="text" id="titulo" name="titulo" required>
+    <label for="gravadora">Gravadora</label>
+    <input type="text" id="gravadora" name="gravadora" required>
 
-    <label for="artista">Artista:</label>
+    <div>
+        <label for="genero">Genero:</label>
+        <select id="genero" name="genero" onchange="filtrarPorGenero()">
+            <option value="1">Rock</option>
+            <option value="2">Sertanejo</option>
+            <option value="3">Funk</option>
+        </select>
+    </div>
+    <h1>Informacoes do Album: </h1>
+    <label for="pais">Pais</label>
+    <input type="text" id="pais" name="pais" required>
+
+    <label for="ano">Ano</label>
+    <input type="number" id="ano" name="ano" required>
+
+    <label for="descricaoAlbum">Descricao do Album</label>
+    <input type="text" id="descricaoAlbum" name="descricaoAlbum" required>
+
+    <label for="imagem">Imagem:</label>
+    <input type="file" id="imagem" name="imagem" required>
+
+
+    <h1>Informacoes do Artista: </h1>
+    <label for="nomeArtista">Nome do artista:</label>
+    <input type="text" id="nomeArtista" name="nomeArtista" required>
+
+    <label for="descricaoArtista">Descricao:</label>
+    <input type="text" id="descricaoArtista" name="descricaoArtista" required>
+
+
+    <h1>Informacoes da Musica: </h1>
+    <label for="nomeMusica">Nome da musica:</label>
+    <input type="text" id="nomeMusica" name="nomeMusica" required>
+
+    <label for="artista">Compositor:</label>
     <input type="text" id="artista" name="artista" required>
 
-    <label for="album">Álbum:</label>
-    <input type="text" id="album" name="album" required>
-
-    <label for="album">Informacoes do artista:</label>
-    <input type="text" id="informacoes" name="informacoes" required>
     <button type="submit">Enviar</button>
 
-    <label for="album">Imagem:</label>
-    <input type="file" id="imagem" name="imagem">
-
-    <button type="submit">Save</button>
+</form>
+    </div>
     </body>
+<script>
+    function filtrarPorGenero() {
+        var generoSelect = document.getElementById("genero");
+        var generoSelecionado = generoSelect.options[generoSelect.selectedIndex].value;
+
+        var generoInputAnterior = document.getElementById("generoInput");
+        if (generoInputAnterior) {
+            generoInputAnterior.remove();
+        }
+
+        var generoInput = document.createElement("input");
+        generoInput.setAttribute("type", "hidden");
+        generoInput.setAttribute("name", "genero");
+        generoInput.setAttribute("value", generoSelecionado);
+        generoInput.setAttribute("id", "generoInput");
+
+        var form = document.getElementById("form-adicionar");
+        form.appendChild(generoInput);
+    }
+
+</script>
+
 </html>

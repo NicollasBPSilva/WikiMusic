@@ -1,6 +1,8 @@
 <%@ page import="br.com.carsoft.model.Album" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Base64" %>
+<%@ page import="br.com.carsoft.model.Artista" %>
+<%@ page import="br.com.carsoft.model.Musica" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -11,116 +13,51 @@
 </head>
 <body>
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f2f2f2;
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    h1 {
-        text-align: center;
-        margin: 50px 0 20px;
-    }
 
     #album-list {
+        margin-bottom: 20px;
+    }
+
+    #album-list ul {
         display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+        flex-direction: row;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    #album-list li {
+        margin-bottom: 20px;
     }
 
     .album {
-        background-color: #fff;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        border-radius: 4px;
-        width: 300px;
-        margin: 20px;
-        padding: 20px;
-        text-align: center;
-        position: relative;
-    }
-
-    .album h2 {
-        margin: 0;
-        font-size: 24px;
-        font-weight: bold;
-        color: #333;
+        border: 1px solid #ccc;
+        padding: 10px;
+        background-color: #f9f9f9;
+        width: 50%;
     }
 
     .album p {
-        margin: 10px 0 0;
-        font-size: 16px;
-        color: #666;
+        margin: 0;
+        line-height: 1.5;
     }
 
-    .album form {
-        display: flex;
-        flex-direction: column;
-        margin-top: 20px;
-    }
 
-    .album label {
-        font-size: 16px;
-        color: #333;
-        margin-bottom: 10px;
-    }
-
-    .album input {
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-size: 16px;
-        margin-bottom: 20px;
-    }
-
-    .album button {
-        padding: 10px 20px;
-        background-color: #333;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-
-    .album button:hover {
-        background-color: #555;
-    }
-
-    .album .delete {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background-color: #ff4136;
-        color: #fff;
-        border: none;
-        border-radius: 50%;
-        width: 30px;
-        height: 30px;
-        font-size: 16px;
-        line-height: 1;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-
-    .album .delete:hover {
-        background-color: #c70000;
-    }
-
-    .edit-form {
-        display:none;
-    }
-
-    .album {
-        margin-bottom: 20px;
-    }
-
-    .edit-button {
+    .container {
         margin-top: 10px;
+    }
+
+    .container img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    form button[type="submit"] {
+        background-color: #e74c3c;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
     }
 
     .container {
@@ -131,94 +68,173 @@
         align-items: center;
     }
 
-    .container img {
-        max-width: 100%;
-        max-height: 100%;
+    .edit-form {
+        display: none; /* Initially hide the edit form */
+        flex-direction: column;
+        margin-bottom: 20px;
     }
+
+    .edit-form label {
+        margin-bottom: 5px;
+    }
+
+    .edit-form input[type="text"] {
+        padding: 5px;
+        margin-bottom: 10px;
+    }
+
+    .edit-form button[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .edit-form p {
+        color: red;
+        font-style: italic;
+    }
+
+
+
 
 </style>
 <div>
     <h1>Albums</h1>
 
     <div id="album-list">
-        <% List<Album> albums = (List<Album>) request.getAttribute("albums");
-            for (Album album : albums) { %>
+        <div>
+            <label for="genero">Genero:</label>
+            <select id="genero" onchange="filtrarPorGenero()">
+                <option value="">Escolha o Genero</option>
+                <option value="rock">Rock</option>
+                <option value="sertaneijo">Sertaneijo</option>
+                <option value="funk">Funk</option>
+            </select>
+        </div>
+
+        <%
+            List<Album> albums = (List<Album>) request.getAttribute("albums");
+            String generoSelecionado = (String) request.getAttribute("genero");
+            if (albums != null) {
+                for (Album album : albums) {
+                    if (generoSelecionado == null || generoSelecionado.isEmpty() || album.getGenero().equalsIgnoreCase(generoSelecionado)) {
+        %>
         <div class="album">
-            <h2><%= album.getId() %></h2>
-            <h2><%= album.getTitulo() %></h2>
-            <p><strong>Artista:</strong> <%= album.getArtista() %></p>
-            <p><strong>Album:</strong> <%= album.getAlbum() %></p>
-            <p><strong>Informacoes:</strong> <%= album.getInformacoes() %></p>
+            <p>Descrição</p>
+            <p><%= album.getDescricao() %></p>
+            <p>Ano</p>
+            <p><%= album.getAno() %></p>
+            <p>Gravadora</p>
+            <p><%= album.getGravadora() %></p>
+            <p>Genero</p>
+            <p><%= album.getGenero() %></p>
+            <p>Pais</p>
+            <p><%= album.getPais() %></p>
+
             <div class="container">
                 <img src="data:image/jpg;base64,<%= album.getImagemBase() %>">
             </div>
-            <form action="/delete-album" method="post">
-                <input type="hidden" id="id" name="id" value="<%= album.getId() %>">
-                <button type="submit">Delete</button>
-            </form>
-            <button class="edit-button" onclick="mostrarEdicao(<%= album.getId() %>)">Editar</button>
 
-            <form action="/update-album" method="post" class="edit-form">
+            <h2>Artista</h2>
+            <%
+                List<Artista> artistas = album.getArtistas();
+                if (artistas != null) {
+                    for (Artista artista : artistas) {
+            %>
+            <div class="artista">
+                <p>Nome do Artista</p>
+                <p><%= artista.getNomeArtista() %></p>
+                <p>Descrição do artista</p>
+                <p><%= artista.getDescricaoArtista() %></p>
+
+                <h3>Musicas</h3>
+                <%
+                    List<Musica> musicas = artista.getMusicas();
+                    if (musicas != null) {
+                        for (Musica musica : musicas) {
+                %>
+                <div class="musica">
+                    <p>Nome da musica</p>
+                    <p><%= musica.getMusica() %></p>
+                </div>
+                <%
+                        }
+                    }
+                %>
+            </div>
+            <%
+                    }
+                }
+            %>
+
+            <button type="button" onclick="toggleEditForm(this)">Edit</button>
+            <form action="/editar-album" method="post" class="edit-form">
                 <input type="hidden" name="id" value="<%= album.getId() %>">
-                <label for="titulo">Título:</label>
-                <input type="text" id="titulo" name="titulo">
+                <h1>ALBUM</h1>
+                <label for="nomeAlbum">Descrição:</label>
+                <input type="text" id="nomeAlbum" name="nomeAlbum">
 
-                <label for="artista">Artista:</label>
+                <label for="ano">Ano:</label>
+                <input type="text" id="ano" name="ano">
+
+                <label for="gravadora">Gravadora:</label>
+                <input type="text" id="gravadora" name="gravadora">
+
+                <label for="generoEditar">Genero:</label>
+                <input type="text" id="generoEditar" name="generoEditar">
+
+                <label for="pais">Pais:</label>
+                <input type="text" id="pais" name="pais">
+
+                <h1>ARTISTA</h1>
+                <label for="artista">Artista</label>
                 <input type="text" id="artista" name="artista">
 
-                <label for="album">Álbum:</label>
-                <input type="text" id="album" name="album">
+                <label for="descricaoArtista">Descrição</label>
+                <input type="text" id="descricaoArtista" name="descricaoArtista">
 
-                <label for="album">Artista:</label>
-                <input type="text" id="informacoes" name="informacoes">
+                <h1>MUSICA</h1>
+                <label for="musica">Pais:</label>
+                <input type="text" id="musica" name="musica">
 
-                <label for="album">Imagem:</label>
-                <input type="file" id="imagem" name="imagem">
+                <label for="descricaoMusica">Descricao:</label>
+                <input type="text" id="descricaoMusica" name="descricaoMusica">
 
                 <button type="submit">Update Album</button>
+
+            </form>
+
+
+
+            <form action="/delete-album" method="post">
+                <input type="hidden" name="albumId" value="<%= album.getId() %>">
+                <button type="submit">Delete</button>
             </form>
 
         </div>
-        <% } %>
+        <%
+                    }
+                }
+            }
+        %>
     </div>
-    <button id="anterior-album">Álbum anterior</button>
-    <button id="proximo-album">Próximo Álbum</button>
+</div>
 
-    <script>
+<script>
+    function filtrarPorGenero() {
+        var generoSelect = document.getElementById("genero");
+        var generoSelecionado = generoSelect.options[generoSelect.selectedIndex].value;
 
-        const albums = document.querySelectorAll(".album");
-        let indexAtual = 0;
+        window.location.href = "/encontrar-albums?genero=" + generoSelecionado;
+    }
+    function toggleEditForm(button) {
+        var editForm = button.nextElementSibling;
+        editForm.style.display = (editForm.style.display === "none") ? "flex" : "none";
+    }
 
-        for (let i = 1; i < albums.length; i++) {
-            albums[i].style.display = "none";
-        }
-
-        document.querySelector("#proximo-album").addEventListener("click", () => {
-            albums[indexAtual].style.display = "none";
-
-            indexAtual++;
-
-            if (indexAtual >= albums.length) {
-                indexAtual = 0;
-            }
-
-            albums[indexAtual].style.display = "block";
-        });
-
-        document.querySelector("#anterior-album").addEventListener("click", () => {
-            albums[indexAtual].style.display = "none";
-
-            indexAtual--;
-
-            if (indexAtual < 0) {
-                indexAtual = albums.length - 1;
-            }
-
-            albums[indexAtual].style.display = "block";
-        });
-
-
-    </script>
+</script>
 </div>
 </body>
 </html>

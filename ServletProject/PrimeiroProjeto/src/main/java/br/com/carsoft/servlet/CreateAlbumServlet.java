@@ -2,6 +2,8 @@ package br.com.carsoft.servlet;
 
 import br.com.carsoft.dao.AlbumDao;
 import br.com.carsoft.model.Album;
+import br.com.carsoft.model.Artista;
+import br.com.carsoft.model.Musica;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -23,13 +25,32 @@ import java.io.InputStream;
 public class CreateAlbumServlet extends HttpServlet {
 
         protected void doPost(HttpServletRequest servletRequest, HttpServletResponse response) throws ServletException, IOException {
-
+            //Informações do Album
             String albumId = servletRequest.getParameter("id");
+            String gravadora = servletRequest.getParameter("gravadora");
+            String pais = servletRequest.getParameter("pais");
+            String ano = servletRequest.getParameter("ano");
+            String descricaoAlbum = servletRequest.getParameter("descricaoAlbum");
 
-            String titulo = servletRequest.getParameter("titulo");
-            String artista = servletRequest.getParameter("artista");
-            String album = servletRequest.getParameter("album");
-            String informacoes = servletRequest.getParameter("informacoes");
+
+            // Conversão do valor do parâmetro "ano" para o tipo correto
+            int anoConversao = Integer.parseInt(ano);
+
+             String genero = "";
+
+            int generoInput = Integer.parseInt(servletRequest.getParameter("genero"));
+
+            switch(generoInput){
+                case 1:
+                    genero = "rock";
+                    break;
+                case 2:
+                    genero = "sertanejo";
+                    break;
+                case 3:
+                    genero = "funk";
+                    break;
+            }
 
 
             Part imagemPart = servletRequest.getPart("imagem");
@@ -43,10 +64,25 @@ public class CreateAlbumServlet extends HttpServlet {
             }
             byte[] imagemBytes = output.toByteArray();
 
-            Album albumClass = new Album(titulo, artista, album, informacoes, imagemBytes);
+            int ativo = 1;
+
+            //Informações do Artista
+
+            String nomeArtista = servletRequest.getParameter("nomeArtista");
+            String descricaoArtista = servletRequest.getParameter("descricaoArtista");
+
+            //Informações da musica
+
+            String nomeMusica = servletRequest.getParameter("nomeMusica");
 
 
-            new AlbumDao().albumAdicionar(albumClass);
+            Album albumClass = new Album(gravadora, genero, pais, anoConversao, descricaoAlbum, imagemBytes, ativo);
+
+            Artista artistaClass = new Artista(nomeArtista, descricaoArtista, ativo);
+
+            Musica musicaClass = new Musica(nomeMusica, ativo);
+
+            new AlbumDao().albumAdicionar(albumClass, artistaClass, musicaClass);
 
             response.sendRedirect("/encontrar-albums");
         }

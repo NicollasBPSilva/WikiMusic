@@ -1,9 +1,12 @@
 br\com\carsoft\servlet\ListAlbumServlet.class
 br\com\carsoft\servlet\CreateAlbumServlet.class
 br\com\carsoft\servlet\DeleteAlbumServlet.class
-br\com\carsoft\servlet\CreateLoginServlet.class
 br\com\carsoft\model\Login.class
 br\com\carsoft\dao\AlbumDao.class
+br\com\carsoft\servlet\LoginServlet.class
+br\com\carsoft\model\Musica.class
+br\com\carsoft\ValidateLogin\ValidationFilter.class
 br\com\carsoft\servlet\UpdateAlbumServlet.class
 br\com\carsoft\dao\LoginDao.class
 br\com\carsoft\model\Album.class
+br\com\carsoft\model\Artista.class
