@@ -1,22 +1,20 @@
-package br.com.carsoft.servlet;
+package br.com.carsoft.servlet.Album.Admin;
 
 import br.com.carsoft.dao.AlbumDao;
-import br.com.carsoft.model.Album;
-import br.com.carsoft.model.Artista;
-import br.com.carsoft.model.Musica;
+import br.com.carsoft.model.Album.Album;
+import br.com.carsoft.model.Album.Artista;
+import br.com.carsoft.model.Album.Musica;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
+import javax.servlet.http.*;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-@WebServlet("/adicionaralbum")
+
+@WebServlet({"/adicionaralbum", "/admin/adicionaralbum"})
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024 * 80, // 80 MB
         maxFileSize = 1024 * 1024 * 400, // 400 MB
@@ -25,6 +23,14 @@ import java.io.InputStream;
 public class CreateAlbumServlet extends HttpServlet {
 
         protected void doPost(HttpServletRequest servletRequest, HttpServletResponse response) throws ServletException, IOException {
+
+            HttpSession session = servletRequest.getSession();
+            String loggedUser = (String) session.getAttribute("loggedUser");
+            if (loggedUser == null) {
+                response.sendRedirect("login.jsp");
+                return;
+            }
+
             //Informações do Album
             String albumId = servletRequest.getParameter("id");
             String gravadora = servletRequest.getParameter("gravadora");
@@ -38,19 +44,9 @@ public class CreateAlbumServlet extends HttpServlet {
 
              String genero = "";
 
-            int generoInput = Integer.parseInt(servletRequest.getParameter("genero"));
+            String generoInput = servletRequest.getParameter("genero");
 
-            switch(generoInput){
-                case 1:
-                    genero = "rock";
-                    break;
-                case 2:
-                    genero = "sertanejo";
-                    break;
-                case 3:
-                    genero = "funk";
-                    break;
-            }
+            String generoConvertido = converterGenero(generoInput);
 
 
             Part imagemPart = servletRequest.getPart("imagem");
@@ -64,6 +60,20 @@ public class CreateAlbumServlet extends HttpServlet {
             }
             byte[] imagemBytes = output.toByteArray();
 
+            ///////////////
+
+            Part imagemPartArtista = servletRequest.getPart("imagemArtista");
+            InputStream albumImagemStream = imagemPartArtista.getInputStream();
+
+            ByteArrayOutputStream albumOutput = new ByteArrayOutputStream();
+            byte[] albumBuffer = new byte[4096];
+            int albumBytesRead;
+            while ((albumBytesRead = albumImagemStream.read(albumBuffer)) != -1) {
+                albumOutput.write(albumBuffer, 0, albumBytesRead);
+            }
+            byte[] artistaImagem = albumOutput.toByteArray();
+
+
             int ativo = 1;
 
             //Informações do Artista
@@ -76,18 +86,38 @@ public class CreateAlbumServlet extends HttpServlet {
             String nomeMusica = servletRequest.getParameter("nomeMusica");
 
 
-            Album albumClass = new Album(gravadora, genero, pais, anoConversao, descricaoAlbum, imagemBytes, ativo);
+            Album albumClass = new Album(gravadora, generoConvertido, pais, anoConversao, descricaoAlbum, imagemBytes, ativo);
 
-            Artista artistaClass = new Artista(nomeArtista, descricaoArtista, ativo);
+            Artista artistaClass = new Artista(nomeArtista, descricaoArtista, artistaImagem, ativo);
 
             Musica musicaClass = new Musica(nomeMusica, ativo);
 
             new AlbumDao().albumAdicionar(albumClass, artistaClass, musicaClass);
 
-            response.sendRedirect("/encontrar-albums");
+            response.sendRedirect("albumsAdmin.jsp");
         }
 
 
+
+    private String converterGenero (String generoInput) {
+        String genero = "";
+
+        int generoValue = Integer.parseInt(generoInput);
+
+        switch (generoValue) {
+            case 1:
+                genero = "rock";
+                break;
+            case 2:
+                genero = "sertanejo";
+                break;
+            case 3:
+                genero = "funk";
+                break;
+        }
+
+        return genero;
+    }
 
 }
 

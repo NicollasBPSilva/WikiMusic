@@ -1,9 +1,22 @@
-package br.com.carsoft.model;
+package br.com.carsoft.model.Album;
 
 import java.util.List;
 
 public class Artista {
 
+    private String artistaImagemBase64;
+    public String getArtistaImagemBase64() {
+        return artistaImagemBase64;
+    }
+
+    public void setArtistaImagemBase64(String artistaImagemBase64) {
+        this.artistaImagemBase64 = artistaImagemBase64;
+    }
+    public byte[] getArtistaImagem() {
+        return artistaImagem;
+    }
+
+    private byte[] artistaImagem;
     private int artistaId;
     private String nomeArtista;
     private String descricaoArtista;
@@ -12,6 +25,7 @@ public class Artista {
     private int ativo;
 
     private List<Musica> musicas;
+
 
     public List<Musica> getMusicas() {
         return musicas;
@@ -64,4 +78,21 @@ public class Artista {
         this.descricaoArtista = descricaoArtista;
     }
 
+    public Artista(String artista, String descricaoArtista) {
+        this.nomeArtista = artista;
+        this.descricaoArtista = descricaoArtista;
+    }
+    public Artista(String nomeArtista, String descricaoArtista, byte[] artistaImagem, int ativo) {
+        this.nomeArtista = nomeArtista;
+        this.descricaoArtista = descricaoArtista;
+        this.artistaImagem = artistaImagem;
+        this.ativo = ativo;
+    }
+
+    public Artista(int artistaId,String nomeArtista, String descricaoArtista, String artistaImagemBase64) {
+        this.artistaId = artistaId;
+        this.nomeArtista = nomeArtista;
+        this.descricaoArtista = descricaoArtista;
+        this.artistaImagemBase64 = artistaImagemBase64;
+    }
 }

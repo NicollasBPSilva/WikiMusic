@@ -85,13 +85,13 @@
     <label for="descricaoArtista">Descricao:</label>
     <input type="text" id="descricaoArtista" name="descricaoArtista" required>
 
+    <label for="imagemArtista">Imagem:</label>
+    <input type="file" id="imagemArtista" name="imagemArtista" required>
 
     <h1>Informacoes da Musica: </h1>
     <label for="nomeMusica">Nome da musica:</label>
     <input type="text" id="nomeMusica" name="nomeMusica" required>
 
-    <label for="artista">Compositor:</label>
-    <input type="text" id="artista" name="artista" required>
 
     <button type="submit">Enviar</button>
 

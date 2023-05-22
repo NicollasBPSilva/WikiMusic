@@ -1,4 +1,4 @@
-package br.com.carsoft.model;
+package br.com.carsoft.model.Session;
 
 public class Login {
     private String name;

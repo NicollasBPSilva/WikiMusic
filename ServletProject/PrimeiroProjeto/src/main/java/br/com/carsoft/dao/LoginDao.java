@@ -1,6 +1,6 @@
 package br.com.carsoft.dao;
 
-import br.com.carsoft.model.Login;
+import br.com.carsoft.model.Session.Login;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,7 +11,7 @@ public class LoginDao {
 
     public boolean verifyCredentials(Login login) {
 
-        String SQL = "SELECT * FROM USR WHERE USERNAME = ?";
+        String SQL = "SELECT * FROM USERS WHERE USERNAME = ?";
 
         try {
 

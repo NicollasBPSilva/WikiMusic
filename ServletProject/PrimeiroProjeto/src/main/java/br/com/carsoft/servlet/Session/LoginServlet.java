@@ -1,8 +1,8 @@
-package br.com.carsoft.servlet;
+package br.com.carsoft.servlet.Session;
 
 
 import br.com.carsoft.dao.LoginDao;
-import br.com.carsoft.model.Login;
+import br.com.carsoft.model.Session.Login;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
 
             req.getSession().setAttribute("loggedUser", username);
 
-            resp.sendRedirect("find-all-cars");
+            resp.sendRedirect("/albumsAdmin.jsp");
 
         } else {
 

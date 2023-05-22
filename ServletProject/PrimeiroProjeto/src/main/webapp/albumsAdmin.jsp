@@ -1,14 +1,15 @@
-<%@ page import="br.com.carsoft.model.Album" %>
+<%@ page import="br.com.carsoft.model.Album.Album" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Base64" %>
-<%@ page import="br.com.carsoft.model.Artista" %>
-<%@ page import="br.com.carsoft.model.Musica" %>
+<%@ page import="br.com.carsoft.model.Album.Artista" %>
+<%@ page import="br.com.carsoft.model.Album.Musica" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Dashboard</title>
 </head>
 <body>
@@ -69,7 +70,7 @@
     }
 
     .edit-form {
-        display: none; /* Initially hide the edit form */
+        display: none;
         flex-direction: column;
         margin-bottom: 20px;
     }
@@ -101,18 +102,27 @@
 
 </style>
 <div>
+    <% if (session.getAttribute("loggedUser") != null) { %>
+    <span><%= session.getAttribute("loggedUser") %></span>
+    <a href="/logout">Logout</a>
+    <% } %>
+
+
     <h1>Albums</h1>
 
     <div id="album-list">
         <div>
             <label for="genero">Genero:</label>
-            <select id="genero" onchange="filtrarPorGenero()">
+            <select id="genero" >
                 <option value="">Escolha o Genero</option>
                 <option value="rock">Rock</option>
-                <option value="sertaneijo">Sertaneijo</option>
+                <option value="sertanejo">Sertanejo</option>
                 <option value="funk">Funk</option>
             </select>
+            <p>Nome do Album</p>
+            <input type="text" name="nomeAlbum" id="nomeAlbum">
         </div>
+        <button onclick="filtrarPorGenero()">Buscar</button>
 
         <%
             List<Album> albums = (List<Album>) request.getAttribute("albums");
@@ -122,7 +132,10 @@
                     if (generoSelecionado == null || generoSelecionado.isEmpty() || album.getGenero().equalsIgnoreCase(generoSelecionado)) {
         %>
         <div class="album">
-            <p>Descrição</p>
+            <div class="container">
+                <img src="data:image/jpg;base64,<%= album.getImagemBase() %>">
+            </div>
+            <p>Nome</p>
             <p><%= album.getDescricao() %></p>
             <p>Ano</p>
             <p><%= album.getAno() %></p>
@@ -133,10 +146,6 @@
             <p>Pais</p>
             <p><%= album.getPais() %></p>
 
-            <div class="container">
-                <img src="data:image/jpg;base64,<%= album.getImagemBase() %>">
-            </div>
-
             <h2>Artista</h2>
             <%
                 List<Artista> artistas = album.getArtistas();
@@ -144,10 +153,14 @@
                     for (Artista artista : artistas) {
             %>
             <div class="artista">
+                <div class="container">
+                    <img src="data:image/jpg;base64,<%= artista.getArtistaImagemBase64() %>">
+                </div>
                 <p>Nome do Artista</p>
                 <p><%= artista.getNomeArtista() %></p>
                 <p>Descrição do artista</p>
                 <p><%= artista.getDescricaoArtista() %></p>
+
 
                 <h3>Musicas</h3>
                 <%
@@ -170,20 +183,26 @@
             %>
 
             <button type="button" onclick="toggleEditForm(this)">Edit</button>
-            <form action="/editar-album" method="post" class="edit-form">
+            <form action="/editar-album" method="post" class="edit-form" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="<%= album.getId() %>">
                 <h1>ALBUM</h1>
-                <label for="nomeAlbum">Descrição:</label>
-                <input type="text" id="nomeAlbum" name="nomeAlbum">
+                <label for="descricaoAlbum">Descrição:</label>
+                <input type="text" id="descricaoAlbum" name="descricaoAlbum">
 
                 <label for="ano">Ano:</label>
-                <input type="text" id="ano" name="ano">
+                <input type="int" id="ano" name="ano">
 
                 <label for="gravadora">Gravadora:</label>
                 <input type="text" id="gravadora" name="gravadora">
 
-                <label for="generoEditar">Genero:</label>
-                <input type="text" id="generoEditar" name="generoEditar">
+                <div>
+                    <label for="generoEditar">Genero:</label>
+                    <select id="generoEditar" name="generoEditar" onchange="filtroGeneroEditar()">
+                        <option value="1">Rock</option>
+                        <option value="2">Sertanejo</option>
+                        <option value="3">Funk</option>
+                    </select>
+                </div>
 
                 <label for="pais">Pais:</label>
                 <input type="text" id="pais" name="pais">
@@ -195,12 +214,8 @@
                 <label for="descricaoArtista">Descrição</label>
                 <input type="text" id="descricaoArtista" name="descricaoArtista">
 
-                <h1>MUSICA</h1>
-                <label for="musica">Pais:</label>
-                <input type="text" id="musica" name="musica">
-
-                <label for="descricaoMusica">Descricao:</label>
-                <input type="text" id="descricaoMusica" name="descricaoMusica">
+                <label for="imagem">Imagem</label>
+                <input type="file" id="imagem" name="imagem" required>
 
                 <button type="submit">Update Album</button>
 
@@ -227,12 +242,41 @@
         var generoSelect = document.getElementById("genero");
         var generoSelecionado = generoSelect.options[generoSelect.selectedIndex].value;
 
-        window.location.href = "/encontrar-albums?genero=" + generoSelecionado;
+        var nomeAlbumInput = document.getElementById("nomeAlbum");
+        var nomeAlbum = nomeAlbumInput.value;
+
+        var url = "/albums-admin";
+        var params = [];
+
+        if (generoSelecionado) {
+            params.push("genero=" + generoSelecionado);
+        }
+
+        if (nomeAlbum) {
+            params.push("nomeAlbum=" + encodeURIComponent(nomeAlbum));
+        }
+
+        if (params.length > 0) {
+            url += "?" + params.join("&");
+        }
+
+        window.location.href = url;
     }
+
+
+    function filtroGeneroEditar() {
+        var generoSelect = document.getElementById("generoEditar");
+        var generoSelecionado = generoSelect.options[generoSelect.selectedIndex].value;
+
+    }
+
     function toggleEditForm(button) {
         var editForm = button.nextElementSibling;
         editForm.style.display = (editForm.style.display === "none") ? "flex" : "none";
     }
+
+
+
 
 </script>
 </div>

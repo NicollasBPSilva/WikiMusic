@@ -6,6 +6,18 @@
     </style>
 </head>
     <body>
+
+
+    <span><%= session.getAttribute("username") %></span>
+    <a href="/logout">Logout</a>
+    <%
+        if (session.getAttribute("loggedUser") != null) {
+    %>
+    <span><%= session.getAttribute("loggedUser") %></span>
+    <a href="/logout">Logout</a>
+    <%
+        }
+    %>
         <form action="/login" method="post">
             <div class="Test">
 
@@ -27,6 +39,8 @@
 
             <h3> <img src="IMG/logoWikimusic.png" alt="WIKIMUSIC"> </h3>
             <!--  -->
+
+            <button><a href="albums.jsp">Ver albums</a></button>
             <button><a href="adicionarAlbum.jsp">Adicionar album</a></button>
         </form>
         <button><a href="adicionarAlbum.jsp">Adicionar album</a></button>
@@ -34,3 +48,4 @@
 
 
 </html>
+

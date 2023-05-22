@@ -1,4 +1,4 @@
-package br.com.carsoft.model;
+package br.com.carsoft.model.Album;
 
 import java.util.Base64;
 import java.util.List;
@@ -8,6 +8,9 @@ public class Album {
     private String gravadora;
     private String genero;
     private String pais;
+
+    private String artista;
+    private String descricaoArtista;
 
     private int ano;
     private String descricao;
@@ -20,6 +23,25 @@ public class Album {
     private int ativo;
     private int artista_id;
     private List<Artista> artistas;
+
+
+
+    public String getArtista() {
+        return artista;
+    }
+
+    public void setArtista(String artista) {
+        this.artista = artista;
+    }
+
+    public String getDescricaoArtista() {
+        return descricaoArtista;
+    }
+
+    public void setDescricaoArtista(String descricaoArtista) {
+        this.descricaoArtista = descricaoArtista;
+    }
+
     public Album(String getAlbumId) {
         this.id = getAlbumId;
     }
@@ -58,6 +80,18 @@ public class Album {
         this.imagem = imagem;
         this.ativo = ativo;
 
+    }
+
+    public Album(String id, String gravadora, String generoEditar, String pais, int ano, String descricao, String artista, String descricaoArtista, byte[] artistaImagem) {
+        this.id = id;
+        this.gravadora = gravadora;
+        this.genero = generoEditar;
+        this.pais = pais;
+        this.ano = ano;
+        this.descricao = descricao;
+        this.artista = artista;
+        this.descricaoArtista = descricaoArtista;
+        this.imagem = artistaImagem;
     }
 
 
