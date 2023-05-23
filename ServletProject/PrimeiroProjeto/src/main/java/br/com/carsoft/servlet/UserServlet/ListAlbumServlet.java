@@ -21,24 +21,16 @@ import java.util.List;
             String genero = req.getParameter("genero");
             String nome = req.getParameter("nome");
 
-        if(nome == null){
-        List<Album> albums = new AlbumDao().encontrarAlbumsPorGenero(genero);
+                List<Album> albums = new AlbumDao().encontrarAlbumsPorGenero(genero, nome);
 
-            req.setAttribute("albums", albums);
-            req.setAttribute("generoSelecionado", genero);
-            req.getRequestDispatcher("albums.jsp").forward(req, resp);
-        }
+                req.setAttribute("albums", albums);
+                req.setAttribute("generoSelecionado", genero);
 
-            List<Album> albums = new AlbumDao().encontrarAlbumsPorGenero(genero, nome);
+                req.setAttribute("nome", nome);
 
-            req.setAttribute("albums", albums);
-            req.setAttribute("generoSelecionado", genero);
+                req.getRequestDispatcher("albums.jsp").forward(req, resp);
+            }
 
-            req.setAttribute("nome", nome);
-
-            req.getRequestDispatcher("albums.jsp").forward(req, resp);
-
-        }
 
     }
 

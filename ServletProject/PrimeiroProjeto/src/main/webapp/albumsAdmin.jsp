@@ -3,6 +3,7 @@
 <%@ page import="java.util.Base64" %>
 <%@ page import="br.com.carsoft.model.Album.Artista" %>
 <%@ page import="br.com.carsoft.model.Album.Musica" %>
+<%@ page import="java.util.Set" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -148,7 +149,7 @@
 
             <h2>Artista</h2>
             <%
-                List<Artista> artistas = album.getArtistas();
+                Set<Artista> artistas = album.getArtistas();
                 if (artistas != null) {
                     for (Artista artista : artistas) {
             %>
@@ -181,6 +182,12 @@
                     }
                 }
             %>
+            <form action="/adicionarMusica" method="post">
+                <input type="hidden" name="artistaAdicionar" value="<%= album.getId() %>">
+                <label for="musicaArtista">Adicionar musica</label>
+                <input type="text" id="musicaArtista" name="musicaArtista">
+                <button type="submit">Adicionar</button>
+            </form>
 
             <button type="button" onclick="toggleEditForm(this)">Edit</button>
             <form action="/editar-album" method="post" class="edit-form" enctype="multipart/form-data">
@@ -220,8 +227,6 @@
                 <button type="submit">Update Album</button>
 
             </form>
-
-
 
             <form action="/delete-album" method="post">
                 <input type="hidden" name="albumId" value="<%= album.getId() %>">

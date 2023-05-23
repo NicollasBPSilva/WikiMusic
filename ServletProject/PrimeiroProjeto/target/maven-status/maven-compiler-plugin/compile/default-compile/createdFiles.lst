@@ -1,5 +1,6 @@
 br\com\carsoft\model\Session\Login.class
 br\com\carsoft\model\Album\Album.class
+br\com\carsoft\servlet\Album\Admin\InsertMusicServlet.class
 br\com\carsoft\servlet\UserServlet\ListAlbumServlet.class
 br\com\carsoft\servlet\Session\LogoutServlet.class
 br\com\carsoft\servlet\Album\Admin\DeleteAlbumServlet.class

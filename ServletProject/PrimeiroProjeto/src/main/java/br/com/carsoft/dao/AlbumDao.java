@@ -142,7 +142,7 @@ public class AlbumDao {
 
         }
 
-    private static void inserirMusicaRerefenteUltimoArtista(Musica musica, int artistaId) {
+    public static void inserirMusicaRerefenteUltimoArtista(Musica musica, int artistaId) {
         String SQL = "INSERT INTO MUSICA(NOME, ARTISTA_ID, ATIVO) VALUES ((?), (?), (?))";
         try {
             Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "sa");
@@ -168,27 +168,18 @@ public class AlbumDao {
         }
     }
 
-    public List<Album> encontrarAlbumsPorGenero(String generoBusca, String nomeAlbum){
-
-        String SQL = "SELECT alb.id, alb.gravadora, alb.genero, alb.pais, alb.ano, alb.descricao, alb.imagem, art.nome, art.descricao, music.nome AS music_nome, music.ativo " +
+    public List<Album> encontrarAlbumsPorGenero(String generoBusca, String nomeAlbum) {
+        String SQL = "SELECT alb.id, alb.gravadora, alb.genero, alb.pais, alb.ano, alb.descricao, alb.imagem, art.id AS artista_id, art.nome, art.descricao, music.nome AS music_nome, music.ativo " +
                 "FROM ALBUM alb " +
                 "JOIN ARTISTA art ON alb.id = art.album_id " +
                 "JOIN MUSICA music ON art.id = music.artista_id " +
                 "WHERE alb.GENERO LIKE CONCAT('%', ?, '%') AND alb.DESCRICAO LIKE CONCAT('%', ?, '%') AND alb.ATIVO = 1 AND art.ativo = 1 AND music.ativo = 1";
 
-
-
         try {
-
             Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "sa");
+            System.out.println("Success in database connection");
 
-            System.out.println("success in database connection");
-
-            if(nomeAlbum == null){
-                PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-            }
             PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-
 
             preparedStatement.setString(1, generoBusca);
             preparedStatement.setString(2, nomeAlbum);
@@ -196,72 +187,67 @@ public class AlbumDao {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             List<Album> albumList = new ArrayList<>();
-            List<Artista> artistaList = new ArrayList<>();
-            List<Musica> musicaList = new ArrayList<>();
 
             while (resultSet.next()) {
-
                 String albumId = resultSet.getString("id");
-
                 String gravadora = resultSet.getString("gravadora");
                 String genero = resultSet.getString("genero");
                 String pais = resultSet.getString("pais");
                 String ano = resultSet.getString("ano");
                 String descricao = resultSet.getString("descricao");
                 byte[] imagem = resultSet.getBytes("imagem");
-
                 String base64Imagem = Base64.getEncoder().encodeToString(imagem);
-
                 int converterAno = Integer.parseInt(ano);
 
-                Album album = new Album(albumId, gravadora, genero, pais,converterAno ,descricao, base64Imagem);
-                albumList.add(album);
+                Album album = null;
+                for (Album existingAlbum : albumList) {
+                    if (existingAlbum.getId().equals(albumId)) {
+                        album = existingAlbum;
+                        break;
+                    }
+                }
 
-                int artistaId = resultSet.getInt("id");
+                if (album == null) {
+                    album = new Album(albumId, gravadora, genero, pais, converterAno, descricao, base64Imagem);
+                    albumList.add(album);
+                }
 
+                int artistaId = resultSet.getInt("artista_id");
                 String nomeArtista = resultSet.getString("nome");
                 String descricaoArtista = resultSet.getString("descricao");
-
                 byte[] imagemArtista = resultSet.getBytes("imagem");
+                String base64ImagemArtista = Base64.getEncoder().encodeToString(imagemArtista);
 
-                String  base64ImagemArtista = Base64.getEncoder().encodeToString(imagemArtista);
 
-                Artista artista = new Artista(artistaId,nomeArtista,descricaoArtista, base64ImagemArtista);
-                artistaList.add(artista);
-
-                String nomeMusica = resultSet.getString("descricao");
-                Musica musica = new Musica(nomeMusica);
-                musicaList.add(musica);
-
-                album.setArtistas(artistaList);
-                artista.setMusicas(musicaList);
+                Artista artista = new Artista(artistaId, nomeArtista, descricaoArtista, base64ImagemArtista);
+                if(artista != null){
+                    album.addArtista(artista);
+                }
+                String nomeMusica = resultSet.getString("music_nome");
+                int ativoMusica = resultSet.getInt("ativo");
+                Musica musica = new Musica(nomeMusica, ativoMusica);
+                artista.addMusica(musica);
             }
 
-
-            System.out.println("success in select * from album and joins");
+            System.out.println("Success in executing the SQL query");
 
             connection.close();
 
             return albumList;
-
         } catch (Exception e) {
-
-            System.out.println("fail in database connection");
-
+            System.out.println("Failed to connect to the database");
             return Collections.emptyList();
-
         }
-
     }
 
 
-    public List<Album> encontrarAlbumsPorGenero(String generoBusca){
+    public List<Album> encontrarAlbumsPorGenero(){
 
         String SQL = "SELECT alb.id, alb.gravadora, alb.genero, alb.pais, alb.ano, alb.descricao, alb.imagem, art.nome, art.descricao, music.nome AS music_nome, music.ativo " +
                 "FROM ALBUM alb " +
                 "JOIN ARTISTA art ON alb.id = art.album_id " +
                 "JOIN MUSICA music ON art.id = music.artista_id " +
-                "WHERE alb.GENERO LIKE CONCAT('%', ?, '%') AND alb.ATIVO = 1 AND art.ativo = 1 AND music.ativo = 1";
+                "WHERE alb.ATIVO = 1 AND art.ativo = 1 AND music.ativo = 1 ORDER BY 1 DESC";
 
 
 
@@ -273,7 +259,6 @@ public class AlbumDao {
 
             PreparedStatement preparedStatement = connection.prepareStatement(SQL);
 
-            preparedStatement.setString(1, generoBusca);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -397,6 +382,7 @@ public class AlbumDao {
             System.out.println("Error: " + e.getMessage());
         }
     }
+
 
 }
 

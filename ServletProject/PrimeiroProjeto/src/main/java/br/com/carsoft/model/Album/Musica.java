@@ -8,6 +8,8 @@ public class Musica {
     private int ativo;
     private int fkArtistaId;
 
+
+
     public int getAtivo() {
         return ativo;
     }
@@ -28,7 +30,7 @@ public class Musica {
         this.musica = musica;
         this.ativo = ativo;
     }
-
+    
     public Musica(String musica) {
         this.musica = musica;
     }

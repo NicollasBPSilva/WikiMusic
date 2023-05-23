@@ -1,6 +1,8 @@
 package br.com.carsoft.model.Album;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Artista {
 
@@ -88,11 +90,18 @@ public class Artista {
         this.artistaImagem = artistaImagem;
         this.ativo = ativo;
     }
-
+    private Set<Artista> artistas;
     public Artista(int artistaId,String nomeArtista, String descricaoArtista, String artistaImagemBase64) {
         this.artistaId = artistaId;
         this.nomeArtista = nomeArtista;
         this.descricaoArtista = descricaoArtista;
         this.artistaImagemBase64 = artistaImagemBase64;
+        this.artistas = new HashSet<>();
     }
+
+    public void addMusica(Musica musica) {
+        musicas.add(musica);
+    }
+
+
 }

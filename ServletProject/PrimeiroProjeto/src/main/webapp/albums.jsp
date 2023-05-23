@@ -191,7 +191,9 @@
     background-color: #ddd;
   }
 
-
+  .album {
+    display: none;
+  }
 </style>
 
 <div class="container">
@@ -199,7 +201,7 @@
     <div class="header-buttons">
       <button class="active">Home</button>
 
-      <form  onload action="/encontrar-albuns" method="get">
+      <form action="/encontrar-albums" method="get">
         <select name="genero" id="genero">
           <option value="rock">Rock</option>
           <option value="sertanejo">Sertanejo</option>
@@ -207,7 +209,7 @@
         </select>
 
         <label for="nome">Artista</label>
-        <input type="text" name="nome" id="nome">
+        <input type="text" name="nome" id="nome" required>
 
         <button type="submit">Buscar</button>
       </form>
@@ -217,6 +219,8 @@
     <button class="button-login">Login</button>
   </div>
 
+
+
   <%
     List<Album> albums = (List<Album>) request.getAttribute("albums");
     String generoSelecionado = (String) request.getAttribute("genero");
@@ -224,49 +228,49 @@
       for (Album album : albums) {
         if (generoSelecionado == null || generoSelecionado.isEmpty() || album.getGenero().equalsIgnoreCase(generoSelecionado)) {
   %>
-
-  <div class="wrapper">
-    <div class="sidebar">
-      <div class="container">
-        <img src="data:image/jpg;base64,<%= album.getImagemBase() %>">
-        <p>Nome</p>
-        <p><%= album.getDescricao() %></p>
-        <p>Ano</p>
-        <p><%= album.getAno() %></p>
-        <p>Gravadora</p>
-        <p><%= album.getGravadora() %></p>
-        <p>Gênero</p>
-        <p><%= album.getGenero() %></p>
-        <p>País</p>
-        <p><%= album.getPais() %></p>
-      </div>
-      </div>
-
-    <div class="main-content">
-      <%
-        List<Artista> artistas = album.getArtistas();
-        if (artistas != null) {
-          for (Artista artista : artistas) {
-      %>
-      <div class="artista">
+    <div class="wrapper">
+      <div class="sidebar">
         <div class="container">
-          <img src="data:image/jpg;base64,<%= artista.getArtistaImagemBase64() %>">
-          <p><%= artista.getNomeArtista() %></p>
-          <p>Descrição</p>
-          <h3>Músicas</h3>
-          <%
-            List<Musica> musicas = artista.getMusicas();
-            if (musicas != null) {
-              for (Musica musica : musicas) {
-          %>
-          <div class="musica">
+          <img src="data:image/jpg;base64,<%= album.getImagemBase() %>">
+          <p>Nome</p>
+          <p><%= album.getDescricao() %></p>
+          <p>Ano</p>
+          <p><%= album.getAno() %></p>
+          <p>Gravadora</p>
+          <p><%= album.getGravadora() %></p>
+          <p>Gênero</p>
+          <p><%= album.getGenero() %></p>
+          <p>País</p>
+          <p><%= album.getPais() %></p>
+        </div>
+      </div>
+
+      <div class="main-content">
+        <%
+          List<Artista> artistas = album.getArtistas();
+          if (artistas != null) {
+            for (Artista artista : artistas) {
+        %>
+        <div class="artista">
+          <div class="container">
+            <img src="data:image/jpg;base64,<%= artista.getArtistaImagemBase64() %>">
+            <p><%= artista.getNomeArtista() %></p>
+            <p>Descrição</p>
+            <h3>Músicas</h3>
             <p>Nome da Música</p>
-            <p><%= musica.getMusica() %></p>
-          </div>
-          <%
+            <%
+              List<Musica> musicas = artista.getMusicas();
+              if (musicas != null) {
+                for (Musica musica : musicas) {
+            %>
+            <div class="musica">
+              <p><%= musica.getMusica() %></p>
+            </div>
+            <%
+                }
               }
-            }
-          %>
+            %>
+          </div>
         </div>
         <%
             }
@@ -274,12 +278,13 @@
         %>
       </div>
     </div>
-    <%
-          }
+  </div>
+  <%
         }
       }
-    %>
-</div>
+    }
+  %>
+
 
 </div>
 
@@ -290,6 +295,12 @@
 </div>
 
 <script>
+
+  function fetchAlbums(){
+    var url = "/encontrar-albums";
+    window.location.href = url;
+
+  }
   function filtrarPorGenero() {
     var generoSelect = document.getElementById("genero");
     var generoSelecionado = generoSelect.options[generoSelect.selectedIndex].value;
@@ -315,7 +326,23 @@
     window.location.href = url;
   }
 
+  var currentAlbum = -1;
 
+  function toggleAlbum(albumId) {
+    var album = document.getElementById("album" + albumId);
+    var prevAlbum = document.getElementById("album" + currentAlbum);
+
+    if (album.style.display === "none") {
+      album.style.display = "block";
+      if (prevAlbum) {
+        prevAlbum.style.display = "none";
+      }
+      currentAlbum = albumId;
+    } else {
+      album.style.display = "none";
+      currentAlbum = -1;
+    }
+  }
 
 </script>
 </body>
