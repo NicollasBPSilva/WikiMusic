@@ -8,7 +8,7 @@ html {
 
   header {
     width: 100%; 
-    height: 10vh;
+    height: 60px;
     background: #515151;
     /* justify-content: space-between; */
     align-items: center;
@@ -27,14 +27,15 @@ html {
     color: white;
     align-items: center;
     justify-content: center;  
+    /* justify-content: space-evenly; */
   }
-/* justify-content: space-evenly; */
+
 
   .Botao_login{
-    width: 10%;
-    height: 100%;
+    width: 100px;
+    height: 60px;
     font-size: 40px;
-    padding: 0 2%;
+    padding: 0 40px;
     margin: 0;
     display: flex;
     flex-direction: row;
@@ -69,26 +70,29 @@ html {
   }
 
   article {
-    padding: 20vh;
+    padding: 150px 130px;
     margin: 10px;
   }
   
   .container{
     background: #D9BFA0;
-    height: 84.6vh;
-    padding: 2% 2%;
+    height: 625px;
+    padding: 20px 35px;
     margin: 0;
   }
 
   #artista{
-    border-radius: 25%;
-    padding: 12vh 0px;
+    border-radius: 10%;
+    height: 250px;
+    width: 250px;
+    margin-top: 100px;
     display: flex;
   }
 
   #genero, #albuns{
     display: flex;
-    padding: 1vh 0px;
+    margin-top: 40px;
+    padding: 5px 0px;
   }
 
   section {
@@ -106,17 +110,36 @@ html {
   }
 
   .Botao_wiki{
-    padding: 0 10vw;
+    padding: 0 190px;
     border: none;
     outline: none;
     align-items: center;
     display: flex;
     flex-direction: row; 
-    gap: 60vw;
+    gap: 750px;
   }
 
   #biblio{
     /* align-items: center;
     display: flex;
     flex-direction: row; */
+  }
+
+  @media (max-width: 768px){
+    
+    #artista{
+      width: 100px;
+      height: 100px;
+    }
+
+    #genero{
+      margin-top: 20px;
+      padding: 5px 0px;
+      font-size: 16px;
+    }
+
+    #albuns{
+      padding: 5px 0px;
+      font-size: 16px;
+    }
   }
