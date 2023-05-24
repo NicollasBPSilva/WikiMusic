@@ -19,7 +19,7 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 55px;
+    height: 60px;
     background-color: #515151;
     position: fixed;
     top: 0;
@@ -74,7 +74,7 @@ button:hover {
     transition-duration: 100ms;
 }
 
-.header .button-login{
+/* .header .button-login{
     display: flex; 
     font-size: 40px;
     padding: 0 2%;
@@ -82,6 +82,28 @@ button:hover {
     background-color: #8C3F23;
     border-radius: 0;
     color: white;
+} */
+
+.button-login{
+    width: 150px;
+    height: 100%;
+    font-size: 30px;
+    padding: 0 40px;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    background-color: #8C3F23;
+    color: white;
+  }
+
+a{
+    text-decoration: none;
+    color: white;
+    padding: 0 10px;
 }
 
 .header button.active {
