@@ -1,0 +1,207 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this template
+*/
+/* 
+    Created on : 21 de mai. de 2023, 15:54:58
+    Author     : vitor
+*/
+head{
+    background: #C7B624;
+}
+body{
+    background: #1E1E1E;
+}
+.container{
+    width: 100%;
+    height: 45px;
+    background: #005CB9;
+    
+}
+.pesquisa {
+  display: flex;
+  
+}
+
+.pesquisa input[type="text"] {
+  padding: 5px;
+  border: none;
+  width: 350px;
+  border-radius: 3px 0 0 3px;
+}
+
+.pesquisa button {
+  padding: 5px 10px;
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  border-radius: 0 3px 3px 0;
+  cursor: pointer;
+}
+/*.pesquisa{
+    width: 200px;
+    height: 30px;
+}*/
+
+/*.pesquisa button:hover {
+  background-color: #45a049;
+}*/
+
+.col-md-6{
+   
+}
+.wiki{
+     padding: 10px 27px 27px 10px;
+   margin: 0 auto; 
+}
+head{
+    background-color: background;
+}
+.comunidade{
+    width: 150px;
+    height: 30px;
+    float: left;
+    padding: 10px 0px 10px 0px
+}
+.rock{
+/*     width: 15px;
+    height: 15px;*/
+/*    
+    padding: 10px 400px 10px 600px*/
+}
+.foto_musicas{
+    width: 100%;
+    height: 700px;
+    padding: 10px 27px 27px 10px;
+    
+}
+#servicos{
+    background: white;
+    padding-top: 60px;
+    padding-bottom: 20px;
+}
+.album{
+/*    padding: 10px 10px 0 0 ;*/
+}
+.espaco{
+    margin: 20px ;
+   
+    /*padding: 27px 10px px 10px;*/
+    /*padding-right: 40px;*/
+   
+}
+.fundo{
+    background: white;
+}
+.espaco1{
+    margin: 50px;
+    
+}
+.coluna{
+  float: left;
+  width: 190px;
+  margin:  0 40px;
+  
+}
+/*.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}*/
+.espaco2{
+    margin: 800px;
+}
+.rodape{
+    height: 120px;
+}
+.tendencia{
+    background: white;
+}
+.tendeciaWiki{
+    margin-left: -13px;
+        font-family: Noto Serif;
+    color: black;
+    margin: 30px;
+    font-size: 40px;
+}
+footer {
+  background-color: #f1f1f1;
+  padding: 10px;
+  text-align: center;
+}
+
+.rodape-frase {
+  font-size: 40px;
+  color: white;
+  margin-bottom: 5px;
+}.rodape {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #005CB9;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+/*  background-color: #f2f2f2;*/
+  padding: 10px;
+}
+
+.frase {
+ /*margin: 3px 220px;0*/
+ margin-left: 200px;
+}
+.roda{
+    font-family: Noto Serif;
+    color: white;
+/*    margin-left: 300px;*/
+      font-size: 40px;
+
+    padding: 10px;
+}
+
+
+.tracino {
+   width: 400px; /* Ajuste a largura conforme necessário */
+  /*margin: -2px;*/
+  /*border: none;*/
+  border-top: 1px solid #000; /* Define o estilo da linha e a cor */
+  align-self: center; /* Alinha a linha verticalmente no centro */
+	border-top: 1px solid white;
+        color: white;
+}
+.btnLogin{
+            margin-left: 200px;
+   display: flex;
+  justify-content: center;
+/*  align-items: center;*/
+  /*background-color: #f2f2f2;*/
+  padding: 0px;
+    text-align: center; /* Alinhamento do texto (horizontalmente) */
+
+  
+}
+.login{
+width: 116px;
+border: none;
+ font-size: 16px; /* Tamanho da fonte */
+  font-weight: bold; /* Peso da fonte (negrito) */
+  text-align: center; /* Alinhamento do texto (horizontalmente) */
+  padding: 10px 20px; /* Espaçamento interno do botão */
+  
+   
+}
+.menu{
+    font-size: 21px;
+  color: white;
+}
+.cont{
+    float: left;
+    margin-left: -80px;
+    margin-top: -10px;
+    margin-bottom: -15px;
+}
+.subir{
+    /*margin-bottom: 40px;*/
+    width: 100%;
+}
