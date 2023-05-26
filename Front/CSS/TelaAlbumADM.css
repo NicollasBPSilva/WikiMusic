@@ -1,0 +1,109 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+  }
+  
+  html {
+      font-family: sans-serif;
+    }
+  
+    body {
+      margin: 0;
+    }
+  
+    header {
+      background: #142126;
+      height: 0%;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    footer{
+        background: #142126;
+        position: fixed;
+        bottom: 0%;
+         height: 10%;
+          width: 100%;
+          text-align: center;
+          
+          
+      }
+  
+    h1 {
+        text-align:start;
+        color: white;
+        line-height: 100%;
+        margin: 30px;
+        font-size: 20px;
+        position: fixed;
+    }
+  
+    h2{
+      text-align: center;
+     
+    }
+  
+    h3{
+  
+      text-align: center;
+      line-height: 100px;    
+      font-size: 50px;
+       }
+  
+     
+  
+    article {
+      width: 500px;
+      margin: 5px;
+      padding-top: 5px;
+      background: #F3E9E9;
+      text-align: center;
+      font-size: 15px;
+    }
+  
+    article1{
+      width: 500px;
+      margin: 5px;
+      padding-top: 5px;
+      background: #F3E9E9;
+      text-align: center;
+      font-size: 15px;
+      }
+  
+    article2{
+      width: 500px;
+      margin: 5px;
+      padding-top: 5px;
+      background: #F3E9E9;
+      text-align: center;
+      font-size: 15px;
+  }
+  
+  input{
+    border-radius: 50px;
+    border: #F3E9E9;
+    background-color: #f3f3f3;
+    width: 250px;
+    text-align: center;
+   
+   
+  }
+  
+  seta direita{
+    padding-top: 100px;
+    background-color:white;
+  }
+    /* Add your flexbox CSS below here */
+  
+    section {
+      display: flex;
+      flex-direction: row;
+    }
+  
+    .sair{
+     text-align: end;
+  
+    }
+  
+  
+  
