@@ -5,10 +5,7 @@ import br.com.carsoft.model.Album.Artista;
 import br.com.carsoft.model.Album.Musica;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Base64;
+import java.util.*;
 
 public class AlbumDao {
 
@@ -34,6 +31,7 @@ public class AlbumDao {
             connection.close();
 
             int albumId = encontrarUltimoAlbumAdicionado(album);
+
 
             inserirArtistaRerefenteUltimoAlbum(artista, albumId);
 
@@ -168,8 +166,62 @@ public class AlbumDao {
         }
     }
 
+
+
+    public List<Artista> encontrarArtistaPorGenero() {
+        String SQL = "SELECT TOP 1 art.id AS artista_id, art.nome AS artista_nome, art.descricao AS artista_descricao, art.imagem AS artista_imagem, music.nome AS musica_nome, music.ativo AS musica_ativo " +
+                "FROM ARTISTA art " +
+                "JOIN ALBUM alb ON alb.id = art.album_id " +
+                "JOIN MUSICA music ON music.artista_id = art.id " +
+                "WHERE art.ativo = 1 AND music.ativo = 1";
+
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "sa");
+            System.out.println("Success in database connection");
+
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+
+
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            Map<Integer, Artista> artistaMap = new HashMap<>();
+
+            while (resultSet.next()) {
+                int artistaId = resultSet.getInt("artista_id");
+                String nomeArtista = resultSet.getString("artista_nome");
+                String descricaoArtista = resultSet.getString("artista_descricao");
+                byte[] imagemArtista = resultSet.getBytes("artista_imagem");
+                String base64ImagemArtista = Base64.getEncoder().encodeToString(imagemArtista);
+
+                Artista artista = artistaMap.get(artistaId);
+                if (artista == null) {
+                    artista = new Artista(artistaId, nomeArtista, descricaoArtista, base64ImagemArtista);
+                    artistaMap.put(artistaId, artista);
+                }
+
+                String nomeMusica = resultSet.getString("musica_nome");
+                int ativoMusica = resultSet.getInt("musica_ativo");
+                Musica musica = new Musica(nomeMusica, ativoMusica);
+                artista.addMusica(musica);
+            }
+
+            System.out.println("Success in executing the SQL query");
+
+            connection.close();
+
+            return new ArrayList<>(artistaMap.values());
+        } catch (Exception e) {
+            System.out.println("Failed to connect to the database");
+            return Collections.emptyList();
+        }
+    }
+
+
+
+
     public List<Album> encontrarAlbumsPorGenero(String generoBusca, String nomeAlbum) {
-        String SQL = "SELECT alb.id, alb.gravadora, alb.genero, alb.pais, alb.ano, alb.descricao, alb.imagem, art.id AS artista_id, art.nome, art.descricao, music.nome AS music_nome, music.ativo " +
+        String SQL = "SELECT alb.id, alb.gravadora, alb.genero, alb.pais, alb.ano, alb.descricao, alb.imagem, art.id AS artista_id, art.nome, art.descricao, art.imagem AS artista_imagem, music.nome AS music_nome, music.ativo " +
                 "FROM ALBUM alb " +
                 "JOIN ARTISTA art ON alb.id = art.album_id " +
                 "JOIN MUSICA music ON art.id = music.artista_id " +
@@ -186,43 +238,37 @@ public class AlbumDao {
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            List<Album> albumList = new ArrayList<>();
+            Map<String, Album> albumMap = new HashMap<>();
 
             while (resultSet.next()) {
                 String albumId = resultSet.getString("id");
-                String gravadora = resultSet.getString("gravadora");
-                String genero = resultSet.getString("genero");
-                String pais = resultSet.getString("pais");
-                String ano = resultSet.getString("ano");
-                String descricao = resultSet.getString("descricao");
-                byte[] imagem = resultSet.getBytes("imagem");
-                String base64Imagem = Base64.getEncoder().encodeToString(imagem);
-                int converterAno = Integer.parseInt(ano);
-
-                Album album = null;
-                for (Album existingAlbum : albumList) {
-                    if (existingAlbum.getId().equals(albumId)) {
-                        album = existingAlbum;
-                        break;
-                    }
-                }
-
+                Album album = albumMap.get(albumId);
                 if (album == null) {
+                    String gravadora = resultSet.getString("gravadora");
+                    String genero = resultSet.getString("genero");
+                    String pais = resultSet.getString("pais");
+                    String ano = resultSet.getString("ano");
+                    String descricao = resultSet.getString("descricao");
+                    byte[] imagem = resultSet.getBytes("imagem");
+                    String base64Imagem = Base64.getEncoder().encodeToString(imagem);
+                    int converterAno = Integer.parseInt(ano);
+
                     album = new Album(albumId, gravadora, genero, pais, converterAno, descricao, base64Imagem);
-                    albumList.add(album);
+                    albumMap.put(albumId, album);
                 }
 
                 int artistaId = resultSet.getInt("artista_id");
                 String nomeArtista = resultSet.getString("nome");
                 String descricaoArtista = resultSet.getString("descricao");
-                byte[] imagemArtista = resultSet.getBytes("imagem");
+                byte[] imagemArtista = resultSet.getBytes("artista_imagem");
                 String base64ImagemArtista = Base64.getEncoder().encodeToString(imagemArtista);
 
-
-                Artista artista = new Artista(artistaId, nomeArtista, descricaoArtista, base64ImagemArtista);
-                if(artista != null){
+                Artista artista = album.getArtistaById(artistaId);
+                if (artista == null) {
+                    artista = new Artista(artistaId, nomeArtista, descricaoArtista, base64ImagemArtista);
                     album.addArtista(artista);
                 }
+
                 String nomeMusica = resultSet.getString("music_nome");
                 int ativoMusica = resultSet.getInt("ativo");
                 Musica musica = new Musica(nomeMusica, ativoMusica);
@@ -233,7 +279,7 @@ public class AlbumDao {
 
             connection.close();
 
-            return albumList;
+            return new ArrayList<>(albumMap.values());
         } catch (Exception e) {
             System.out.println("Failed to connect to the database");
             return Collections.emptyList();
@@ -241,85 +287,71 @@ public class AlbumDao {
     }
 
 
-    public List<Album> encontrarAlbumsPorGenero(){
-
-        String SQL = "SELECT alb.id, alb.gravadora, alb.genero, alb.pais, alb.ano, alb.descricao, alb.imagem, art.nome, art.descricao, music.nome AS music_nome, music.ativo " +
+    public List<Album> encontrarAlbumsPorGenero() {
+        String SQL = "SELECT TOP 1  alb.id, alb.gravadora, alb.genero, alb.pais, alb.ano, alb.descricao, alb.imagem, art.id AS artista_id, art.nome, art.descricao, art.imagem AS artista_imagem, music.nome AS music_nome, music.ativo " +
                 "FROM ALBUM alb " +
                 "JOIN ARTISTA art ON alb.id = art.album_id " +
                 "JOIN MUSICA music ON art.id = music.artista_id " +
-                "WHERE alb.ATIVO = 1 AND art.ativo = 1 AND music.ativo = 1 ORDER BY 1 DESC";
-
-
+                " WHERE alb.ATIVO = 1 AND art.ativo = 1 AND music.ativo = 1";
 
         try {
-
             Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "sa");
-
-            System.out.println("success in database connection");
+            System.out.println("Success in database connection");
 
             PreparedStatement preparedStatement = connection.prepareStatement(SQL);
 
-
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            List<Album> albumList = new ArrayList<>();
-            List<Artista> artistaList = new ArrayList<>();
-            List<Musica> musicaList = new ArrayList<>();
+            Map<String, Album> albumMap = new HashMap<>();
 
             while (resultSet.next()) {
-
                 String albumId = resultSet.getString("id");
+                Album album = albumMap.get(albumId);
+                if (album == null) {
+                    String gravadora = resultSet.getString("gravadora");
+                    String genero = resultSet.getString("genero");
+                    String pais = resultSet.getString("pais");
+                    String ano = resultSet.getString("ano");
+                    String descricao = resultSet.getString("descricao");
+                    byte[] imagem = resultSet.getBytes("imagem");
+                    String base64Imagem = Base64.getEncoder().encodeToString(imagem);
+                    int converterAno = Integer.parseInt(ano);
 
-                String gravadora = resultSet.getString("gravadora");
-                String genero = resultSet.getString("genero");
-                String pais = resultSet.getString("pais");
-                String ano = resultSet.getString("ano");
-                String descricao = resultSet.getString("descricao");
-                byte[] imagem = resultSet.getBytes("imagem");
+                    album = new Album(albumId, gravadora, genero, pais, converterAno, descricao, base64Imagem);
+                    albumMap.put(albumId, album);
+                }
 
-                String base64Imagem = Base64.getEncoder().encodeToString(imagem);
-
-                int converterAno = Integer.parseInt(ano);
-
-                Album album = new Album(albumId, gravadora, genero, pais,converterAno ,descricao, base64Imagem);
-                albumList.add(album);
-
-                int artistaId = resultSet.getInt("id");
-
+                int artistaId = resultSet.getInt("artista_id");
                 String nomeArtista = resultSet.getString("nome");
                 String descricaoArtista = resultSet.getString("descricao");
+                byte[] imagemArtista = resultSet.getBytes("artista_imagem");
+                String base64ImagemArtista = Base64.getEncoder().encodeToString(imagemArtista);
 
-                byte[] imagemArtista = resultSet.getBytes("imagem");
+                Artista artista = album.getArtistaById(artistaId);
+                if (artista == null) {
+                    artista = new Artista(artistaId, nomeArtista, descricaoArtista, base64ImagemArtista);
+                    album.addArtista(artista);
+                }
 
-                String  base64ImagemArtista = Base64.getEncoder().encodeToString(imagemArtista);
-
-                Artista artista = new Artista(artistaId,nomeArtista,descricaoArtista, base64ImagemArtista);
-                artistaList.add(artista);
-
-                String nomeMusica = resultSet.getString("descricao");
-                Musica musica = new Musica(nomeMusica);
-                musicaList.add(musica);
-
-                album.setArtistas(artistaList);
-                artista.setMusicas(musicaList);
+                String nomeMusica = resultSet.getString("music_nome");
+                int ativoMusica = resultSet.getInt("ativo");
+                Musica musica = new Musica(nomeMusica, ativoMusica);
+                artista.addMusica(musica);
             }
 
-
-            System.out.println("success in select * from album and joins");
+            System.out.println("Success in executing the SQL query");
 
             connection.close();
 
-            return albumList;
-
+            return new ArrayList<>(albumMap.values());
         } catch (Exception e) {
-
-            System.out.println("fail in database connection");
-
+            System.out.println("Failed to connect to the database");
             return Collections.emptyList();
-
         }
-
     }
+
+
+
 
 
 

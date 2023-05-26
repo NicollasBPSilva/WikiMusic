@@ -97,8 +97,7 @@ public class CreateAlbumServlet extends HttpServlet {
             response.sendRedirect("albumsAdmin.jsp");
         }
 
-
-
+        
     private String converterGenero (String generoInput) {
         String genero = "";
 

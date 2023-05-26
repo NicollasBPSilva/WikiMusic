@@ -1,12 +1,20 @@
 package br.com.carsoft.model.Album;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class Artista {
-
     private String artistaImagemBase64;
+
+    public Artista(String nomeArtista, String descricaoArtista, String imagemArtista) {
+        this.nomeArtista = nomeArtista;
+        this.descricaoArtista = descricaoArtista;
+        this.artistaImagemBase64 = imagemArtista;
+
+    }
+
     public String getArtistaImagemBase64() {
         return artistaImagemBase64;
     }
@@ -17,8 +25,17 @@ public class Artista {
     public byte[] getArtistaImagem() {
         return artistaImagem;
     }
-
+    private List<Musica> musicas;
     private byte[] artistaImagem;
+
+    public int getArtistaId() {
+        return artistaId;
+    }
+
+    public void setArtistaId(int artistaId) {
+        this.artistaId = artistaId;
+    }
+
     private int artistaId;
     private String nomeArtista;
     private String descricaoArtista;
@@ -26,7 +43,24 @@ public class Artista {
     private String fkAlbumId;
     private int ativo;
 
-    private List<Musica> musicas;
+
+    public Set<Artista> getArtistas() {
+        return artistas;
+    }
+
+    public void setArtistas(Set<Artista> artistas) {
+        this.artistas = artistas;
+    }
+    public Artista getArtistaById(int artistId) {
+        if (artistas != null) {
+            for (Artista artista : artistas) {
+                if (artista.getArtistaId() == artistId) {
+                    return artista;
+                }
+            }
+        }
+        return null;
+    }
 
 
     public List<Musica> getMusicas() {
@@ -96,7 +130,7 @@ public class Artista {
         this.nomeArtista = nomeArtista;
         this.descricaoArtista = descricaoArtista;
         this.artistaImagemBase64 = artistaImagemBase64;
-        this.artistas = new HashSet<>();
+        this.musicas = new ArrayList<>();
     }
 
     public void addMusica(Musica musica) {

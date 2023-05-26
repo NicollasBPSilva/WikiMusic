@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
 
             req.getSession().setAttribute("loggedUser", username);
 
-            resp.sendRedirect("/albumsAdmin.jsp");
+            resp.sendRedirect("/albums-admin?");
 
         } else {
 

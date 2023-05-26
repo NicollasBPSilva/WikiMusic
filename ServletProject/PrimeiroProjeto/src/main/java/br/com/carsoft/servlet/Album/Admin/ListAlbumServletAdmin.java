@@ -10,9 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-    @WebServlet({"/albums-admin", "/admin/albums-admin"})
+@WebServlet({"/albums-admin", "/admin/albums-admin"})
     public class ListAlbumServletAdmin extends HttpServlet {
 
         @Override
@@ -29,6 +31,15 @@ import java.util.List;
             String nomeAlbum = req.getParameter("nomeAlbum");
 
             List<Album> albums = new AlbumDao().encontrarAlbumsPorGenero(genero, nomeAlbum);
+
+            Map<String, Album> albumMap = new HashMap<>();
+
+            for (Album album : albums) {
+                String albumId = album.getId();
+                if (!albumMap.containsKey(albumId)) {
+                    albumMap.put(albumId, album);
+                }
+            }
 
             req.setAttribute("albums", albums);
             req.setAttribute("generoSelecionado", genero);

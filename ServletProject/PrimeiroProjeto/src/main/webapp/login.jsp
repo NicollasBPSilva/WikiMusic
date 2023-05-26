@@ -1,49 +1,30 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <style>
-
-    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TelaLogin</title>
+    <link rel="stylesheet" href="./css/TelaLogin.css">
 </head>
     <body>
-
-
-    <span><%= session.getAttribute("username") %></span>
-    <a href="/logout">Logout</a>
-    <%
-        if (session.getAttribute("loggedUser") != null) {
-    %>
-    <span><%= session.getAttribute("loggedUser") %></span>
-    <a href="/logout">Logout</a>
-    <%
-        }
-    %>
         <form action="/login" method="post">
             <div class="Test">
-
-                <h1 class="imgFrequencia"> <img src="img/frequencia.png" alt="frequência"> </h1>
-
+                <div class="img">
+                    <img src="img/frequencia.png" alt="frequência">
+                </div>
             </div>
 
             <div class="login">
-                <label><b>Usuário</b></label>
-                <input type="text" placeholder="Insira o nome de usuario" name="username" id="name" required>
-
-                <label><b>Senha</b></label>
-                <input type="password" placeholder="Insira a senha" name="password" id="password" required>
-
+                <input type="text" placeholder="Usuário" name="username">
+                <br><br>
+                <input type="password" placeholder="Senha" name="password">
                 <br><br><br>
-                <button><img src="img/botaoEntrar.png" alt="entrar">Entrar </button>
-
             </div>
+            <h2><button class="button-position"><img src="img/botao_entrar.png" alt="entrar"</button></h2>
+            <h3> <img src="img/LOGO WIKIMUSIC.png" alt="WIKIMUSIC"> </h3>
 
-            <h3> <img src="IMG/logoWikimusic.png" alt="WIKIMUSIC"> </h3>
-            <!--  -->
-
-            <button><a href="albums.jsp">Ver albums</a></button>
-            <button><a href="adicionarAlbum.jsp">Adicionar album</a></button>
         </form>
-        <button><a href="adicionarAlbum.jsp">Adicionar album</a></button>
     </body>
 
 

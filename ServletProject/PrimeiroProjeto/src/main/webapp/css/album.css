@@ -1,0 +1,172 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+form {
+    display: flex;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    background-color: #515151;
+    position: fixed;
+    z-index: 2;
+    color: #fff;
+}
+
+.header-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    gap: 3rem;
+}
+
+.header button,
+.footer button {
+    padding: 10px;
+    font-size: 18px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+button:hover {
+    background: rgb(65, 65, 66);
+    background: linear-gradient(0deg, #515151 0%, #909090 100%);
+    scale: 1.02;
+    transition-duration: 100ms;
+}
+
+.ancor-login {
+    text-decoration: none;
+    color: #fff;
+}
+.header .button-login {
+    display: flex;
+    font-size: 40px;
+    padding: 0 1rem;
+    background-color: #8c3f23;
+    border-radius: 0;
+}
+
+.header button.active {
+    background-color: darkgrey;
+}
+
+.header .button-login:hover {
+    background: rgb(62, 20, 20);
+    background: linear-gradient(0deg, #652b2b 0%, #561212 100%);
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 50px;
+}
+
+aside {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    background-color: #b5b5b5;
+    padding: 20px;
+    height: 100%;
+}
+
+.sidebar img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 5%;
+    margin-bottom: 30px;
+    margin-top: 60px;
+}
+
+.main-content {
+    flex: 1;
+    text-align: left;
+    padding: 80px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.container > img {
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 5%;
+    margin-bottom: 20px;
+    margin-top: 60px;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 8%;
+    background-color: #142126;
+    border: 1px solid black;
+    color: #fff;
+    width: 100%;
+    z-index: 200;
+    padding: 0 1rem;
+}
+
+
+.header {
+    height: 8%;
+    background-color: #142126;
+    border: 1px solid black;
+}
+
+@media (max-width: 768px) {
+    .sidebar img {
+        width: 100px;
+        width: 100px;
+        height: 100px;
+    }
+
+    .header .button-login {
+        font-size: 20px;
+        padding: auto;
+    }
+
+    .container .main-content {
+        padding: 40px;
+        padding-top: 80px;
+        margin: 0;
+    }
+}
+
+
+.header .custom-input {
+     color: red;
+     height: 2px;
+     background-color: yellow;
+     border: 1px solid black;
+ }
+
+.header {
+    height: 8%;
+    background-color: #142126;
+    border: 1px solid black;
+}

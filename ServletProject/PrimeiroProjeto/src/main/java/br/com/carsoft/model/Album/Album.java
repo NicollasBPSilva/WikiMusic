@@ -23,7 +23,6 @@ public class Album {
     private int artista_id;
 
 
-
     public String getArtista() {
         return artista;
     }
@@ -31,13 +30,13 @@ public class Album {
     public void setArtista(String artista) {
         this.artista = artista;
     }
+
     private Set<Artista> artistas;
+
     public String getDescricaoArtista() {
         return descricaoArtista;
     }
-    public void addArtista(Artista artista) {
-            artistas.add(artista);
-    }
+
     public void setDescricaoArtista(String descricaoArtista) {
         this.descricaoArtista = descricaoArtista;
     }
@@ -62,7 +61,6 @@ public class Album {
     }
 
 
-
     public Album(String id, String gravadora, String genero, String pais, int ano, String descricao, String imagemBase) {
         this.id = id;
         this.gravadora = gravadora;
@@ -74,7 +72,7 @@ public class Album {
 
     }
 
-    public Album(String gravadora, String genero, String pais, int ano, String descricao, byte[] imagem,int ativo) {
+    public Album(String gravadora, String genero, String pais, int ano, String descricao, byte[] imagem, int ativo) {
         this.gravadora = gravadora;
         this.genero = genero;
         this.pais = pais;
@@ -102,10 +100,6 @@ public class Album {
         return artistas.contains(artista);
     }
 
-    public Set<Artista> getArtistas() {
-        return artistas;
-    }
-
     public int getAtivo() {
         return ativo;
     }
@@ -120,16 +114,6 @@ public class Album {
 
     public String getImagemBase() {
         return imagemBase;
-    }
-
-
-
-    public Base64[] getBase64imagem() {
-        return base64imagem;
-    }
-
-    public void setBase64imagem(Base64[] base64imagem) {
-        this.base64imagem = base64imagem;
     }
 
     public String getId() {
@@ -194,9 +178,25 @@ public class Album {
     }
 
 
-    public void setArtistas(List<Artista> artistaList) {
+    public Set<Artista> getArtistas() {
+        return artistas;
+    }
 
-
+    public void addArtista(Artista artista) {
+        if (artistas == null) {
+            artistas = new HashSet<>();
+        }
+        artistas.add(artista);
+    }
+    public Artista getArtistaById(int artistId) {
+        if (artistas != null) {
+            for (Artista artista : artistas) {
+                if (artista.getArtistaId() == artistId) {
+                    return artista;
+                }
+            }
+        }
+        return null;
     }
 
 
