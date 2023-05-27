@@ -93,13 +93,6 @@
 
         <h4>Genero: </h4>
         <br>
-
-        <select id="genero" name="genero" onchange="filtrarPorGenero()">
-            <option value="1">Rock</option>
-            <option value="2">Sertanejo</option>
-            <option value="3">Funk</option>
-        </select>
-        <br> <br>
 <%--        <label for="nomeArtista">Nome do artista:</label>--%>
 
         <input type="text" placeholder="Nome do Artista:" id="nomeArtista" name="nomeArtista" required>

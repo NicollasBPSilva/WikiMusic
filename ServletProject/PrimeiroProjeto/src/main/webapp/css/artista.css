@@ -6,6 +6,7 @@
 }
 form {
     display: flex;
+    align-items: baseline;
 }
 
 body {
@@ -13,6 +14,7 @@ body {
     flex-direction: column;
     height: 100vh;
     width: 100%;
+    background: #F3E9E9;
 }
 
 .header {
@@ -83,6 +85,18 @@ main {
     margin-top: 50px;
 }
 
+select{
+    background: #515151;
+    color: white;
+    border-radius: 13% 20%;
+
+}
+
+label{
+    color: white;
+    font-weight: bolder;
+}
+
 aside {
     display: flex;
     flex-direction: column;
@@ -98,16 +112,21 @@ aside {
     object-fit: cover;
     border-radius: 5%;
     margin-bottom: 30px;
-    margin-top: 60px;
+    margin-top: 62%;
 }
 
 .main-content {
     flex: 1;
-    text-align: left;
-    padding: 80px;
-    width: 100%;
+    /*text-align:center;*/
+    padding-left: 25%;
+    /*width: 50%;*/
+    height: 42%;
     display: flex;
     flex-direction: column;
+}
+
+p{
+    word-wrap: break-word;
 }
 
 .container > img {

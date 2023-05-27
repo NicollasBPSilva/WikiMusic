@@ -1,6 +1,10 @@
 <%@ page import="br.com.carsoft.model.Album.Album" %>
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.Base64" %>
+<%@ page import="br.com.carsoft.model.Album.Artista" %>
+<%@ page import="br.com.carsoft.model.Album.Musica" %>
+<%@ page import="java.util.Set" %>
+<%@ page import="br.com.carsoft.model.Album.Album" %>
+<%@ page import="java.util.List" %>
 <%@ page import="br.com.carsoft.model.Album.Artista" %>
 <%@ page import="br.com.carsoft.model.Album.Musica" %>
 <%@ page import="java.util.Set" %>
@@ -45,31 +49,38 @@
 </header>
 <main>
     <aside class="sidebar">
-        <label for="nome">Album</label>
-        <% List<Album> albums = (List<Album>)
-                request.getAttribute("albums");
-            String generoSelecionado = (String)
-                    request.getAttribute("genero");
+        <h1 for="nome">ALBUMS</h1>
+        <%
+            List<Album> albums = (List<Album>) request.getAttribute("albums");
+            String generoSelecionado = (String) request.getAttribute("genero");
             if (albums != null) {
                 for (Album album : albums) {
-                    if (generoSelecionado == null || generoSelecionado.isEmpty()
-                            || album.getGenero().equalsIgnoreCase(generoSelecionado)) {
+                    if (generoSelecionado == null || generoSelecionado.isEmpty() || album.getGenero().equalsIgnoreCase(generoSelecionado)) {
         %>
+
         <div class="imagem">
-            <img src="data:image/jpg;base64,<%= album.getImagemBase() %>"
-                 height="300px" width="500px">
+            <img src="data:image/jpg;base64,<%= album.getImagemBase() %>" height="300px" width="500px">
         </div>
         <p>Nome: <%= album.getDescricao() %></p>
         <p>Ano: <%= album.getAno() %></p>
         <p>Gravadora: <%= album.getGravadora() %></p>
         <p>Gênero: <%= album.getGenero() %></p>
         <p>País: <%= album.getPais() %></p>
+        <%
+                    }
+                }
+            }
+        %>
     </aside>
     <div class="main-content">
-        <h2>Artistas</h2>
-        <% Set<Artista> artistas = album.getArtistas();
-            if (artistas != null && !artistas.isEmpty()) {
-                for (Artista artista : artistas) {
+        <h2>ARTISTAS</h2>
+        <%
+            if (albums != null) {
+                for (Album album : albums) {
+                    if (generoSelecionado == null || generoSelecionado.isEmpty() || album.getGenero().equalsIgnoreCase(generoSelecionado)) {
+                        Set<Artista> artistas = album.getArtistas();
+                        if (artistas != null && !artistas.isEmpty()) {
+                            for (Artista artista : artistas) {
         %>
         <div class="artista">
             <div class="container">
@@ -77,18 +88,27 @@
                 <p>Nome do Artista: <%= artista.getNomeArtista() %></p>
                 <p>Descrição do Artista: <%= artista.getDescricaoArtista() %></p>
                 <h3>Músicas</h3>
-                <% List<Musica> musicas = artista.getMusicas();
+                <%
+                    List<Musica> musicas = artista.getMusicas();
                     if (musicas != null && !musicas.isEmpty()) {
                         for (Musica musica : musicas) {
                 %>
                 <div class="musica">
                     <p>Nome da Música: <%= musica.getMusica() %></p>
                 </div>
-                <% } } }} %>
-
-                <% } } } %>
+                <%
+                        }
+                    }
+                %>
             </div>
         </div>
+        <%
+                            }
+                        }
+                    }
+                }
+            }
+        %>
     </div>
 </main>
 <footer>
@@ -97,4 +117,5 @@
 </footer>
 </body>
 </html>
+
 
