@@ -26,7 +26,7 @@
 
 <section>
     <article>
-        <h2>Adicionar</h2>
+        <h2>Album</h2>
 
 
 
@@ -53,14 +53,11 @@
     <br>
 
     <h4>Artista</h4>
-    <br>
-    <select id="Artista" name="Artista" onchange="filtrarPorGenero()">
 
-    </select>
 
     <br> <br>
 
-    <input type="text" placeholder="Gravadora" id="Gravadora" name="Gravadora" required>
+    <input type="text" placeholder="Gravadora" id="gravadora" name="gravadora" required>
 
 <%--            <label for="pais">Pais</label>--%>
             <br><br>
@@ -80,19 +77,14 @@
             <input placeholder="nome" id="nome" name="nome" required>
 
 <%--            <label for="imagem">Imagem</label>--%>
-            <br><br>
-            <input type="file" id="imagem" placeholder="imagem" name="imagem" required>
-            <br><br>
+
 <%--    <button class="button-estilo"><img src="img/Botao incluir.png" alt="botao entrar"></button>--%>
 
-    </article>
 
-    <article>
-        <h2>Informacoes do Artista: </h2>
+            <br><br>
+        <h2>Artista </h2>
         <br><br>
 
-        <h4>Genero: </h4>
-        <br>
 <%--        <label for="nomeArtista">Nome do artista:</label>--%>
 
         <input type="text" placeholder="Nome do Artista:" id="nomeArtista" name="nomeArtista" required>

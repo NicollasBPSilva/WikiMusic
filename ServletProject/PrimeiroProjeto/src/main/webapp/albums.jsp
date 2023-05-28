@@ -25,7 +25,6 @@
 <body>
 <header class="header">
     <div class="header-buttons">
-        <button class="active">Home</button>
         <form action="/encontrar-albums" class="button" method="get">
             <select name="genero" id="genero">
                 <option value="rock">Rock</option>
@@ -33,13 +32,14 @@
                 <option value="funk">Funk</option>
             </select>
 
-            <label for="nome">Artista</label>
+            <label for="nome">Album</label>
             <input type="text" name="nome" id="nome" class="-">
+
 
             <button type="submit">Buscar</button>
         </form>
         <button onclick="redirecionarArtista()">Artistas</button>
-
+        <button onclick="redirecionarHome()">Home</button>
     </div>
     <a class="ancor-login" href="login.jsp">
         <button class="button-login">
@@ -61,11 +61,16 @@
         <div class="imagem">
             <img src="data:image/jpg;base64,<%= album.getImagemBase() %>" height="300px" width="500px">
         </div>
-        <p>Nome: <%= album.getDescricao() %></p>
-        <p>Ano: <%= album.getAno() %></p>
-        <p>Gravadora: <%= album.getGravadora() %></p>
-        <p>Gênero: <%= album.getGenero() %></p>
-        <p>País: <%= album.getPais() %></p>
+        <p>Nome</p>
+        <p> <%= album.getDescricao() %></p>
+        <p>Ano</p>
+        <p> <%= album.getAno() %></p>
+        <p>Gravadora</p>
+        <p> <%= album.getGravadora() %></p>
+        <p>Genero</p>
+        <p><%= album.getGenero() %></p>
+        <p>País</p>
+        <p> <%= album.getPais() %></p>
         <%
                     }
                 }
@@ -76,17 +81,21 @@
         <h2>ARTISTAS</h2>
         <%
             if (albums != null) {
+                boolean artistsFound = false;
                 for (Album album : albums) {
                     if (generoSelecionado == null || generoSelecionado.isEmpty() || album.getGenero().equalsIgnoreCase(generoSelecionado)) {
                         Set<Artista> artistas = album.getArtistas();
                         if (artistas != null && !artistas.isEmpty()) {
                             for (Artista artista : artistas) {
+                                artistsFound = true;
         %>
         <div class="artista">
             <div class="container">
                 <img src="data:image/jpg;base64,<%= artista.getArtistaImagemBase64() %>" height="500px">
-                <p>Nome do Artista: <%= artista.getNomeArtista() %></p>
-                <p>Descrição do Artista: <%= artista.getDescricaoArtista() %></p>
+                <p>Nome</p>
+                <p> <%= artista.getNomeArtista() %></p>
+                <p>Descrição do Artista</p>
+                <p> <%= artista.getDescricaoArtista() %></p>
                 <h3>Músicas</h3>
                 <%
                     List<Musica> musicas = artista.getMusicas();
@@ -94,7 +103,8 @@
                         for (Musica musica : musicas) {
                 %>
                 <div class="musica">
-                    <p>Nome da Música: <%= musica.getMusica() %></p>
+                    Música
+                    <p> <%= musica.getMusica() %></p>
                 </div>
                 <%
                         }
@@ -103,17 +113,30 @@
             </div>
         </div>
         <%
-                            }
                         }
                     }
                 }
+            }
+            if (!artistsFound) {
+        %>
+        <div class="no-results">
+            <p>Nenhum artista encontrado.</p>
+        </div>
+        <%
+            }
+        } else {
+        %>
+        <div class="no-results">
+            <p>Nenhum álbum encontrado.</p>
+        </div>
+        <%
             }
         %>
     </div>
 </main>
 <footer>
-    <button>WikiMusic</button>
-    <p class="footer">Sua biblioteca de música</p>
+    <p class="footer-text">WikiMusic</p>
+    <p class="footer-text">Sua biblioteca de música</p>
 </footer>
 </body>
 </html>

@@ -166,10 +166,58 @@ public class AlbumDao {
         }
     }
 
+    public List<Artista> encontrarArtistaPorGenero(String generoArtista, String artista) {
+        String SQL = "SELECT art.id AS artista_id, art.nome AS artista_nome, art.descricao AS artista_descricao, art.imagem AS artista_imagem, music.nome AS musica_nome, music.ativo AS musica_ativo " +
+                "FROM ARTISTA art " +
+                "JOIN ALBUM alb ON alb.id = art.album_id " +
+                "JOIN MUSICA music ON music.artista_id = art.id " +
+                "WHERE alb.GENERO LIKE CONCAT('%', ?, '%') AND art.nome LIKE CONCAT('%', ?, '%') AND art.ativo = 1 AND music.ativo = 1";
 
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "sa");
+            System.out.println("Success in database connection");
+
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+
+            preparedStatement.setString(1, generoArtista);
+            preparedStatement.setString(2, artista);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            Map<Integer, Artista> artistaMap = new HashMap<>();
+
+            while (resultSet.next()) {
+                int artistaId = resultSet.getInt("artista_id");
+                String nomeArtista = resultSet.getString("artista_nome");
+                String descricaoArtista = resultSet.getString("artista_descricao");
+                byte[] imagemArtista = resultSet.getBytes("artista_imagem");
+                String base64ImagemArtista = Base64.getEncoder().encodeToString(imagemArtista);
+
+                Artista artistaAdd = artistaMap.get(artistaId);
+                if (artistaAdd == null) {
+                    artistaAdd = new Artista(artistaId, nomeArtista, descricaoArtista, base64ImagemArtista);
+                    artistaMap.put(artistaId, artistaAdd);
+                }
+
+                String nomeMusica = resultSet.getString("musica_nome");
+                int ativoMusica = resultSet.getInt("musica_ativo");
+                Musica musica = new Musica(nomeMusica, ativoMusica);
+                artistaAdd.addMusica(musica);
+            }
+
+            System.out.println("Success in executing the SQL query");
+
+            connection.close();
+
+            return new ArrayList<>(artistaMap.values());
+        } catch (Exception e) {
+            System.out.println("Failed to connect to the database");
+            return Collections.emptyList();
+        }
+    }
 
     public List<Artista> encontrarArtistaPorGenero() {
-        String SQL = "SELECT TOP 1 art.id AS artista_id, art.nome AS artista_nome, art.descricao AS artista_descricao, art.imagem AS artista_imagem, music.nome AS musica_nome, music.ativo AS musica_ativo " +
+        String SQL = "SELECT art.id AS artista_id, art.nome AS artista_nome, art.descricao AS artista_descricao, art.imagem AS artista_imagem, music.nome AS musica_nome, music.ativo AS musica_ativo " +
                 "FROM ARTISTA art " +
                 "JOIN ALBUM alb ON alb.id = art.album_id " +
                 "JOIN MUSICA music ON music.artista_id = art.id " +
@@ -288,7 +336,7 @@ public class AlbumDao {
 
 
     public List<Album> encontrarAlbumsPorGenero() {
-        String SQL = "SELECT TOP 1  alb.id, alb.gravadora, alb.genero, alb.pais, alb.ano, alb.descricao, alb.imagem, art.id AS artista_id, art.nome, art.descricao, art.imagem AS artista_imagem, music.nome AS music_nome, music.ativo " +
+        String SQL = "SELECT alb.id, alb.gravadora, alb.genero, alb.pais, alb.ano, alb.descricao, alb.imagem, art.id AS artista_id, art.nome, art.descricao, art.imagem AS artista_imagem, music.nome AS music_nome, music.ativo " +
                 "FROM ALBUM alb " +
                 "JOIN ARTISTA art ON alb.id = art.album_id " +
                 "JOIN MUSICA music ON art.id = music.artista_id " +

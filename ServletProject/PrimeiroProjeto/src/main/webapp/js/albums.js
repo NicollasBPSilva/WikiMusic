@@ -36,7 +36,11 @@ function redirecionarArtista(){
     var params = [];
     window.location.href = url;
 }
-
+function redirecionarHome(){
+    var url = "home.jsp";
+    var params = [];
+    window.location.href = url;
+}
 // var currentAlbum = -1;
 // function toggleAlbum(albumId) {
 //     var album = document.getElementById("album" + albumId);

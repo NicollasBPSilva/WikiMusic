@@ -21,7 +21,7 @@
   </servlet-mapping>
 
   <welcome-file-list>
-    <welcome-file>albums.jsp</welcome-file>
+    <welcome-file>home.jsp</welcome-file>
   </welcome-file-list>
 
 

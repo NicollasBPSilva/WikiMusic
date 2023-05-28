@@ -12,9 +12,11 @@ form {
 body {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
     background: #F3E9E9;
+    margin: 0; /* Add margin 0 */
+    padding: 0;
 }
 
 .header {
@@ -34,7 +36,7 @@ body {
     justify-content: center;
     align-items: center;
     flex: 1;
-    gap: 2rem;
+    gap: 3rem;
 }
 
 .header button,
@@ -45,7 +47,7 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    background-color: #515151;
+    background-color: transparent;
 }
 
 button:hover {
@@ -67,7 +69,7 @@ button:hover {
     border-radius: 0;
 }
 
-.header button.active {
+.header button.active:hover {
     background-color: darkgrey;
 }
 
@@ -81,8 +83,9 @@ main {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     margin-top: 50px;
+    padding-bottom: 60px;
 }
 
 select{
@@ -100,27 +103,35 @@ label{
 aside {
     display: flex;
     flex-direction: column;
-    width: 300px;
-    background-color: #b5b5b5;
-    padding: 20px;
+    width: 25%;
     height: 100%;
+    background-color: #b5b5b5;
+    padding-top: 3%;
+    padding-left: 2%;
 }
 
+
 .sidebar img {
-    width: 250px;
-    height: 250px;
+    width: 400px;
+    height: 400px;
     object-fit: cover;
     border-radius: 5%;
     margin-bottom: 30px;
-    margin-top: 62%;
+    margin-top: 60px;
 }
+
+.artista{
+    padding-bottom: 30%;
+}
+
+
 
 .main-content {
     flex: 1;
     /*text-align:center;*/
     padding-left: 25%;
     /*width: 50%;*/
-    height: 42%;
+
     display: flex;
     flex-direction: column;
 }
@@ -143,18 +154,18 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 8%;
+    height: 5%;
     background-color: #142126;
     border: 1px solid black;
     color: #fff;
     width: 100%;
     z-index: 200;
-    padding: 0 1rem;
+    padding-top:2%;
 }
+
 
 @media (max-width: 768px) {
     .sidebar img {
-        width: 100px;
         width: 100px;
         height: 100px;
     }
@@ -183,3 +194,21 @@ footer {
     border-radius: 10%;
 }
 
+button{
+    font-size: 59px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2%; /* Adjust the height as needed */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #142126;
+    border: 1px solid black;
+    color: #fff;
+    padding: 0 1rem;
+}

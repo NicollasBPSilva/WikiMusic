@@ -13,35 +13,23 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet({"/encontrar-artistas"})
-    public class ListArtistaServlet extends HttpServlet {
-        @Override
-        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+public class ListArtistaServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String genero = req.getParameter("genero");
+        String artista = req.getParameter("artistaNome");
 
-            String genero = req.getParameter("genero");
-            String artista = req.getParameter("artista");
-
-            if(artista == ""){
-                List<Artista> artistaList = new AlbumDao().encontrarArtistaPorGenero();
-
-                req.setAttribute("artista", artistaList);
-                req.setAttribute("generoSelecionado", genero);
-
-                req.setAttribute("artista", artista);
-
-
-                req.getRequestDispatcher("artistas.jsp").forward(req, resp);
-
-            }
-
-            List<Artista> artistaList = new AlbumDao().encontrarArtistaPorGenero();
-
-            req.setAttribute("artista", artistaList);
-            req.setAttribute("generoSelecionado", genero);
-
-            req.setAttribute("nome", artista);
-
-            req.getRequestDispatcher("artistas.jsp").forward(req, resp);
+        List<Artista> artistaList;
+        if (artista == null) {
+            artistaList = new AlbumDao().encontrarArtistaPorGenero();
+        } else {
+            artistaList = new AlbumDao().encontrarArtistaPorGenero(genero, artista);
         }
 
-    }
+        req.setAttribute("artista", artistaList);
+        req.setAttribute("generoSelecionado", genero);
+        req.setAttribute("nome", artista);
 
+        req.getRequestDispatcher("artistas.jsp").forward(req, resp);
+    }
+}

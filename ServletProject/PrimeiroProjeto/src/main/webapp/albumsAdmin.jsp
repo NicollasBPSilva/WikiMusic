@@ -92,12 +92,24 @@
                     }}
                 %>
             </div>
+            <form action="/adicionarArtista" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="artistaId" value="<%= album.getId() %>">
+                <label for="artistaAdicionar">Adicionar Artista</label>
+                <input type="text" id="artistaAdicionar" name="artistaAdicionar">
+                <label for="descricaoArtistaAdd">Descricao</label>
+                <input type="text" id="descricaoArtistaAdd" name="descricaoArtistaAdd">
+                <label for="imagemArtista">Adicionar Imagem</label>
+                <input type="file" id="imagemArtista" name="imagemArtista">
+                <button type="submit">Adicionar</button>
+            </form>
             <form action="/adicionarMusica" method="post">
                 <input type="hidden" name="artistaAdicionar" value="<%= album.getId() %>">
                 <label for="musicaArtista">Adicionar música</label>
                 <input type="text" id="musicaArtista" name="musicaArtista">
                 <button type="submit">Adicionar</button>
             </form>
+
+
 
             <button type="button" onclick="toggleEditForm(this)">Editar</button>
             <form action="/editar-album" method="post" class="edit-form" enctype="multipart/form-data">

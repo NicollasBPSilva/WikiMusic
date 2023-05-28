@@ -49,7 +49,7 @@ public class CreateAlbumServlet extends HttpServlet {
             String generoConvertido = converterGenero(generoInput);
 
 
-            Part imagemPart = servletRequest.getPart("imagem");
+            Part imagemPart = servletRequest.getPart("imagemArtista");
             InputStream imagemStream = imagemPart.getInputStream();
 
             ByteArrayOutputStream output = new ByteArrayOutputStream();
