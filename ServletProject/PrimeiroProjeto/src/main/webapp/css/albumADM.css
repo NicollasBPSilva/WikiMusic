@@ -22,14 +22,13 @@ header {
 
 }
 
-footer{
+footer {
     background: #142126;
     position: fixed;
     bottom: 0%;
-    height: 10%;
+    height: 8%;
     width: 100%;
     text-align: center;
-
 
 }
 
@@ -67,6 +66,7 @@ article {
     background: #F3E9E9;
     text-align: center;
     font-size: 15px;
+    padding-bottom: 10%;
 }
 
 img{
