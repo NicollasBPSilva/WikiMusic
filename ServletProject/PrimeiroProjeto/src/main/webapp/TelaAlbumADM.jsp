@@ -11,18 +11,29 @@
 </head>
 <body>
 <header>
+    <% if (session.getAttribute("loggedUser") != null) { %>
+    <span class="user-text"><%= session.getAttribute("loggedUser") %></span>
+
+    <% } %>
+    <form action="home.jsp">
+        <button class="button-header" type="submit">HOME</button>
+    </form>
+    <form action="/encontrar-albums?">
+        <button class="button-header" type="submit">ALBUMS</button>
+    </form>
+    <form action="/encontrar-artistas?">
+        <button class="button-header" type="submit">ARTISTAS</button>
+    </form>
+    <form action="albums-admin?">
+        <button class="button-header" type="submit">Administrar Albums</button>
+    </form>
+
     <div class="sair">
         <a href="logout.jsp"> <img src="img/BotaoSair.png" alt="Sair" width="157px"> </a>
     </div>
-
 </header>
 
-<h3>
-    <%--    <a href="TelaArtistaADM.html"> <img src="IMG/Seta_esquerda.png" alt="seta esquerda" > </a>--%>
-    Album
-    <%--    <a href="TelaArtistaADM.html"> <img src="IMG/Seta_direita.png" alt="seta direita"></a>--%>
 
-</h3>
 
 <section>
     <article>

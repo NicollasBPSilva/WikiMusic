@@ -17,32 +17,26 @@ import java.util.List;
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
             String genero = req.getParameter("genero");
             String nomeAlbum = req.getParameter("nome");
 
-            if(nomeAlbum == ""){
-                List<Album> albums = new AlbumDao().encontrarAlbumsPorGenero();
+            List<Album> albumList;
+            if (nomeAlbum == null) {
+                albumList = new AlbumDao().encontrarAlbumsPorGenero();
+            } else {
+                albumList = new AlbumDao().encontrarAlbumsPorGenero(genero, nomeAlbum);
+            }
+            List<Album> albums = new AlbumDao().encontrarAlbumsPorGenero();
 
-                req.setAttribute("albums", albums);
-                req.setAttribute("generoSelecionado", genero);
+            req.setAttribute("albums", albumList);
+            req.setAttribute("generoSelecionado", genero);
 
-                req.setAttribute("nome", nomeAlbum);
+            req.setAttribute("nome", nomeAlbum);
 
-                req.getRequestDispatcher("albums.jsp").forward(req, resp);
+            req.getRequestDispatcher("albums.jsp").forward(req, resp);
+
 
             }
-
-                List<Album> albums = new AlbumDao().encontrarAlbumsPorGenero(genero, nomeAlbum);
-
-                req.setAttribute("albums", albums);
-                req.setAttribute("generoSelecionado", genero);
-
-                req.setAttribute("nome", nomeAlbum);
-
-                req.getRequestDispatcher("albums.jsp").forward(req, resp);
-            }
-
 
     }
 

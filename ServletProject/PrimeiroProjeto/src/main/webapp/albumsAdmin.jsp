@@ -21,9 +21,24 @@
 <body>
 <div>
     <header>
+        <% if (session.getAttribute("loggedUser") != null) { %>
+        <span class="user-text"><%= session.getAttribute("loggedUser") %></span>
+
+        <% } %>
+        <form action="home.jsp">
+            <button class="button-header" type="submit">HOME</button>
+        </form>
+        <form action="/encontrar-albums?">
+            <button class="button-header" type="submit">ALBUMS</button>
+        </form>
+        <form action="/encontrar-artistas?">
+            <button class="button-header" type="submit">ARTISTAS</button>
+        </form>
+        <form action="TelaAlbumADM.jsp">
+            <button class="button-header" type="submit">Adicionar Album</button>
+        </form>
         <div class="sair">
             <% if (session.getAttribute("loggedUser") != null) { %>
-            <span><%= session.getAttribute("loggedUser") %></span>
             <a href="/logout"> <img src="img/BotaoSair.png" alt="Sair" width="157px"></a>
             <% } %>
         </div>
@@ -100,18 +115,18 @@
                 <input type="text" id="descricaoArtistaAdd" name="descricaoArtistaAdd">
                 <label for="imagemArtista">Adicionar Imagem</label>
                 <input type="file" id="imagemArtista" name="imagemArtista">
-                <button type="submit">Adicionar</button>
+                <button class="button-corpo" type="submit">Adicionar</button>
             </form>
             <form action="/adicionarMusica" method="post">
                 <input type="hidden" name="artistaAdicionar" value="<%= album.getId() %>">
                 <label for="musicaArtista">Adicionar música</label>
                 <input type="text" id="musicaArtista" name="musicaArtista">
-                <button type="submit">Adicionar</button>
+                <button class="button-corpo" type="submit">Adicionar</button>
             </form>
 
 
 
-            <button type="button" onclick="toggleEditForm(this)">Editar</button>
+            <button class="button-corpo" type="button" onclick="toggleEditForm(this)">Editar</button>
             <form action="/editar-album" method="post" class="edit-form" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="<%= album.getId() %>">
                 <h1>ALBUM</h1>
@@ -146,12 +161,12 @@
                 <label for="imagem">Imagem</label>
                 <input type="file" id="imagem" name="imagem" required>
 
-                <button type="submit">Update Album</button>
+                <button class="button-corpo" type="submit">Update Album</button>
             </form>
 
             <form action="/delete-album" method="post">
                 <input type="hidden" name="albumId" value="<%= album.getId() %>">
-                <button type="submit">Delete</button>
+                <button class="button-corpo" type="submit">Delete</button>
             </form>
         </div>
         <%
@@ -167,8 +182,8 @@
     <h1> WIKIMUSIC</h1>
 </footer>
 
-<button><a href="albums.jsp">Ver albums</a></button>
-<button><a href="adicionarAlbum.jsp">Adicionar album</a></button>
+<%--<button><a href="albums.jsp">Ver albums</a></button>--%>
+<%--<button><a href="adicionarAlbum.jsp">Adicionar album</a></button>--%>
 
 <script>
     function filtrarPorGenero() {

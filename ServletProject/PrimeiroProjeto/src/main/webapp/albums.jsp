@@ -119,15 +119,15 @@
             }
             if (!artistsFound) {
         %>
-        <div class="no-results">
-            <p>Nenhum artista encontrado.</p>
+        <div class="sem-resultado">
+            <p class="image-text">Nenhum artista encontrado.</p>
         </div>
         <%
             }
         } else {
         %>
-        <div class="no-results">
-            <p>Nenhum álbum encontrado.</p>
+        <div class="sem-resultado">
+            <p class="image-text">Nenhum álbum encontrado.</p>
         </div>
         <%
             }

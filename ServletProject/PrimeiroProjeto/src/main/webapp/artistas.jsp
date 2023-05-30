@@ -78,13 +78,13 @@
                 <p  class="text"><%= musica.getMusica() %></p>
                 <%   }
                 } else { %>
-                <p  class="text">Nenhuma musica foi encontrada.</p>
+                <p class="sem-resultado">Nenhuma musica foi encontrada.</p>
                 <% } %>
 
         </div>
         <% }
         } else { %>
-        <p>Nenhum artista foi encontrado.</p>
+        <p class="sem-resultado">Nenhum artista foi encontrado.</p>
         <% } %>
     </div>
 </main>

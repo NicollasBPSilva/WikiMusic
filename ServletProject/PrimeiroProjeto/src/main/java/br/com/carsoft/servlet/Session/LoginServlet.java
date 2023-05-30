@@ -41,7 +41,7 @@ public class LoginServlet extends HttpServlet {
 
             req.setAttribute("message", "Invalid credentials!");
 
-            req.getRequestDispatcher("TelaAlbumADM.jsp").forward(req, resp);
+            req.getRequestDispatcher("albumsAdmin.jsp").forward(req, resp);
 
         }
 

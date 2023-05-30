@@ -12,10 +12,14 @@ body {
 }
 
 header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     background: #142126;
     height: 0%;
     width: 100%;
     box-sizing: border-box;
+
 }
 
 footer{
@@ -79,9 +83,10 @@ input{
 
 }
 
-seta direita{
-    padding-top: 100px;
-    background-color:white;
+.user-text{
+ color: white;
+    font-size: 20px;
+    font-weight: bolder;
 }
 
 section {
@@ -98,6 +103,32 @@ h6{
     font-size: 100px;
 }
 
-  .imagem{
 
-  }
+.button-header {
+    padding: 10px;
+    font-size: 18px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    justify-content: space-between;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.button-corpo {
+    padding: 10px;
+    font-size: 18px;
+    border: none;
+    border-radius: 4px;
+    justify-content: space-between;
+    cursor: pointer;
+    color: white;
+    background: #142126;
+}
+button:hover {
+    background: rgb(65, 65, 66);
+    background: linear-gradient(0deg, #515151 0%, #909090 100%);
+    scale: 1.02;
+    transition-duration: 100ms;
+}
+

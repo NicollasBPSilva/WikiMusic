@@ -12,13 +12,20 @@
     }
   
     header {
-      background: #142126;
-      height: 0%;
-      width: 100%;
-      box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: #142126;
+    height: 0%;
+    width: 100%;
+    box-sizing: border-box;
     }
 
-
+.user-text{
+    color: white;
+    font-size: 20px;
+    font-weight: bolder;
+}
 
     footer{
         background: #142126;
@@ -30,7 +37,25 @@
           
           
       }
-  
+
+button {
+    padding: 10px;
+    font-size: 18px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    justify-content: space-between;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+button:hover {
+    background: rgb(65, 65, 66);
+    background: linear-gradient(0deg, #515151 0%, #909090 100%);
+    scale: 1.02;
+    transition-duration: 100ms;
+}
+
     h1 {
         text-align:start;
         color: white;

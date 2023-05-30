@@ -109,7 +109,9 @@ aside {
     padding-right: 2%;
 }
 
-
+.sem-resultado{
+    padding-left: 16%;
+}
 
 .main-content {
     flex: 1;
