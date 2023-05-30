@@ -59,6 +59,7 @@
         } %>
     </aside>
     <div class="main-content">
+        <h2 class="text">Artistas</h2>
         <% List<Artista> artistas = (List<Artista>) request.getAttribute("artista");
             if (artistas != null && !artistas.isEmpty()) {
                 for (Artista artista : artistas) { %>
