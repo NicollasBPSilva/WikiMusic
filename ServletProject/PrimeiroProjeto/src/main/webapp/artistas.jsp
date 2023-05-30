@@ -63,23 +63,23 @@
             if (artistas != null && !artistas.isEmpty()) {
                 for (Artista artista : artistas) { %>
         <div class="artista">
-            <p>Nome</p>
-            <h2><%= artista.getNomeArtista() %></h2>
-            <p>Descricao</p>
-            <p><%= artista.getDescricaoArtista() %></p>
-            <p>Artistas</p>
-            <h1>
-                <p>Musicas</p>
+            <p class="text">Nome</p>
+            <p  class="text"><%= artista.getNomeArtista() %></p>
+            <p  class="text">Descricao</p>
+            <p  class="text"><%= artista.getDescricaoArtista() %></p>
+            <p  class="text">Artistas</p>
+
+                <p class="text">Musicas</p>
                 <% List<Musica> musicas = artista.getMusicas();
                     if (musicas != null && !musicas.isEmpty()) {
                         for (Musica musica : musicas) { %>
 
-                <p><%= musica.getMusica() %></p>
+                <p  class="text"><%= musica.getMusica() %></p>
                 <%   }
                 } else { %>
-                <p>Nenhuma musica foi encontrada.</p>
+                <p  class="text">Nenhuma musica foi encontrada.</p>
                 <% } %>
-            </h1>
+
         </div>
         <% }
         } else { %>

@@ -37,7 +37,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         </li>
                         <div class="btnLogin mr-0 " >
                             <li class="nav-item btnLogin ">
-                            <a href="login.jsp" class="btn btn-outline-dark login colorText" style="background-color: #8c3f23; color:antiquewhite ">Login</a>
+                            <a href="login.jsp" class="btn btn-outline-dark login colorText" style="background-color: #8c3f23; color:antiquewhite; font-size: 32px;">Login</a>
                         </li>
                         </div>
 

@@ -49,7 +49,7 @@
 </header>
 <main>
     <aside class="sidebar">
-        <h1 for="nome">ALBUMS</h1>
+        <h2 for="nome">ALBUMS</h2>
         <%
             List<Album> albums = (List<Album>) request.getAttribute("albums");
             String generoSelecionado = (String) request.getAttribute("genero");
@@ -60,17 +60,18 @@
 
         <div class="imagem">
             <img src="data:image/jpg;base64,<%= album.getImagemBase() %>" height="300px" width="500px">
+            <h3 class="image-text">Nome</h3>
+            <p class="image-text"> <%= album.getDescricao() %></p>
+            <p class="image-text">Ano</p>
+            <p class="image-text"> <%= album.getAno() %></p>
+            <p class="image-text">Gravadora</p>
+            <p class="image-text"> <%= album.getGravadora() %></p>
+            <p class="image-text">Genero</p>
+            <p class="image-text"><%= album.getGenero() %></p>
+            <p class="image-text">País</p>
+            <p class="image-text"> <%= album.getPais() %></p>
         </div>
-        <p>Nome</p>
-        <p> <%= album.getDescricao() %></p>
-        <p>Ano</p>
-        <p> <%= album.getAno() %></p>
-        <p>Gravadora</p>
-        <p> <%= album.getGravadora() %></p>
-        <p>Genero</p>
-        <p><%= album.getGenero() %></p>
-        <p>País</p>
-        <p> <%= album.getPais() %></p>
+
         <%
                     }
                 }
@@ -92,19 +93,18 @@
         <div class="artista">
             <div class="container">
                 <img src="data:image/jpg;base64,<%= artista.getArtistaImagemBase64() %>" height="500px">
-                <p>Nome</p>
-                <p> <%= artista.getNomeArtista() %></p>
-                <p>Descrição do Artista</p>
-                <p> <%= artista.getDescricaoArtista() %></p>
-                <h3>Músicas</h3>
+                <p class="image-text">Nome</p>
+                <p class="image-text"> <%= artista.getNomeArtista() %></p>
+                <p class="image-text">Descrição do Artista</p>
+                <p class="image-text"> <%= artista.getDescricaoArtista() %></p>
+                <h3 class="image-text">Músicas</h3>
                 <%
                     List<Musica> musicas = artista.getMusicas();
                     if (musicas != null && !musicas.isEmpty()) {
                         for (Musica musica : musicas) {
                 %>
                 <div class="musica">
-                    Música
-                    <p> <%= musica.getMusica() %></p>
+                    <p class="image-text"> <%= musica.getMusica() %></p>
                 </div>
                 <%
                         }

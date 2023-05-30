@@ -81,11 +81,10 @@ button:hover {
 main {
     display: flex;
     justify-content: center;
-    align-items: center;
     width: 100%;
-    height: 100vh;
     margin-top: 50px;
-    padding-bottom: 60px;
+    padding-bottom: 2%;
+    flex: 1;
 }
 
 select{
@@ -104,16 +103,17 @@ aside {
     display: flex;
     flex-direction: column;
     width: 25%;
-    height: 100%;
     background-color: #b5b5b5;
     padding-top: 3%;
     padding-left: 2%;
 }
 
 
+
+
 .sidebar img {
-    width: 400px;
-    height: 400px;
+    width: 90%;
+    height: 100%;
     object-fit: cover;
     border-radius: 5%;
     margin-bottom: 30px;
@@ -128,21 +128,27 @@ aside {
 
 .main-content {
     flex: 1;
-    /*text-align:center;*/
-    padding-left: 25%;
-    /*width: 50%;*/
-
+    text-align: left;
+    padding-left: 20%;
+    padding-top: 3%;
+    width: 25%;
     display: flex;
     flex-direction: column;
+
 }
 
-p{
+.text{
     word-wrap: break-word;
+    margin-bottom: 10%;
+    padding-left: 15%;
+    padding-bottom: 2%;
+    margin: 0;
+    font-size: 20px;
 }
 
 .container > img {
-    width: 400px;
-    height: 400px;
+    width: 75%;
+    height: 100%;
     object-fit: cover;
     border-radius: 5%;
     margin-bottom: 20px;
@@ -151,18 +157,19 @@ p{
 
 
 footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 5%;
     background-color: #142126;
     border: 1px solid black;
     color: #fff;
-    width: 100%;
-    z-index: 200;
-    padding-top:2%;
+    /*padding: 0 1rem;*/
 }
-
 
 @media (max-width: 768px) {
     .sidebar img {
@@ -203,7 +210,7 @@ footer {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 2%; /* Adjust the height as needed */
+    height: 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -212,3 +219,82 @@ footer {
     color: #fff;
     padding: 0 1rem;
 }
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    background-color: #b5b5b5;
+    padding-top: 3%;
+    padding-left: 2%;
+}
+
+.sidebar img {
+    width: 90%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5%;
+    margin-bottom: 30px;
+    margin-top: 60px;
+}
+
+.sidebar .artist-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+
+.sidebar .artist-info p {
+    margin-bottom: 10px;
+}
+
+.main-content {
+    flex: 1;
+    padding-left: 25%;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    background-color: #b5b5b5;
+    padding-top: 3%;
+    padding-left: 2%;
+}
+
+.sidebar img {
+    width: 90%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5%;
+    margin-bottom: 30px;
+    margin-top: 60px;
+}
+
+.sidebar .artist-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+
+.sidebar .artist-info p {
+    margin-bottom: 10px;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+
+
+

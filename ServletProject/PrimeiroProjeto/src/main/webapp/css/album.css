@@ -85,12 +85,18 @@ button:hover {
     background: linear-gradient(0deg, #652b2b 0%, #561212 100%);
 }
 
+h2{
+   padding-left: 20%;
+}
+
 main {
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 100vh;
+    height: calc(100vh - 50px);
     margin-top: 50px;
+    padding-bottom: 2%;
+    flex: 1;
 }
 
 aside {
@@ -100,17 +106,10 @@ aside {
     background-color: #b5b5b5;
     padding-top: 3%;
     padding-left: 2%;
-    margin-top: auto;
+    padding-right: 2%;
 }
 
-.sidebar img {
-    width: 400px;
-    height: 400px;
-    object-fit: cover;
-    border-radius: 5%;
-    margin-bottom: 30px;
-    margin-top: 60px;
-}
+
 
 .main-content {
     flex: 1;
@@ -125,8 +124,8 @@ aside {
 
 
 .container > img {
-    width: 400px;
-    height: 400px;
+    width: 75%;
+    height: 100%;
     object-fit: cover;
     border-radius: 5%;
     margin-bottom: 20px;
@@ -138,14 +137,14 @@ footer {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 2%; /* Adjust the height as needed */
+    height: 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #142126;
     border: 1px solid black;
     color: #fff;
-    padding: 0 1rem;
+    /*padding: 0 1rem;*/
 }
 
 .header {
@@ -156,8 +155,8 @@ footer {
 
 @media (max-width: 768px) {
     .sidebar img {
-        width: 100px;
-        height: 100px;
+        width: 59%;
+        height: 100%;
     }
 
     .header .button-login {
@@ -172,6 +171,17 @@ footer {
     }
 }
 
+.sidebar img {
+    width: 90%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5%;
+    margin-bottom: 30px;
+    margin-top: 60px;
+}
+
+
+
 
 .header .custom-input {
      color: red;
@@ -185,5 +195,48 @@ footer {
     background-color: #142126;
     border: 1px solid black;
 }
+
+
+.imagem {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.imagem img {
+    width: 100%;
+    height: auto;
+    border-radius: 5%;
+}
+
+.imagem .image-text {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding-bottom: 3%;
+    font-size: 20px;
+}
+
+.artista {
+    margin-bottom: 40px;
+}
+
+.artista .container img {
+    width: 50%;
+    height: auto;
+    border-radius: 5%;
+    margin-bottom: 30px;
+}
+
+.artista .container .image-text {
+    margin-bottom: 10%;
+    padding-left: 15%;
+    padding-bottom: 2%;
+    margin: 0;
+    font-size: 20px;
+}
+
+
 
 
