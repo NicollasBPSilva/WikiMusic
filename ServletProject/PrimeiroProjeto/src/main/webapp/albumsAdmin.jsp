@@ -60,7 +60,7 @@
             <p>Nome do Album</p>
             <input type="text" name="nomeAlbum" id="nomeAlbum">
         </div>
-        <button onclick="filtrarPorGenero()">Buscar</button>
+        <button class="button-corpo" onclick="filtrarPorGenero()">Buscar</button>
 
         <%
             List<Album> albums = (List<Album>) request.getAttribute("albums");

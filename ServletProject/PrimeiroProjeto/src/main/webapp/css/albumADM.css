@@ -155,22 +155,22 @@ button:hover {
 
 .album-detalhes p {
     font-size: 20px;
-    line-height: 1.5;
+    line-height: 2.5;
 }
 
 .artista p {
     font-size: 20px;
-    line-height: 1.5;
+    line-height: 2.5;
+}
+
+.musica p {
+    font-size: 20px;
+    line-height: 2.5;
 }
 
 article label{
     font-size: 20px;
 }
-
-/*.editarAlbum{*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*}*/
 
 .edit-form{
     display: none;
