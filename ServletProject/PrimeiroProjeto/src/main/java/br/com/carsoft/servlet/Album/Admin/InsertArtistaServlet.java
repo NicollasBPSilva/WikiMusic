@@ -31,6 +31,11 @@ public class InsertArtistaServlet extends HttpServlet {
 
 
         Part imagemPartArtista = req.getPart("imagemArtista");
+        String artista = req.getParameter("artistaAdicionar");
+        String descricao = req.getParameter("descricaoArtistaAdd");
+
+
+
         InputStream albumImagemStream = imagemPartArtista.getInputStream();
 
         ByteArrayOutputStream albumOutput = new ByteArrayOutputStream();
@@ -43,16 +48,18 @@ public class InsertArtistaServlet extends HttpServlet {
 
 
         int artistaId = Integer.parseInt(req.getParameter("artistaId"));
-        String artista = req.getParameter("artistaAdicionar");
-        String descricao = req.getParameter("descricaoArtistaAdd");
+
 
         int ativo = 1;
 
+        if(artista != null && descricao != null && descricao != null){
+            Artista artistaClass  = new Artista(artista, descricao, artistaImagem, ativo);
 
-        Artista artistaClass  = new Artista(artista, descricao, artistaImagem, ativo);
+
+            new AlbumDao().inserirArtistaRerefenteUltimoAlbum(artistaClass, artistaId);
+        }
 
 
-        new AlbumDao().inserirArtistaRerefenteUltimoAlbum(artistaClass, artistaId);
         resp.sendRedirect("albumsAdmin.jsp");
 
 
