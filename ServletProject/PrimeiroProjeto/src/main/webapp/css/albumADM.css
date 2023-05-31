@@ -52,10 +52,6 @@ h2{
 
 }
 
-h3{
-    text-align: center;
-    font-size: 40px;
-}
 
 .button-estilo {
     background: transparent;
@@ -105,10 +101,6 @@ section {
 
 }
 
-h6{
-    font-size: 100px;
-}
-
 
 .button-header {
     padding: 10px;
@@ -123,6 +115,7 @@ h6{
 
 .button-corpo {
     padding: 10px;
+    margin-bottom: 20px;
     font-size: 18px;
     border: none;
     border-radius: 4px;
@@ -145,9 +138,9 @@ button:hover {
     text-align: center;
 }
 
-.imagem {
-    margin-bottom: 2%;
-}
+/*.imagem {*/
+/*    margin-bottom: 2%;*/
+/*}*/
 
 .album-detalhes {
     display: flex;
@@ -157,11 +150,21 @@ button:hover {
 
 .album-detalhes label {
     display: block;
-    margin-bottom: 4%;
+    margin-top: 4%;
 }
 
 .album-detalhes p {
-    font-size: 30px;
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+.artista p {
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+article label{
+    font-size: 20px;
 }
 
 /*.editarAlbum{*/

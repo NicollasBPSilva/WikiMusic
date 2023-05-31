@@ -14,6 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TelaAlbumADM</title>
     <link rel="stylesheet" href="./css/albumADM.css">
+    <script src="js/albumsAdmin.js"></script>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Dashboard</title>
@@ -49,7 +50,7 @@
     <section>
     <article>
         <div>
-            <label for="genero">Genero:</label>
+            <label for="genero">Genero</label>
             <select id="genero" >
                 <option value="">Escolha o Genero</option>
                 <option value="rock">Rock</option>
@@ -85,7 +86,7 @@
                 <h3>País</h3>
                 <p><%= album.getPais() %></p>
 
-            <h2>Artistas</h2>
+            <h3>Artistas</h3>
             <%
                 Set<Artista> artistas = album.getArtistas();
                 if (artistas != null && !artistas.isEmpty()) {
@@ -93,10 +94,12 @@
             %>
             <div class="artista">
                 <div class="container">
-                    <img src="data:image/jpg;base64,<%= artista.getArtistaImagemBase64() %>" height="500px">
+                    <img src="data:image/jpg;base64,<%= artista.getArtistaImagemBase64() %>"  height="300px" width="500px">
                 </div>
-                <p>Nome do Artista: <%= artista.getNomeArtista() %></p>
-                <p>Descrição do Artista: <%= artista.getDescricaoArtista() %></p>
+                <h3> Nome do Artista</h3>
+                <p> <%= artista.getNomeArtista() %></p>
+                <h3> Descricao do Artista</h3>
+                <p> <%= artista.getDescricaoArtista() %></p>
 
                 <h3>Músicas</h3>
                 <%
@@ -105,7 +108,6 @@
                         for (Musica musica : musicas) {
                 %>
                 <div class="musica">
-                    <h3>Nome das musicas</h3>
                     <p><%= musica.getMusica() %></p>
                 </div>
                 <%
@@ -137,17 +139,17 @@
             <form action="/editar-album" method="post" class="edit-form" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="<%= album.getId() %>">
                 <h1>ALBUM</h1>
-                <label for="descricaoAlbum">Descrição:</label>
+                <label for="descricaoAlbum">Descrição</label>
                 <input type="text" id="descricaoAlbum" name="descricaoAlbum">
 
-                <label for="ano">Ano:</label>
+                <label for="ano">Ano</label>
                 <input type="int" id="ano" name="ano">
 
-                <label for="gravadora">Gravadora:</label>
+                <label for="gravadora">Gravadora</label>
                 <input type="text" id="gravadora" name="gravadora">
 
                 <div>
-                    <label for="generoEditar">Gênero:</label>
+                    <label for="generoEditar">Gênero</label>
                     <select id="generoEditar" name="generoEditar" onchange="filtroGeneroEditar()">
                         <option value="1">Rock</option>
                         <option value="2">Sertanejo</option>
@@ -155,7 +157,7 @@
                     </select>
                 </div>
 
-                <label for="pais">País:</label>
+                <label for="pais">País</label>
                 <input type="text" id="pais" name="pais">
 
                 <h1>ARTISTA</h1>
@@ -186,49 +188,6 @@
 <footer>
     <h1> WIKIMUSIC</h1>
 </footer>
-
-<script>
-    function filtrarPorGenero() {
-        var generoSelect = document.getElementById("genero");
-        var generoSelecionado = generoSelect.options[generoSelect.selectedIndex].value;
-
-        var nomeAlbumInput = document.getElementById("nomeAlbum");
-        var nomeAlbum = nomeAlbumInput.value;
-
-        var url = "/albums-admin";
-        var params = [];
-
-        if (generoSelecionado) {
-            params.push("genero=" + generoSelecionado);
-        }
-
-        if (nomeAlbum) {
-            params.push("nomeAlbum=" + encodeURIComponent(nomeAlbum));
-        }
-
-        if (params.length > 0) {
-            url += "?" + params.join("&");
-        }
-
-        window.location.href = url;
-    }
-
-
-    function filtroGeneroEditar() {
-        var generoSelect = document.getElementById("generoEditar");
-        var generoSelecionado = generoSelect.options[generoSelect.selectedIndex].value;
-
-    }
-
-    function toggleEditForm(button) {
-        var editForm = button.nextElementSibling;
-        editForm.style.display = (editForm.style.display === "none") ? "flex" : "none";
-    }
-
-
-
-
-</script>
 </div>
 </body>
 </html>
