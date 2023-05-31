@@ -26,7 +26,7 @@ import java.util.List;
             } else {
                 albumList = new AlbumDao().encontrarAlbumsPorGenero(genero, nomeAlbum);
             }
-            List<Album> albums = new AlbumDao().encontrarAlbumsPorGenero();
+//            List<Album> albums = new AlbumDao().encontrarAlbumsPorGenero();
 
             req.setAttribute("albums", albumList);
             req.setAttribute("generoSelecionado", genero);

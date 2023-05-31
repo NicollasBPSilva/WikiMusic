@@ -30,18 +30,23 @@ import java.util.Map;
             String genero = req.getParameter("genero");
             String nomeAlbum = req.getParameter("nomeAlbum");
 
-            List<Album> albums = new AlbumDao().encontrarAlbumsPorGenero(genero, nomeAlbum);
+            List<Album> albumList;
+            if(nomeAlbum == null){
+                 albumList = new AlbumDao().encontrarAlbumsPorGenero();
+            }else{
+                albumList = new AlbumDao().encontrarAlbumsPorGenero(genero, nomeAlbum);
+            }
 
             Map<String, Album> albumMap = new HashMap<>();
 
-            for (Album album : albums) {
+            for (Album album : albumList) {
                 String albumId = album.getId();
                 if (!albumMap.containsKey(albumId)) {
                     albumMap.put(albumId, album);
                 }
             }
 
-            req.setAttribute("albums", albums);
+            req.setAttribute("albums", albumList);
             req.setAttribute("generoSelecionado", genero);
             req.setAttribute("nomeAlbum", nomeAlbum);
 
