@@ -73,11 +73,17 @@
                 <img src="data:image/jpg;base64,<%= album.getImagemBase() %>" height="300px" width="500px">
             </div>
             <br>
-            <p>Nome: <%= album.getDescricao() %></p>
-            <p>Ano: <%= album.getAno() %></p>
-            <p>Gravadora: <%= album.getGravadora() %></p>
-            <p>Gênero: <%= album.getGenero() %></p>
-            <p>País: <%= album.getPais() %></p>
+            <article class="album-detalhes">
+                <h3>Nome</h3>
+            <p><%= album.getDescricao() %></p>
+                <h3>Ano</h3>
+                <p><%= album.getAno() %></p>
+                <h3>Gravadora</h3>
+                <p><%= album.getGravadora() %></p>
+                <h3>Gênero</h3>
+                <p><%= album.getGenero() %></p>
+                <h3>País</h3>
+                <p><%= album.getPais() %></p>
 
             <h2>Artistas</h2>
             <%
@@ -99,7 +105,8 @@
                         for (Musica musica : musicas) {
                 %>
                 <div class="musica">
-                    <p>Nome da Música: <%= musica.getMusica() %></p>
+                    <h3>Nome das musicas</h3>
+                    <p><%= musica.getMusica() %></p>
                 </div>
                 <%
                         }
@@ -107,6 +114,7 @@
                     }}
                 %>
             </div>
+
             <form action="/adicionarArtista" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="artistaId" value="<%= album.getId() %>">
                 <label for="artistaAdicionar">Adicionar Artista</label>
@@ -123,7 +131,6 @@
                 <input type="text" id="musicaArtista" name="musicaArtista">
                 <button class="button-corpo" type="submit">Adicionar</button>
             </form>
-
 
 
             <button class="button-corpo" type="button" onclick="toggleEditForm(this)">Editar</button>
@@ -174,16 +181,11 @@
                 }
             }
         %>
-
-
 </article>
 </section>
 <footer>
     <h1> WIKIMUSIC</h1>
 </footer>
-
-<%--<button><a href="albums.jsp">Ver albums</a></button>--%>
-<%--<button><a href="adicionarAlbum.jsp">Adicionar album</a></button>--%>
 
 <script>
     function filtrarPorGenero() {

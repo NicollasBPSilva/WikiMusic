@@ -32,6 +32,12 @@ footer {
 
 }
 
+.album{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
 h1 {
     text-align:start;
     color: white;
@@ -77,7 +83,7 @@ input{
     border-radius: 50px;
     border: #F3E9E9;
     background-color: #f3f3f3;
-    width: 250px;
+    width: 80%;
     text-align: center;
 
 
@@ -132,3 +138,38 @@ button:hover {
     transition-duration: 100ms;
 }
 
+.album {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.imagem {
+    margin-bottom: 2%;
+}
+
+.album-detalhes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.album-detalhes label {
+    display: block;
+    margin-bottom: 4%;
+}
+
+.album-detalhes p {
+    font-size: 30px;
+}
+
+/*.editarAlbum{*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*}*/
+
+.edit-form{
+    display: none;
+    flex-direction: column;
+}
