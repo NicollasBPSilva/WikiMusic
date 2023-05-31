@@ -64,7 +64,7 @@ aside{
   padding-top: 1%;
 }
 
-.button-estilo-aside:hover {
+button:hover {
   background-color: darkgrey;
   background: rgb(65, 65, 66);
   border: none;
@@ -77,10 +77,9 @@ aside{
   background: #142126;
   color: white;
   margin-left: 25px;
-  border-radius: 20%;
+  border-radius: 5px;
   font-size: 18px;
 }
-
 
   h2 {
     position: absolute;
