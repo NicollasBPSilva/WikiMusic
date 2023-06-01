@@ -40,17 +40,10 @@
         <h2>Album</h2>
 
 
-
         <form action="/adicionaralbum" method="post" class="formulario" id="form-adicionar" enctype="multipart/form-data">
 
-<%--            <input type="text" id="gravadora" name="gravadora" required>--%>
-
-
-
             <div>
-<%--                <label for="genero">Genero:</label>--%>
                 <br><br>
-
 
     <h4>Genero: </h4>
     <br>
@@ -61,61 +54,40 @@
                 </select>
 
             </div>
-    <br>
-
-    <h4>Artista</h4>
-
 
     <br> <br>
 
     <input type="text" placeholder="Gravadora" id="gravadora" name="gravadora" required>
 
-<%--            <label for="pais">Pais</label>--%>
             <br><br>
             <input type="text" placeholder="pais" id="pais" name="pais" required>
 
 
-<%--            <label for="ano">Ano de lancamento</label>--%>
             <br><br>
             <input placeholder="ano" type="number" id="ano" name="ano" required>
 
-<%--            <label for="descricaoAlbum">Descricao</label>--%>
             <br><br>
             <input placeholder="descricao" id="descricaoAlbum" name="descricaoAlbum" required>
 
-<%--            <label for="nome">Nome</label>--%>
             <br><br>
             <input placeholder="nome" id="nome" name="nome" required>
-
-<%--            <label for="imagem">Imagem</label>--%>
-
-<%--    <button class="button-estilo"><img src="img/Botao incluir.png" alt="botao entrar"></button>--%>
+    <br><br>
+    <input type="file" id="imagemAlbum" name="imagemAlbum" required>
 
 
             <br><br>
         <h2>Artista </h2>
         <br><br>
 
-<%--        <label for="nomeArtista">Nome do artista:</label>--%>
 
         <input type="text" placeholder="Nome do Artista:" id="nomeArtista" name="nomeArtista" required>
         <br><br>
-<%--        <label for="descricaoArtista">Descricao:</label>--%>
 
-        <input type="text" placeholder="Descricao:" id="descricaoArtista" name="descricaoArtista" required>
-        <br><br>
-<%--        <label for="imagemArtista">Imagem:</label>--%>
-        <input type="text" placeholder="Nome da Musica:" id="nomeMusica" name="nomeMusica" required>
-
+        <input type="text" placeholder="Descricao do artista:" id="descricaoArtista" name="descricaoArtista" required>
         <br><br>
 
-<%--        <label>Informacoes da Musica: </label>--%>
-
-        <input type="text" placeholder="Musica" id="Genero:" name="nomeMusica" required>
+        <input type="text" placeholder="Musica" id="musica:" name="nomeMusica" required>
         <br><br>
-<%--        <label for="nomeMusica">Nome da musica:</label>--%>
-
-
 
         <input type="file" id="imagemArtista" name="imagemArtista" required>
         <br><br>

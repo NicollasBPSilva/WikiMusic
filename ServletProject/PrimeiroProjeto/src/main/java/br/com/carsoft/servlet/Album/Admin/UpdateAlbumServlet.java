@@ -37,28 +37,30 @@ public class UpdateAlbumServlet  extends HttpServlet {
 
 
         //ARTISTA
-        String artista  = servletRequest.getParameter("artista");
-        String descricaoArtista  = servletRequest.getParameter("descricaoArtista");
-
+//        String artista  = servletRequest.getParameter("artista");
+//        String descricaoArtista  = servletRequest.getParameter("descricaoArtista");
+//
 
         int converterAno =  Integer.parseInt(ano);
 
 
         String generoConvertido = converterGenero(generoEditar);
+//
+//        Part imagemPart = servletRequest.getPart("imagem");
+//        InputStream imagemStream = imagemPart.getInputStream();
+//
+//        ByteArrayOutputStream output = new ByteArrayOutputStream();
+//        byte[] buffer = new byte[4096];
+//        int bytesRead = -1;
+//        while ((bytesRead = imagemStream.read(buffer)) != -1) {
+//            output.write(buffer, 0, bytesRead);
+//        }
+//        byte[] imagemBytes = output.toByteArray();
 
-        Part imagemPart = servletRequest.getPart("imagem");
-        InputStream imagemStream = imagemPart.getInputStream();
+//        Album albumClass = new Album(albumId, gravadora, generoConvertido, pais, converterAno,descricaoAlbum, artista,descricaoArtista, imagemBytes);
 
-        ByteArrayOutputStream output = new ByteArrayOutputStream();
-        byte[] buffer = new byte[4096];
-        int bytesRead = -1;
-        while ((bytesRead = imagemStream.read(buffer)) != -1) {
-            output.write(buffer, 0, bytesRead);
-        }
-        byte[] imagemBytes = output.toByteArray();
 
-        Album albumClass = new Album(albumId, gravadora, generoConvertido, pais, converterAno,descricaoAlbum, artista,descricaoArtista, imagemBytes);
-
+        Album albumClass = new Album(albumId, gravadora, generoConvertido, pais, converterAno,descricaoAlbum);
 
         new AlbumDao().atualizarAlbum(albumClass);
 

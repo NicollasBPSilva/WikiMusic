@@ -146,6 +146,7 @@ button:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 50%;
 }
 
 .album-detalhes label {

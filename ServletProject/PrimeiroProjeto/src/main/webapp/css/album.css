@@ -175,7 +175,7 @@ footer {
 
 .sidebar img {
     width: 90%;
-    height: 100%;
+    height: 50%;
     object-fit: cover;
     border-radius: 5%;
     margin-bottom: 30px;

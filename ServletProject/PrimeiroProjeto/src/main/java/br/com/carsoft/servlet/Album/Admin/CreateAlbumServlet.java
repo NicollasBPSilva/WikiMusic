@@ -49,7 +49,7 @@ public class CreateAlbumServlet extends HttpServlet {
             String generoConvertido = converterGenero(generoInput);
 
 
-            Part imagemPart = servletRequest.getPart("imagemArtista");
+            Part imagemPart = servletRequest.getPart("imagemAlbum");
             InputStream imagemStream = imagemPart.getInputStream();
 
             ByteArrayOutputStream output = new ByteArrayOutputStream();
@@ -58,7 +58,7 @@ public class CreateAlbumServlet extends HttpServlet {
             while ((bytesRead = imagemStream.read(buffer)) != -1) {
                 output.write(buffer, 0, bytesRead);
             }
-            byte[] imagemBytes = output.toByteArray();
+            byte[] imagemAlbum = output.toByteArray();
 
             ///////////////
 
@@ -86,7 +86,7 @@ public class CreateAlbumServlet extends HttpServlet {
             String nomeMusica = servletRequest.getParameter("nomeMusica");
 
 
-            Album albumClass = new Album(gravadora, generoConvertido, pais, anoConversao, descricaoAlbum, imagemBytes, ativo);
+            Album albumClass = new Album(gravadora, generoConvertido, pais, anoConversao, descricaoAlbum, imagemAlbum, ativo);
 
             Artista artistaClass = new Artista(nomeArtista, descricaoArtista, artistaImagem, ativo);
 

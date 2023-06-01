@@ -307,7 +307,7 @@ public class AlbumDao {
 
                 int artistaId = resultSet.getInt("artista_id");
                 String nomeArtista = resultSet.getString("nome");
-                String descricaoArtista = resultSet.getString("descricao");
+                String descricaoArtista = resultSet.getString("descricaoArtista");
                 byte[] imagemArtista = resultSet.getBytes("artista_imagem");
                 String base64ImagemArtista = Base64.getEncoder().encodeToString(imagemArtista);
 
@@ -336,7 +336,7 @@ public class AlbumDao {
 
 
     public List<Album> encontrarAlbumsPorGenero() {
-        String SQL = "SELECT alb.id, alb.gravadora, alb.genero, alb.pais, alb.ano, alb.descricao, alb.imagem, art.id AS artista_id, art.nome, art.descricao, art.imagem AS artista_imagem, music.nome AS music_nome, music.ativo " +
+        String SQL = "SELECT alb.id, alb.gravadora, alb.genero, alb.pais, alb.ano, alb.descricao, alb.imagem, art.id AS artista_id, art.nome, art.descricao AS art_descricao, art.imagem AS artista_imagem, music.nome AS music_nome, music.ativo " +
                 "FROM ALBUM alb " +
                 "JOIN ARTISTA art ON alb.id = art.album_id " +
                 "JOIN MUSICA music ON art.id = music.artista_id " +
@@ -371,7 +371,7 @@ public class AlbumDao {
 
                 int artistaId = resultSet.getInt("artista_id");
                 String nomeArtista = resultSet.getString("nome");
-                String descricaoArtista = resultSet.getString("descricao");
+                String descricaoArtista = resultSet.getString("art_descricao");
                 byte[] imagemArtista = resultSet.getBytes("artista_imagem");
                 String base64ImagemArtista = Base64.getEncoder().encodeToString(imagemArtista);
 
@@ -397,9 +397,6 @@ public class AlbumDao {
             return Collections.emptyList();
         }
     }
-
-
-
 
 
 
@@ -430,7 +427,7 @@ public class AlbumDao {
 
     public static void atualizarAlbum(Album albumUpdate) {
         String albumUpdateSQL = "UPDATE ALBUM SET GRAVADORA = ?, GENERO = ?, PAIS = ?, ANO = ?, DESCRICAO = ? WHERE ATIVO = 1 AND ID = ?";
-        String artistUpdateSQL = "UPDATE ARTISTA SET NOME = ?, DESCRICAO = ?, IMAGEM = ? WHERE ATIVO = 1 AND ALBUM_ID = ?";
+//        String artistUpdateSQL = "UPDATE ARTISTA SET NOME = ?, DESCRICAO = ?, IMAGEM = ? WHERE ATIVO = 1 AND ALBUM_ID = ?";
 
         try {
             Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "sa");
@@ -447,14 +444,14 @@ public class AlbumDao {
             albumStatement.executeUpdate();
             System.out.println("Success in updating album");
 
-            PreparedStatement artistStatement = connection.prepareStatement(artistUpdateSQL);
-            artistStatement.setString(1, albumUpdate.getArtista());
-            artistStatement.setString(2, albumUpdate.getDescricao());
-            artistStatement.setBytes(3, albumUpdate.getImagem());
-            artistStatement.setString(4, albumUpdate.getId()); // ALBUM ID FK
-
-            artistStatement.executeUpdate();
-            System.out.println("Success in updating artist");
+//            PreparedStatement artistStatement = connection.prepareStatement(artistUpdateSQL);
+//            artistStatement.setString(1, albumUpdate.getArtista());
+//            artistStatement.setString(2, albumUpdate.getDescricao());
+//            artistStatement.setBytes(3, albumUpdate.getImagem());
+//            artistStatement.setString(4, albumUpdate.getId()); // ALBUM ID FK
+//
+//            artistStatement.executeUpdate();
+//            System.out.println("Success in updating artist");
 
             connection.close();
         } catch (SQLException e) {

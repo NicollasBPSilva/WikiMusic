@@ -22,6 +22,15 @@ public class Album {
     private int ativo;
     private int artista_id;
 
+    public Album(String albumId, String gravadora, String generoConvertido, String pais, int converterAno, String descricaoAlbum) {
+        this.id = albumId;
+        this.gravadora = gravadora;
+        this.genero = generoConvertido;
+        this.pais = pais;
+        this.ano = converterAno;
+        this.descricao = descricaoAlbum;
+    }
+
 
     public String getArtista() {
         return artista;

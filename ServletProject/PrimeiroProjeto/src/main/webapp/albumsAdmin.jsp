@@ -57,7 +57,7 @@
                 <option value="sertanejo">Sertanejo</option>
                 <option value="funk">Funk</option>
             </select>
-            <p>Nome do Album</p>
+            <h3>Nome do Album</h3>
             <input type="text" name="nomeAlbum" id="nomeAlbum">
         </div>
         <button class="button-corpo" onclick="filtrarPorGenero()">Buscar</button>
@@ -69,6 +69,7 @@
                 for (Album album : albums) {
                     if (generoSelecionado == null || generoSelecionado.isEmpty() || album.getGenero().equalsIgnoreCase(generoSelecionado)) {
         %>
+        <h3>Album</h3>
         <div class="album">
             <div class="imagem">
                 <img src="data:image/jpg;base64,<%= album.getImagemBase() %>" height="300px" width="500px">
@@ -119,19 +120,22 @@
 
             <form action="/adicionarArtista" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="artistaId" value="<%= album.getId() %>">
+
                 <label for="artistaAdicionar">Adicionar Artista</label>
                 <input type="text" id="artistaAdicionar" name="artistaAdicionar">
                 <label for="descricaoArtistaAdd">Descricao</label>
                 <input type="text" id="descricaoArtistaAdd" name="descricaoArtistaAdd">
                 <label for="imagemArtista">Adicionar Imagem</label>
                 <input type="file" id="imagemArtista" name="imagemArtista">
-                <button class="button-corpo" type="submit">Adicionar</button>
+                <br><br>
+                <button class="button-corpo" type="submit">Adicionar Artista</button>
             </form>
             <form action="/adicionarMusica" method="post">
                 <input type="hidden" name="artistaAdicionar" value="<%= album.getId() %>">
                 <label for="musicaArtista">Adicionar música</label>
                 <input type="text" id="musicaArtista" name="musicaArtista">
-                <button class="button-corpo" type="submit">Adicionar</button>
+                <br><br>
+                <button class="button-corpo" type="submit">Adicionar Música</button>
             </form>
 
 
@@ -160,15 +164,15 @@
                 <label for="pais">País</label>
                 <input type="text" id="pais" name="pais">
 
-                <h1>ARTISTA</h1>
-                <label for="artista">Artista</label>
-                <input type="text" id="artista" name="artista">
+<%--                <h1>ARTISTA</h1>--%>
+<%--                <label for="artista">Artista</label>--%>
+<%--                <input type="text" id="artista" name="artista">--%>
 
-                <label for="descricaoArtista">Descrição</label>
-                <input type="text" id="descricaoArtista" name="descricaoArtista">
+<%--                <label for="descricaoArtista">Descrição</label>--%>
+<%--                <input type="text" id="descricaoArtista" name="descricaoArtista">--%>
 
-                <label for="imagem">Imagem</label>
-                <input type="file" id="imagem" name="imagem" required>
+<%--                <label for="imagem">Imagem</label>--%>
+<%--                <input type="file" id="imagem" name="imagem" required>--%>
 
                 <button class="button-corpo" type="submit">Update Album</button>
             </form>
