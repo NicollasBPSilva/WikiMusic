@@ -221,7 +221,7 @@ footer {
 }
 
 .artista {
-    margin-bottom: 40px;
+    margin-bottom: 110%;
 }
 
 .artista .container img {
@@ -237,6 +237,10 @@ footer {
     padding-bottom: 2%;
     margin: 0;
     font-size: 20px;
+}
+
+.artista p{
+    width: 50%;
 }
 
 

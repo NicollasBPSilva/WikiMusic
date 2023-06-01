@@ -3,6 +3,17 @@ package br.com.carsoft.model.Album;
 import java.util.*;
 
 public class Album {
+
+
+    public String getNomeAlbum() {
+        return nomeAlbum;
+    }
+
+    public void setNomeAlbum(String nomeAlbum) {
+        this.nomeAlbum = nomeAlbum;
+    }
+
+    private  String nomeAlbum;
     private String id;
     private String gravadora;
     private String genero;
@@ -22,14 +33,7 @@ public class Album {
     private int ativo;
     private int artista_id;
 
-    public Album(String albumId, String gravadora, String generoConvertido, String pais, int converterAno, String descricaoAlbum) {
-        this.id = albumId;
-        this.gravadora = gravadora;
-        this.genero = generoConvertido;
-        this.pais = pais;
-        this.ano = converterAno;
-        this.descricao = descricaoAlbum;
-    }
+
 
 
     public String getArtista() {
@@ -69,8 +73,16 @@ public class Album {
         this.artistas = new HashSet<>();
     }
 
+    public Album(String albumId, String gravadora, String generoConvertido, String pais, int converterAno, String descricaoAlbum) {
+        this.id = albumId;
+        this.gravadora = gravadora;
+        this.genero = generoConvertido;
+        this.pais = pais;
+        this.ano = converterAno;
+        this.descricao = descricaoAlbum;
+    }
 
-    public Album(String id, String gravadora, String genero, String pais, int ano, String descricao, String imagemBase) {
+    public Album(String id, String gravadora, String genero, String pais, int ano, String descricao, String imagemBase, String nome) {
         this.id = id;
         this.gravadora = gravadora;
         this.genero = genero;
@@ -78,6 +90,7 @@ public class Album {
         this.ano = ano;
         this.descricao = descricao;
         this.imagemBase = imagemBase;
+        this.nomeAlbum = nome;
 
     }
 
@@ -91,6 +104,19 @@ public class Album {
         this.ativo = ativo;
 
     }
+
+    public Album(String gravadora, String genero, String pais, int ano, String descricao, byte[] imagem, int ativo, String nomeAlbum) {
+        this.gravadora = gravadora;
+        this.genero = genero;
+        this.pais = pais;
+        this.ano = ano;
+        this.descricao = descricao;
+        this.imagem = imagem;
+        this.ativo = ativo;
+        this.nomeAlbum = nomeAlbum;
+
+    }
+
 
     public Album(String id, String gravadora, String generoEditar, String pais, int ano, String descricao, String artista, String descricaoArtista, byte[] artistaImagem) {
         this.id = id;

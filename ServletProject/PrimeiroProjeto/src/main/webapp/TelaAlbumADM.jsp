@@ -70,7 +70,7 @@
             <input placeholder="descricao" id="descricaoAlbum" name="descricaoAlbum" required>
 
             <br><br>
-            <input placeholder="nome" id="nome" name="nome" required>
+            <input placeholder="nomeAlbum" id="nomeAlbum" name="nomeAlbum" required>
     <br><br>
     <input type="file" id="imagemAlbum" name="imagemAlbum" required>
 

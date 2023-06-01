@@ -109,19 +109,17 @@ aside {
 }
 
 
-
-
 .sidebar img {
     width: 90%;
     height: 50%;
-    object-fit: cover;
+    /*object-fit: cover;*/
     border-radius: 5%;
     margin-bottom: 30px;
     margin-top: 60px;
 }
 
 .artista{
-    padding-bottom: 110%;
+    padding-bottom: 30%;
 }
 
 
@@ -148,7 +146,7 @@ aside {
 
 .container > img {
     width: 75%;
-    height: 100%;
+    height: 50%;
     object-fit: cover;
     border-radius: 5%;
     margin-bottom: 20px;

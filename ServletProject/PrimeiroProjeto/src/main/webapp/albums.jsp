@@ -61,6 +61,8 @@
         <div class="imagem">
             <img src="data:image/jpg;base64,<%= album.getImagemBase() %>" height="300px" width="500px">
             <h3 class="image-text">Nome</h3>
+            <p class="image-text"> <%= album.getNomeAlbum() %></p>
+            <h3 class="image-text">Descrição</h3>
             <p class="image-text"> <%= album.getDescricao() %></p>
             <p class="image-text">Ano</p>
             <p class="image-text"> <%= album.getAno() %></p>

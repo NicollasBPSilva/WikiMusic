@@ -11,7 +11,7 @@ public class AlbumDao {
 
     public static void albumAdicionar(Album album, Artista artista, Musica musica) {
         //Inserir Album
-        String SQL = "INSERT INTO ALBUM (GRAVADORA, GENERO, PAIS, ANO, DESCRICAO, IMAGEM, ATIVO) VALUES ((?), (?), (?), (?), (?), (?), (?))";
+        String SQL = "INSERT INTO ALBUM (GRAVADORA, GENERO, PAIS, ANO, DESCRICAO, IMAGEM, ATIVO, NOME) VALUES ((?), (?), (?), (?), (?), (?), (?), (?))";
 
         try {
             Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "sa");
@@ -25,6 +25,8 @@ public class AlbumDao {
             preparedStatement.setString(5, album.getDescricao());
             preparedStatement.setBytes(6, album.getImagem());
             preparedStatement.setInt(7, album.getAtivo());
+            preparedStatement.setString(8, album.getNomeAlbum());
+
 
             preparedStatement.execute();
 
@@ -269,11 +271,11 @@ public class AlbumDao {
 
 
     public List<Album> encontrarAlbumsPorGenero(String generoBusca, String nomeAlbum) {
-        String SQL = "SELECT alb.id, alb.gravadora, alb.genero, alb.pais, alb.ano, alb.descricao, alb.imagem, art.id AS artista_id, art.nome, art.descricao, art.imagem AS artista_imagem, music.nome AS music_nome, music.ativo " +
+        String SQL = "SELECT alb.id, alb.gravadora, alb.genero, alb.pais, alb.ano, alb.descricao, alb.imagem, alb.nome, art.id AS artista_id, art.nome, art.descricao as descricaoArtista, art.imagem AS artista_imagem, music.nome AS music_nome, music.ativo " +
                 "FROM ALBUM alb " +
                 "JOIN ARTISTA art ON alb.id = art.album_id " +
                 "JOIN MUSICA music ON art.id = music.artista_id " +
-                "WHERE alb.GENERO LIKE CONCAT('%', ?, '%') AND alb.DESCRICAO LIKE CONCAT('%', ?, '%') AND alb.ATIVO = 1 AND art.ativo = 1 AND music.ativo = 1";
+                "WHERE alb.GENERO LIKE CONCAT('%', ?, '%') AND alb.nome LIKE CONCAT('%', ?, '%') AND alb.ATIVO = 1 AND art.ativo = 1 AND music.ativo = 1";
 
         try {
             Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "sa");
@@ -297,11 +299,12 @@ public class AlbumDao {
                     String pais = resultSet.getString("pais");
                     String ano = resultSet.getString("ano");
                     String descricao = resultSet.getString("descricao");
+                    String nome = resultSet.getString("nome");
                     byte[] imagem = resultSet.getBytes("imagem");
                     String base64Imagem = Base64.getEncoder().encodeToString(imagem);
                     int converterAno = Integer.parseInt(ano);
 
-                    album = new Album(albumId, gravadora, genero, pais, converterAno, descricao, base64Imagem);
+                    album = new Album(albumId, gravadora, genero, pais, converterAno, descricao, base64Imagem, nome);
                     albumMap.put(albumId, album);
                 }
 
@@ -336,11 +339,11 @@ public class AlbumDao {
 
 
     public List<Album> encontrarAlbumsPorGenero() {
-        String SQL = "SELECT alb.id, alb.gravadora, alb.genero, alb.pais, alb.ano, alb.descricao, alb.imagem, art.id AS artista_id, art.nome, art.descricao AS art_descricao, art.imagem AS artista_imagem, music.nome AS music_nome, music.ativo " +
+        String SQL = "SELECT TOP 5 alb.id, alb.gravadora, alb.genero, alb.pais, alb.ano, alb.descricao, alb.imagem, alb.nome as albumNome, art.id AS artista_id, art.nome, art.descricao AS art_descricao, art.imagem AS artista_imagem, music.nome AS music_nome, music.ativo " +
                 "FROM ALBUM alb " +
                 "JOIN ARTISTA art ON alb.id = art.album_id " +
                 "JOIN MUSICA music ON art.id = music.artista_id " +
-                " WHERE alb.ATIVO = 1 AND art.ativo = 1 AND music.ativo = 1";
+                " WHERE alb.ATIVO = 1 AND art.ativo = 1 AND music.ativo = 1 AND alb.GENERO LIKE '%sertanejo%'";
 
         try {
             Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "sa");
@@ -361,11 +364,12 @@ public class AlbumDao {
                     String pais = resultSet.getString("pais");
                     String ano = resultSet.getString("ano");
                     String descricao = resultSet.getString("descricao");
+                    String nome = resultSet.getString("albumNome");
                     byte[] imagem = resultSet.getBytes("imagem");
                     String base64Imagem = Base64.getEncoder().encodeToString(imagem);
                     int converterAno = Integer.parseInt(ano);
 
-                    album = new Album(albumId, gravadora, genero, pais, converterAno, descricao, base64Imagem);
+                    album = new Album(albumId, gravadora, genero, pais, converterAno, descricao, base64Imagem, nome);
                     albumMap.put(albumId, album);
                 }
 

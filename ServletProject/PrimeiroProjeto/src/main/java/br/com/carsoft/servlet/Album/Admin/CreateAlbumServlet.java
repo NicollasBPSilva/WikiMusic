@@ -37,7 +37,7 @@ public class CreateAlbumServlet extends HttpServlet {
             String pais = servletRequest.getParameter("pais");
             String ano = servletRequest.getParameter("ano");
             String descricaoAlbum = servletRequest.getParameter("descricaoAlbum");
-
+            String nomeAlbum = servletRequest.getParameter("nomeAlbum");
 
             // Conversão do valor do parâmetro "ano" para o tipo correto
             int anoConversao = Integer.parseInt(ano);
@@ -86,7 +86,7 @@ public class CreateAlbumServlet extends HttpServlet {
             String nomeMusica = servletRequest.getParameter("nomeMusica");
 
 
-            Album albumClass = new Album(gravadora, generoConvertido, pais, anoConversao, descricaoAlbum, imagemAlbum, ativo);
+            Album albumClass = new Album(gravadora, generoConvertido, pais, anoConversao, descricaoAlbum, imagemAlbum, ativo, nomeAlbum);
 
             Artista artistaClass = new Artista(nomeArtista, descricaoArtista, artistaImagem, ativo);
 

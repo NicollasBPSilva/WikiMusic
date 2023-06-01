@@ -54,7 +54,7 @@
         <% List<Artista> artistasList = (List<Artista>) request.getAttribute("artista");
             if (artistasList != null) {
                 for (Artista artista : artistasList) { %>
-        <img src="data:image/jpg;base64,<%= artista.getArtistaImagemBase64() %>" width="400" height="400" />
+        <img src="data:image/jpg;base64,<%= artista.getArtistaImagemBase64() %>" width="500px" height="300px" />
         <%   }
         } %>
     </aside>

@@ -77,7 +77,9 @@
             <br>
             <article class="album-detalhes">
                 <h3>Nome</h3>
-            <p><%= album.getDescricao() %></p>
+            <p><%= album.getNomeAlbum() %></p>
+                <h3>Descrição</h3>
+                <p><%= album.getDescricao() %></p>
                 <h3>Ano</h3>
                 <p><%= album.getAno() %></p>
                 <h3>Gravadora</h3>
