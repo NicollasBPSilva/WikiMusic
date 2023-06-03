@@ -21,7 +21,7 @@ public class ListArtistaServlet extends HttpServlet {
 
         List<Artista> artistaList;
         if (artista == null) {
-            artistaList = new AlbumDao().encontrarArtistaPorGenero();
+            artistaList = new AlbumDao().encontrarArtistaPorGenero(genero);
         } else {
             artistaList = new AlbumDao().encontrarArtistaPorGenero(genero, artista);
         }

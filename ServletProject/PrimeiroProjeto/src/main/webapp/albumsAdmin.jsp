@@ -22,10 +22,10 @@
 <body>
 <div>
     <header>
-        <% if (session.getAttribute("loggedUser") != null) { %>
-        <span class="user-text"><%= session.getAttribute("loggedUser") %></span>
+<%--        <% if (session.getAttribute("loggedUser") != null) { %>--%>
+<%--        <span class="user-text"><%= session.getAttribute("loggedUser") %></span>--%>
 
-        <% } %>
+<%--        <% } %>--%>
         <form action="home.jsp">
             <button class="button-header" type="submit">HOME</button>
         </form>
@@ -40,7 +40,7 @@
         </form>
         <div class="sair">
             <% if (session.getAttribute("loggedUser") != null) { %>
-            <a href="/logout"> <img src="img/BotaoSair.png" alt="Sair" width="157px"></a>
+            <a href="login.jsp"> <img src="img/BotaoSair.png" alt="Sair" width="157px"></a>
             <% } %>
         </div>
     </header>

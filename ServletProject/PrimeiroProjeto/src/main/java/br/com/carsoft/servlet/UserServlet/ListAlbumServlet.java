@@ -21,12 +21,11 @@ import java.util.List;
             String nomeAlbum = req.getParameter("nome");
 
             List<Album> albumList;
-            if (nomeAlbum == null) {
-                albumList = new AlbumDao().encontrarAlbumsPorGenero();
+            if (nomeAlbum == null || nomeAlbum.isEmpty()) {
+                albumList = new AlbumDao().encontrarAlbumsPorGenero(genero);
             } else {
                 albumList = new AlbumDao().encontrarAlbumsPorGenero(genero, nomeAlbum);
             }
-//            List<Album> albums = new AlbumDao().encontrarAlbumsPorGenero();
 
             req.setAttribute("albums", albumList);
             req.setAttribute("generoSelecionado", genero);

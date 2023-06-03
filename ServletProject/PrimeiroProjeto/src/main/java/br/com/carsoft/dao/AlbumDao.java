@@ -218,12 +218,12 @@ public class AlbumDao {
         }
     }
 
-    public List<Artista> encontrarArtistaPorGenero() {
+    public List<Artista> encontrarArtistaPorGenero(String generoAlbum) {
         String SQL = "SELECT art.id AS artista_id, art.nome AS artista_nome, art.descricao AS artista_descricao, art.imagem AS artista_imagem, music.nome AS musica_nome, music.ativo AS musica_ativo " +
                 "FROM ARTISTA art " +
                 "JOIN ALBUM alb ON alb.id = art.album_id " +
                 "JOIN MUSICA music ON music.artista_id = art.id " +
-                "WHERE art.ativo = 1 AND music.ativo = 1";
+                "WHERE art.ativo = 1 AND music.ativo = 1 AND alb.GENERO = CONCAT('%', ?, '%')";
 
         try {
             Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "sa");
@@ -338,19 +338,19 @@ public class AlbumDao {
     }
 
 
-    public List<Album> encontrarAlbumsPorGenero() {
-        String SQL = "SELECT TOP 5 alb.id, alb.gravadora, alb.genero, alb.pais, alb.ano, alb.descricao, alb.imagem, alb.nome as albumNome, art.id AS artista_id, art.nome, art.descricao AS art_descricao, art.imagem AS artista_imagem, music.nome AS music_nome, music.ativo " +
+    public List<Album> encontrarAlbumsPorGenero(String generoAlbum) {
+        String SQL = "SELECT TOP 3 alb.id, alb.gravadora, alb.genero, alb.pais, alb.ano, alb.descricao, alb.imagem, alb.nome as albumNome, art.id AS artista_id, art.nome, art.descricao AS art_descricao, art.imagem AS artista_imagem, music.nome AS music_nome, music.ativo " +
                 "FROM ALBUM alb " +
                 "JOIN ARTISTA art ON alb.id = art.album_id " +
                 "JOIN MUSICA music ON art.id = music.artista_id " +
-                " WHERE alb.ATIVO = 1 AND art.ativo = 1 AND music.ativo = 1 AND alb.GENERO LIKE '%sertanejo%'";
+                " WHERE alb.ATIVO = 1 AND art.ativo = 1 AND music.ativo = 1 AND alb.GENERO LIKE CONCAT('%', ?, '%')";
 
         try {
             Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "sa");
             System.out.println("Success in database connection");
 
             PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-
+            preparedStatement.setString(1, generoAlbum);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             Map<String, Album> albumMap = new HashMap<>();

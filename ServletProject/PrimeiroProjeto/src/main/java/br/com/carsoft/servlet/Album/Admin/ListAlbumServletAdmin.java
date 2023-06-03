@@ -31,8 +31,8 @@ import java.util.Map;
             String nomeAlbum = req.getParameter("nomeAlbum");
 
             List<Album> albumList;
-            if(nomeAlbum == null){
-                 albumList = new AlbumDao().encontrarAlbumsPorGenero();
+            if(nomeAlbum == null || nomeAlbum.isEmpty()){
+                 albumList = new AlbumDao().encontrarAlbumsPorGenero(genero);
             }else{
                 albumList = new AlbumDao().encontrarAlbumsPorGenero(genero, nomeAlbum);
             }

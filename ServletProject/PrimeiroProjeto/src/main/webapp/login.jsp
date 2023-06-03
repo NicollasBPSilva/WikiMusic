@@ -32,7 +32,7 @@
             </div>
 
             <div class="login">
-                <input type="text" placeholder="Usuário" name="username">
+                <input type="text" placeholder="Usuario" name="username">
                 <br><br>
                 <input type="password" placeholder="Senha" name="password">
 
