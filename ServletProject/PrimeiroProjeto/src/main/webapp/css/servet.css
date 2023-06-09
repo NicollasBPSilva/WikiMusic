@@ -1,0 +1,81 @@
+#album-list {
+    margin-bottom: 20px;
+}
+
+#album-list ul {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#album-list li {
+    margin-bottom: 20px;
+}
+
+.album {
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #f9f9f9;
+    width: 50%;
+}
+
+.album p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+
+.container {
+    margin-top: 10px;
+}
+
+.container img {
+    max-width: 100%;
+    height: auto;
+}
+
+form button[type="submit"] {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-form {
+    display: none;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.edit-form label {
+    margin-bottom: 5px;
+}
+
+.edit-form input[type="text"] {
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.edit-form button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.edit-form p {
+    color: red;
+    font-style: italic;
+}

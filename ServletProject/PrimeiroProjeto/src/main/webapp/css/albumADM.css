@@ -1,0 +1,179 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+}
+
+html {
+    font-family: sans-serif;
+}
+
+body {
+    margin: 0;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: #142126;
+    height: 0%;
+    width: 100%;
+    box-sizing: border-box;
+
+}
+
+footer {
+    background: #142126;
+    position: fixed;
+    bottom: 0%;
+    height: 8%;
+    width: 100%;
+    text-align: center;
+
+}
+
+.album{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+h1 {
+    text-align:start;
+    color: white;
+    line-height: 100%;
+    margin: 30px;
+    font-size: 20px;
+    position: fixed;
+}
+
+h2{
+    text-align: center;
+
+}
+
+
+.button-estilo {
+    background: transparent;
+    border: none;
+}
+.button-estilo:hover{
+    border: black;
+}
+
+article {
+    width: 100%;
+    margin: 5px;
+    padding-top: 5px;
+    background: #F3E9E9;
+    text-align: center;
+    font-size: 15px;
+    padding-bottom: 10%;
+}
+
+img{
+    widhth: 20%;
+}
+
+input{
+    border-radius: 50px;
+    border: #F3E9E9;
+    background-color: #f3f3f3;
+    width: 80%;
+    text-align: center;
+
+
+}
+
+.user-text{
+ color: white;
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+section {
+    display: flex;
+    flex-direction: row;
+}
+
+.sair{
+    text-align: end;
+
+}
+
+
+.button-header {
+    padding: 10px;
+    font-size: 18px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    justify-content: space-between;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.button-corpo {
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 4px;
+    justify-content: space-between;
+    cursor: pointer;
+    color: white;
+    background: #142126;
+}
+button:hover {
+    background: rgb(65, 65, 66);
+    background: linear-gradient(0deg, #515151 0%, #909090 100%);
+    scale: 1.02;
+    transition-duration: 100ms;
+}
+
+.album {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/*.imagem {*/
+/*    margin-bottom: 2%;*/
+/*}*/
+
+.album-detalhes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+}
+
+.album-detalhes label {
+    display: block;
+    margin-top: 4%;
+}
+
+.album-detalhes p {
+    font-size: 20px;
+    line-height: 2.5;
+}
+
+.artista p {
+    font-size: 20px;
+    line-height: 2.5;
+}
+
+.musica p {
+    font-size: 20px;
+    line-height: 2.5;
+}
+
+article label{
+    font-size: 20px;
+}
+
+.edit-form{
+    display: none;
+    flex-direction: column;
+}
